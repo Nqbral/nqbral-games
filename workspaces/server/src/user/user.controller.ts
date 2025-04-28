@@ -1,7 +1,17 @@
 import { JwtAuthGuard } from '@app/auth/jwt-auth.guard';
 import { AuthenticatedRequest } from '@app/types/authenticated.request.type';
 import { UserService } from '@app/user/user.service';
-import { Body, Controller, Get, Put, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Put,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 
 import { EditPasswordDto } from './dto/edit.password.dto';
 
@@ -34,5 +44,12 @@ export class UserController {
   @Get('stats')
   async getStats(@Req() req: AuthenticatedRequest) {
     return this.userService.getStats(req.user.userId);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete('delete_account')
+  @HttpCode(HttpStatus.NO_CONTENT) // 204 No Content
+  async deleteAccount(@Req() req: AuthenticatedRequest): Promise<void> {
+    await this.userService.deleteAccount(req.user.userId);
   }
 }

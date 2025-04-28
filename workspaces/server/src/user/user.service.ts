@@ -1,5 +1,5 @@
 import { UserDocument } from '@app/auth/schemas/user.schema';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcryptjs';
 import { Model } from 'mongoose';
@@ -37,5 +37,13 @@ export class UserService {
       loveLetter: user?.statsLoveLetter,
       lastHope: user?.statsLastHope,
     };
+  }
+
+  async deleteAccount(userId: string): Promise<void> {
+    const result = await this.userModel.deleteOne({ _id: userId });
+
+    if (result.deletedCount === 0) {
+      throw new NotFoundException('Utilisateur non trouvé.');
+    }
   }
 }

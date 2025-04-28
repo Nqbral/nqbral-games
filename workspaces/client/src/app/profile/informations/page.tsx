@@ -1,8 +1,10 @@
 'use client';
 
+import ModalDeleteAccount from '@/app/components/modals/ModalDeleteAccount';
 import NavigationProfile from '@/app/components/profile/NavigationProfile';
 import NavbarBlack from '@components/navbar/NavbarBlack';
 import { useAuth } from '@context/AuthProvider';
+import { Modal } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -19,6 +21,15 @@ export default function ProfilePageInformations() {
   const router = useRouter();
   const [profile, setProfile] = useState<Profile | undefined>(undefined);
   const [passwordMessage, setPasswordMessage] = useState<string | null>(null);
+
+  const [openModalDeleteAccount, setOpenModalDeleteAccount] = useState(false);
+  const handleOpenModalDeleteAccount = () => {
+    setOpenModalDeleteAccount(true);
+  };
+
+  const handleCloseModalDeleteAccount = () => {
+    setOpenModalDeleteAccount(false);
+  };
 
   const {
     register: editPasswordForm,
@@ -82,6 +93,13 @@ export default function ProfilePageInformations() {
     return (
       <>
         <NavbarBlack />
+        <Modal
+          open={openModalDeleteAccount}
+          onClose={handleCloseModalDeleteAccount}
+          aria-labelledby="modal-delete-account"
+        >
+          <ModalDeleteAccount handleClose={handleCloseModalDeleteAccount} />
+        </Modal>
         <div className="flex min-h-screen flex-row">
           <NavigationProfile />
           <div className="flex min-h-screen w-full flex-col items-center justify-center">
@@ -101,6 +119,13 @@ export default function ProfilePageInformations() {
   return (
     <>
       <NavbarBlack />
+      <Modal
+        open={openModalDeleteAccount}
+        onClose={handleCloseModalDeleteAccount}
+        aria-labelledby="modal-delete-account"
+      >
+        <ModalDeleteAccount handleClose={handleCloseModalDeleteAccount} />
+      </Modal>
       <div className="flex min-h-screen flex-row">
         <NavigationProfile />
         <div className="flex w-full flex-col items-center pt-24">
@@ -160,7 +185,7 @@ export default function ProfilePageInformations() {
             <button
               className="w-48 rounded-lg border-1 border-red-400 px-4 py-2 text-red-400 transition-colors hover:border-red-500 hover:text-red-500"
               onClick={() => {
-                logout();
+                handleOpenModalDeleteAccount();
               }}
             >
               Supprimer le compte
