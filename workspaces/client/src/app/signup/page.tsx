@@ -1,7 +1,7 @@
 'use client';
 
+import NavbarWhite from '@/app/components/navbar/NavbarWhite';
 import LinkButton from '@components/buttons/LinkButton';
-import NavbarSignUp from '@components/navbar/NavbarSignUp';
 import { useAuth } from '@context/AuthProvider';
 import NqbralGamesLogo from '@public/nqbral-games-logo-black.png';
 import Image from 'next/image';
@@ -38,7 +38,7 @@ export default function SignUp() {
 
   return (
     <>
-      <NavbarSignUp />
+      <NavbarWhite />
       <div className="flex min-h-screen w-full flex-col items-center justify-center gap-16 bg-neutral-200 text-neutral-950">
         <div className="flex w-96 flex-col items-center gap-2 rounded-sm border-1 border-neutral-600 px-8 py-4">
           <Image

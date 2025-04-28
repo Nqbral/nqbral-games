@@ -1,7 +1,7 @@
 'use client';
 
+import NavbarBlack from '@/app/components/navbar/NavbarBlack';
 import LinkButton from '@components/buttons/LinkButton';
-import NavbarSignIn from '@components/navbar/NavbarSignIn';
 import { useAuth } from '@context/AuthProvider';
 import NqbralGamesLogo from '@public/nqbral-games-logo.png';
 import Image from 'next/image';
@@ -37,7 +37,7 @@ export default function SignIn() {
 
   return (
     <>
-      <NavbarSignIn />
+      <NavbarBlack />
       <div className="flex min-h-screen w-full flex-col items-center justify-center gap-16">
         <div className="flex w-96 flex-col items-center gap-2 rounded-sm border-1 border-neutral-600 px-8 py-4">
           <Image

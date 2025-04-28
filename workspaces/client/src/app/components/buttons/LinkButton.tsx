@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 type Props = {
   href: string;
-  buttonText: string;
+  buttonText: string | undefined;
   className?: string | undefined;
 };
 
