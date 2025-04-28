@@ -1,0 +1,19 @@
+{
+  "name": "nqbral-games",
+  "version": "1.0.0",
+  "repository": "https://github.com/Nqbral/nqbral-games",
+  "author": "Simon Chevalier",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "workspaces/*"
+    ]
+  },
+  "scripts": {
+    "start:dev:client": "yarn workspace @nqbral-games/client start:dev",
+    "start:dev:server": "yarn workspace @nqbral-games/server start:dev",
+    "start:prod:client": "yarn workspace @nqbral-games/client start:prod",
+    "start:prod:server": "yarn workspace @nqbral-games/server start:prod"
+  }
+}
