@@ -1,7 +1,8 @@
-import { IsString, MinLength } from 'class-validator';
+import { Matches } from 'class-validator';
 
 export class EditPasswordDto {
-  @IsString()
-  @MinLength(6)
+  @Matches(/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{6,}$/, {
+    message: 'Mot de passe invalide.',
+  })
   password: string;
 }
