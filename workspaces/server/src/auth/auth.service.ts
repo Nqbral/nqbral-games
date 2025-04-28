@@ -35,7 +35,10 @@ export class AuthService {
 
     await user.save();
 
-    return { message: 'Compte créé avec succès' };
+    const payload = { sub: user._id, username: user.username };
+    const token = await this.jwtService.signAsync(payload);
+
+    return { token: token, username: user.username };
   }
 
   async login(loginDto: LoginDto) {
@@ -55,6 +58,6 @@ export class AuthService {
     const payload = { sub: user._id, username: user.username };
     const token = await this.jwtService.signAsync(payload);
 
-    return { token };
+    return { token: token, username: user.username };
   }
 }
