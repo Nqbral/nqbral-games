@@ -21,7 +21,7 @@ export class UserController {
     @Req() req: AuthenticatedRequest,
     @Body() updateData: EditPasswordDto,
   ) {
-    return this.userService.updateProfile(req.user.userId, updateData);
+    return this.userService.updatePassword(req.user.userId, updateData);
   }
 
   @UseGuards(JwtAuthGuard)
