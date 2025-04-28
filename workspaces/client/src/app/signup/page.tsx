@@ -136,7 +136,7 @@ export default function SignUp() {
                 visible={true}
                 height="40"
                 width="40"
-                color="#fff"
+                color="#000"
                 radius="9"
                 ariaLabel="three-dots-loading"
               />
