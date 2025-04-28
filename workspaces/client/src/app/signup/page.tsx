@@ -1,13 +1,14 @@
 'use client';
 
 import LinkButton from '@components/buttons/LinkButton';
+import NavbarSignUp from '@components/navbar/NavbarSignUp';
+import { useAuth } from '@context/AuthProvider';
 import NqbralGamesLogo from '@public/nqbral-games-logo-black.png';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { ThreeDots } from 'react-loader-spinner';
-
-import NavbarSignUp from '../components/navbar/NavbarSignUp';
 
 type RegisterFormValues = {
   username: string;
@@ -17,42 +18,23 @@ type RegisterFormValues = {
 
 export default function SignUp() {
   const {
-    register,
+    register: registerForm,
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterFormValues>();
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
 
-  const onSubmit = async (data: RegisterFormValues) => {
-    setLoading(true);
-    setMessage(null);
+  const { register, error, loading, isLogged } = useAuth();
+  const router = useRouter();
 
-    console.log(data);
-
-    try {
-      const response = await fetch(process.env.NEXT_PUBLIC_WS_API_URL + '/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setMessage('Compte créé avec succès 🎉');
-      } else {
-        setMessage(result.message || "Erreur lors de l'inscription");
-      }
-    } catch (error) {
-      setMessage('Erreur serveur');
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
+  const onRegister = async (data: RegisterFormValues) => {
+    await register(data.username, data.email, data.password);
   };
+
+  useEffect(() => {
+    if (isLogged) {
+      router.push('/');
+    }
+  }, [isLogged, router]);
 
   return (
     <>
@@ -66,14 +48,14 @@ export default function SignUp() {
           />
           <h1 className="mb-4 text-xl underline">INSCRIPTION</h1>
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(onRegister)}
             className="flex w-full flex-col items-center gap-4"
           >
             <div className="flex w-full flex-col items-center gap-2">
               <label>Nom d&apos;utilisateur</label>
               <input
                 type="text"
-                {...register('username', {
+                {...registerForm('username', {
                   required: "Nom d'utilisateur requis",
                   pattern: {
                     value: /^[a-zA-Z0-9_-]+$/,
@@ -96,7 +78,7 @@ export default function SignUp() {
               <label>Adresse email</label>
               <input
                 type="email"
-                {...register('email', {
+                {...registerForm('email', {
                   required: 'Email requis',
                   pattern: {
                     value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
@@ -116,7 +98,7 @@ export default function SignUp() {
               <label>Mot de passe</label>
               <input
                 type="password"
-                {...register('password', {
+                {...registerForm('password', {
                   required: 'Mot de passe requis',
                   pattern: {
                     value: /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{6,}$/,
@@ -152,7 +134,9 @@ export default function SignUp() {
               </button>
             )}
 
-            {message && <p className="mt-4 text-center text-sm">{message}</p>}
+            {error && (
+              <p className="mt-4 text-center text-sm text-red-500">{error}</p>
+            )}
           </form>
         </div>
 

@@ -2,9 +2,11 @@
 
 import LinkButton from '@components/buttons/LinkButton';
 import NavbarSignIn from '@components/navbar/NavbarSignIn';
+import { useAuth } from '@context/AuthProvider';
 import NqbralGamesLogo from '@public/nqbral-games-logo.png';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { ThreeDots } from 'react-loader-spinner';
 
@@ -15,40 +17,23 @@ type SignInFormValues = {
 
 export default function SignIn() {
   const {
-    register,
+    register: loginForm,
     handleSubmit,
     formState: { errors },
   } = useForm<SignInFormValues>();
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
 
-  const onSubmit = async (data: SignInFormValues) => {
-    setLoading(true);
-    setMessage(null);
+  const { login, error, loading, isLogged } = useAuth();
+  const router = useRouter();
 
-    try {
-      const response = await fetch(process.env.NEXT_PUBLIC_WS_API_URL + '/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setMessage('Connexion avec succès 🎉');
-      } else {
-        setMessage(result.message || "Erreur lors de la connexion");
-      }
-    } catch (error) {
-      setMessage('Erreur serveur');
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
+  const onLogin = async (data: SignInFormValues) => {
+    await login(data.username, data.password);
   };
+
+  useEffect(() => {
+    if (isLogged) {
+      router.push('/');
+    }
+  }, [isLogged, router]);
 
   return (
     <>
@@ -62,14 +47,14 @@ export default function SignIn() {
           />
           <h1 className="mb-4 text-xl underline">CONNEXION</h1>
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(onLogin)}
             className="flex w-full flex-col items-center gap-4"
           >
             <div className="flex w-full flex-col items-center gap-2">
               <label>Nom d&apos;utilisateur</label>
               <input
                 type="text"
-                {...register('username', {
+                {...loginForm('username', {
                   required: "Nom d'utilisateur requis",
                 })}
                 placeholder="Nom d'utilisateur"
@@ -86,7 +71,7 @@ export default function SignIn() {
               <label>Mot de passe</label>
               <input
                 type="password"
-                {...register('password', {
+                {...loginForm('password', {
                   required: 'Mot de passe requis',
                 })}
                 placeholder="Mot de passe"
@@ -118,7 +103,9 @@ export default function SignIn() {
               </button>
             )}
 
-            {message && <p className="mt-4 text-center text-sm">{message}</p>}
+            {error && (
+              <p className="mt-4 text-center text-sm text-red-500">{error}</p>
+            )}
           </form>
         </div>
 
