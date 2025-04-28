@@ -1,9 +1,22 @@
 import { AppController } from '@app/app.controller';
 import { AppService } from '@app/app.service';
+import { AuthModule } from '@app/auth/auth.module';
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true, // Rendre les variables d'env accessibles partout
+    }),
+    MongooseModule.forRootAsync({
+      useFactory: async () => ({
+        uri: `${process.env.DB_CONNECT}${process.env.DB_NAME}`,
+      }),
+    }),
+    AuthModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
