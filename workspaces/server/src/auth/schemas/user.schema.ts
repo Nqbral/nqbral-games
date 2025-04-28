@@ -3,6 +3,39 @@ import { Document } from 'mongoose';
 
 export type UserDocument = User & Document;
 
+@Schema({ _id: false })
+export class StatsLoveLetter {
+  @Prop({ default: 0 })
+  gamesPlayed: number;
+
+  @Prop({ default: 0 })
+  wins: number;
+
+  @Prop({ default: 0 })
+  losses: number;
+
+  @Prop({ default: 0 })
+  roundsPlayed: number;
+
+  @Prop({ default: 0 })
+  roundsWin: number;
+
+  @Prop({ default: 0 })
+  roundsLosses: number;
+}
+
+@Schema({ _id: false })
+export class StatsLastHope {
+  @Prop({ default: 0 })
+  gamesPlayed: number;
+
+  @Prop({ default: 0 })
+  wins: number;
+
+  @Prop({ default: 0 })
+  losses: number;
+}
+
 @Schema()
 export class User {
   @Prop({ required: true, unique: true })
@@ -16,6 +49,12 @@ export class User {
 
   @Prop({ default: Date.now })
   createdAt: Date;
+
+  @Prop({ type: StatsLoveLetter, default: () => ({}) })
+  statsLoveLetter: StatsLoveLetter;
+
+  @Prop({ type: StatsLastHope, default: () => ({}) })
+  statsLastHope: StatsLastHope;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
