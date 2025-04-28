@@ -15,7 +15,7 @@ export default function NavbarHomePage() {
         <Image src={NqbralGamesLogo} className="w-20" alt="nqbral-games-logo" />
       </Link>
       {isLogged ? (
-        <LinkButton href="/profile" buttonText={user?.username} />
+        <LinkButton href="/profile/informations" buttonText={user?.username} />
       ) : (
         <LinkButton href="/signin" buttonText="Se connecter" />
       )}

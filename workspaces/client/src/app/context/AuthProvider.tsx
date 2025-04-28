@@ -29,7 +29,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [isLogged, setIsLogged] = useState<boolean>(false);
+  const [isLogged, setIsLogged] = useState<boolean>(true);
 
   useEffect(() => {
     // Vérifie si un utilisateur est déjà connecté (par exemple via le localStorage)
@@ -37,7 +37,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     if (storedUser) {
       setUser(JSON.parse(storedUser));
       setIsLogged(true);
+      return;
     }
+
+    setIsLogged(false);
   }, []);
 
   // Login
@@ -63,7 +66,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
         setUser(user);
         setIsLogged(true);
-        localStorage.setItem('user', JSON.stringify(user)); // Sauvegarde l'utilisateur dans le localStorage
+        localStorage.setItem('user', JSON.stringify(user));
       } else {
         setError(data.message || 'Erreur de connexion');
       }

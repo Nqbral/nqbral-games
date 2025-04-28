@@ -20,10 +20,16 @@ export default function LastHope() {
       </div>
       <div className="flex w-full flex-col items-center gap-4 px-8 py-4">
         <div className="text-center">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque iusto
-          quo nemo architecto, adipisci voluptatum, dolore, magni voluptates
-          dolor facilis dolorum laboriosam earum est ipsam aspernatur maiores
-          culpa dolorem ipsa.
+          Dans un laboratoire isolé, alors que l&apos;infection se propage,
+          quelques docteurs tentent désespérément de trouver un remède. Mais
+          parmi eux, des infectés, encore humains en apparence, cherchent à
+          saboter leurs efforts.
+          <br />
+          <br />
+          Jeu de bluff et de trahison, chaque joueur devra gagner la confiance
+          des autres... ou les manipuler pour mieux les tromper. Dans cette
+          lutte silencieuse, qui sauvera l&apos;humanité... et qui précipitera
+          sa chute ?
         </div>
         <Link href={'https://last-hope.nqbral-games.fr/'}>
           <button className="button border-last-hope-primary hover:border-last-hope-primary-hover my-1 rounded-md border-2 px-6 py-2 transition-colors">

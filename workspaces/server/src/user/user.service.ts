@@ -8,9 +8,7 @@ export class UserService {
   constructor(@InjectModel('User') private userModel: Model<UserDocument>) {}
 
   async getProfile(userId: string) {
-    return this.userModel
-      .findById(userId)
-      .select('username email createdAt stats');
+    return this.userModel.findById(userId).select('username email createdAt');
   }
 
   async updateProfile(userId: string, updateData: any) {
@@ -18,7 +16,9 @@ export class UserService {
   }
 
   async getStats(userId: string) {
-    const user = await this.userModel.findById(userId).select('stats');
+    const user = await this.userModel
+      .findById(userId)
+      .select('statsLoveLetter statsLastHope');
 
     return {
       loveLetter: user?.statsLoveLetter,
