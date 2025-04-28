@@ -28,8 +28,10 @@ export default function SignUp() {
     setLoading(true);
     setMessage(null);
 
+    console.log(data);
+
     try {
-      const response = await fetch(process.env.API_URL + '/auth/register', {
+      const response = await fetch(process.env.NEXT_PUBLIC_WS_API_URL + '/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

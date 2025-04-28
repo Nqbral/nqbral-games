@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import { ThreeDots } from 'react-loader-spinner';
 
 type SignInFormValues = {
-  usernameMail: string;
+  username: string;
   password: string;
 };
 
@@ -27,7 +27,7 @@ export default function SignIn() {
     setMessage(null);
 
     try {
-      const response = await fetch(process.env.API_URL + '/auth/signin', {
+      const response = await fetch(process.env.NEXT_PUBLIC_WS_API_URL + '/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,9 +38,9 @@ export default function SignIn() {
       const result = await response.json();
 
       if (response.ok) {
-        setMessage('Compte créé avec succès 🎉');
+        setMessage('Connexion avec succès 🎉');
       } else {
-        setMessage(result.message || "Erreur lors de l'inscription");
+        setMessage(result.message || "Erreur lors de la connexion");
       }
     } catch (error) {
       setMessage('Erreur serveur');
@@ -66,18 +66,18 @@ export default function SignIn() {
             className="flex w-full flex-col items-center gap-4"
           >
             <div className="flex w-full flex-col items-center gap-2">
-              <label>Nom d&apos;utilisateur / Adresse mail</label>
+              <label>Nom d&apos;utilisateur</label>
               <input
                 type="text"
-                {...register('usernameMail', {
+                {...register('username', {
                   required: "Nom d'utilisateur requis",
                 })}
-                placeholder="Nom d'utilisateur / Adresse mail"
+                placeholder="Nom d'utilisateur"
                 className="w-full rounded-lg border px-4 py-2 text-center outline-none focus:border-blue-300"
               />
-              {errors.usernameMail && (
+              {errors.username && (
                 <p className="mt-1 text-sm text-red-500">
-                  {errors.usernameMail.message}
+                  {errors.username.message}
                 </p>
               )}
             </div>
