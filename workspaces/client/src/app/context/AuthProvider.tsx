@@ -18,7 +18,7 @@ type AuthContextType = {
   ) => Promise<void>;
   loading: boolean;
   error: string | null;
-  isLogged: boolean;
+  isLogged: boolean | null;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -29,7 +29,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [isLogged, setIsLogged] = useState<boolean>(true);
+  const [isLogged, setIsLogged] = useState<boolean | null>(null);
 
   useEffect(() => {
     // Vérifie si un utilisateur est déjà connecté (par exemple via le localStorage)

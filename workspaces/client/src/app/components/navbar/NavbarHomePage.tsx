@@ -14,9 +14,11 @@ export default function NavbarHomePage() {
       <Link href="/">
         <Image src={NqbralGamesLogo} className="w-20" alt="nqbral-games-logo" />
       </Link>
-      {isLogged ? (
+      {isLogged == null && <></>}
+      {isLogged == true && (
         <LinkButton href="/profile/informations" buttonText={user?.username} />
-      ) : (
+      )}
+      {isLogged == false && (
         <LinkButton href="/signin" buttonText="Se connecter" />
       )}
     </div>

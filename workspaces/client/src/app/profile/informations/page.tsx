@@ -84,7 +84,7 @@ export default function ProfilePageInformations() {
   }, [user]);
 
   useEffect(() => {
-    if (!isLogged) {
+    if (isLogged != null && !isLogged) {
       router.push('/');
     }
   }, [isLogged, router]);
