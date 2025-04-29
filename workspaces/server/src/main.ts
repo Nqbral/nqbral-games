@@ -8,7 +8,12 @@ async function bootstrap() {
 
   app.use(cookieParser());
   app.enableCors({
-    origin: process.env.CORS_ALLOW_ORIGIN,
+    origin: process.env.CORS_ALLOW_ORIGIN_NQBRAL_GAMES,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    credentials: true,
+  });
+  app.enableCors({
+    origin: process.env.CORS_ALLOW_ORIGIN_LAST_HOPE,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });

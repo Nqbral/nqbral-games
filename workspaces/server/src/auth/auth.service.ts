@@ -41,7 +41,7 @@ export class AuthService {
 
     const payload = { sub: user._id, username: user.username };
 
-    const accessToken = this.jwtService.sign(payload, { expiresIn: '1m' });
+    const accessToken = this.jwtService.sign(payload, { expiresIn: '15m' });
     const refreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
 
     return {
@@ -67,7 +67,7 @@ export class AuthService {
 
     const payload = { sub: user._id, username: user.username };
 
-    const accessToken = this.jwtService.sign(payload, { expiresIn: '1m' });
+    const accessToken = this.jwtService.sign(payload, { expiresIn: '15m' });
     const refreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
 
     return {
@@ -85,7 +85,7 @@ export class AuthService {
     const payload = this.jwtService.verify(token);
     const newAccessToken = this.jwtService.sign(
       { sub: payload.sub },
-      { expiresIn: '1m' },
+      { expiresIn: '15m' },
     );
 
     return { accessToken: newAccessToken };

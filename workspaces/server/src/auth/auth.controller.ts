@@ -29,8 +29,9 @@ export class AuthController {
 
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
-      secure: false,
-      sameSite: 'strict',
+      secure: false, // ← TODO : changer à true en prod
+      domain: 'localhost', // ← TODO : changer à '.nqbral-games.fr' en prod
+      sameSite: 'lax',
       path: '/auth/refresh',
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
@@ -48,8 +49,9 @@ export class AuthController {
 
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
-      secure: false,
-      sameSite: 'strict',
+      secure: false, // ← TODO : changer à true en prod
+      domain: 'localhost', // ← TODO : changer à '.nqbral-games.fr' en prod
+      sameSite: 'lax',
       path: '/auth/refresh',
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
