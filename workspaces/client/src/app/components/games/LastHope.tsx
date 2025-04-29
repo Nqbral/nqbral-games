@@ -31,7 +31,8 @@ export default function LastHope() {
           lutte silencieuse, qui sauvera l&apos;humanité... et qui précipitera
           sa chute ?
         </div>
-        <Link href={'https://last-hope.nqbral-games.fr/'}>
+        {/* TODO : changer le lien pour la prod */}
+        <Link href={'http://localhost:3034'}>
           <button className="button border-last-hope-primary hover:border-last-hope-primary-hover my-1 rounded-md border-2 px-6 py-2 transition-colors">
             Jouer à Last Hope
           </button>
