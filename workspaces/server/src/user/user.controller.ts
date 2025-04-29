@@ -31,8 +31,6 @@ export class UserController {
     @Req() req: AuthenticatedRequest,
     @Body() updateData: EditPasswordDto,
   ) {
-    console.log(req.user.userId);
-    console.log(updateData);
     return this.userService.updatePassword(req.user.userId, updateData);
   }
 
