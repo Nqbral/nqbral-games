@@ -80,7 +80,7 @@ export class AuthController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('verify-token')
+  @Get('verify_token')
   async verifyToken(@Req() req: AuthenticatedRequest) {
     const user = req.user;
     return {
