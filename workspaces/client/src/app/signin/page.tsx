@@ -1,7 +1,6 @@
 'use client';
 
 import NavbarBlack from '@/app/components/navbar/NavbarBlack';
-import LinkButton from '@components/buttons/LinkButton';
 import { useAuth } from '@context/AuthProvider';
 import NqbralGamesLogo from '@public/nqbral-games-logo.png';
 import Image from 'next/image';
@@ -22,11 +21,16 @@ export default function SignIn() {
     formState: { errors },
   } = useForm<SignInFormValues>();
 
-  const { login, error, loading, isLogged } = useAuth();
+  const { login, resetError, error, loading, isLogged } = useAuth();
   const router = useRouter();
 
   const onLogin = async (data: SignInFormValues) => {
     await login(data.username, data.password);
+  };
+
+  const toSignup = () => {
+    resetError();
+    router.push('/signup');
   };
 
   useEffect(() => {
@@ -111,11 +115,12 @@ export default function SignIn() {
 
         <div className="flex w-96 flex-row items-center justify-center gap-2 rounded-sm border-1 border-neutral-600 px-8 py-4">
           <div>Pas de compte ?</div>
-          <LinkButton
-            href="/signup"
-            buttonText="S'inscrire"
-            className="underline"
-          />
+          <button
+            className="underline transition-colors hover:text-neutral-300"
+            onClick={toSignup}
+          >
+            S&apos;inscrire
+          </button>
         </div>
       </div>
     </>

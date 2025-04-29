@@ -16,6 +16,7 @@ type AuthContextType = {
     email: string,
     password: string,
   ) => Promise<void>;
+  resetError: () => void;
   loading: boolean;
   error: string | null;
   isLogged: boolean | null;
@@ -125,9 +126,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     localStorage.removeItem('user');
   };
 
+  const resetError = () => {
+    setError(null);
+  };
+
   return (
     <AuthContext.Provider
-      value={{ user, login, logout, register, loading, error, isLogged }}
+      value={{
+        user,
+        login,
+        logout,
+        register,
+        resetError,
+        loading,
+        error,
+        isLogged,
+      }}
     >
       {children}
     </AuthContext.Provider>
