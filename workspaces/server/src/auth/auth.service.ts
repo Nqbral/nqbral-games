@@ -90,4 +90,23 @@ export class AuthService {
 
     return { accessToken: newAccessToken };
   }
+
+  async verifyToken(token: string) {
+    try {
+      const decoded = this.jwtService.decode(token);
+
+      if (!decoded) {
+        throw new UnauthorizedException('Invalid token');
+      }
+
+      const user = await this.userModel.findOne({ _id: decoded['sub'] });
+
+      if (!user) {
+        throw new UnauthorizedException('User not found');
+      }
+      return user;
+    } catch (error) {
+      throw new UnauthorizedException('Invalid or expired token');
+    }
+  }
 }

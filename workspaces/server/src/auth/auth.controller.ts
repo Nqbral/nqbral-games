@@ -82,10 +82,15 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Get('verify_token')
   async verifyToken(@Req() req: AuthenticatedRequest) {
-    const user = req.user;
+    const refreshToken = req.cookies?.refreshToken;
+
+    if (!refreshToken) {
+      throw new UnauthorizedException('Refresh token manquant');
+    }
+
+    this.authService.verifyToken(refreshToken);
     return {
-      userId: user.userId,
-      username: user.username,
+      message: 'Token vérifié',
     };
   }
 }
