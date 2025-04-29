@@ -4,7 +4,7 @@ import NavbarBlack from '@/app/components/navbar/NavbarBlack';
 import { useAuth } from '@context/AuthProvider';
 import NqbralGamesLogo from '@public/nqbral-games-logo.png';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { ThreeDots } from 'react-loader-spinner';
@@ -23,6 +23,7 @@ export default function SignIn() {
 
   const { login, resetError, error, loading, isLogged } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const onLogin = async (data: SignInFormValues) => {
     await login(data.username, data.password);
@@ -30,14 +31,27 @@ export default function SignIn() {
 
   const toSignup = () => {
     resetError();
+    const redirectTo = searchParams.get('redirect_to');
+
+    console.log(redirectTo);
+
+    if (redirectTo != undefined) {
+      router.push('/signup?redirect_to=' + redirectTo);
+      return;
+    }
     router.push('/signup');
   };
 
   useEffect(() => {
+    const redirectTo = searchParams.get('redirect_to');
     if (isLogged) {
+      if (redirectTo != undefined) {
+        router.push(redirectTo);
+        return;
+      }
       router.push('/');
     }
-  }, [isLogged, router]);
+  }, [isLogged, router, searchParams]);
 
   return (
     <>
