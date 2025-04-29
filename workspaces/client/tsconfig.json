@@ -22,6 +22,7 @@
       "@/*": ["./src/*"],
       "@components/*": ["./src/app/components/*"],
       "@context/*": ["./src/app/context/*"],
+      "@lib/*": ["./src/app/lib/*"],
       "@public/*": ["./public/*"],
       "@types/*": ["./src/app/types/*"]
     }

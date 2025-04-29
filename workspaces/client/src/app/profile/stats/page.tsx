@@ -3,6 +3,7 @@
 import NavigationProfile from '@/app/components/profile/NavigationProfile';
 import NavbarBlack from '@components/navbar/NavbarBlack';
 import { useAuth } from '@context/AuthProvider';
+import axios from '@lib/axiosInstance';
 import LoveLetterLogo from '@public/love-letter-logo.png';
 import LastHopeLogo from '@public/love-letter-logo.png';
 import Image from 'next/image';
@@ -13,26 +14,15 @@ import { ThreeDots } from 'react-loader-spinner';
 import { Stats } from '../../types/user';
 
 export default function ProfilePageStats() {
-  const { user, isLogged } = useAuth();
+  const { accessToken, isLogged } = useAuth();
   const router = useRouter();
   const [stats, setStats] = useState<Stats | undefined>(undefined);
 
   useEffect(() => {
-    if (!user) return;
+    if (!accessToken) return;
 
-    const fetchStats = async () => {
-      const res = await fetch(
-        process.env.NEXT_PUBLIC_WS_API_URL + '/user/stats',
-        {
-          headers: { Authorization: `Bearer ${user.token}` },
-        },
-      );
-      const data = await res.json();
-      setStats(data);
-    };
-
-    fetchStats();
-  }, [user]);
+    axios.get('/user/stats').then((res) => setStats(res.data));
+  }, [accessToken]);
 
   useEffect(() => {
     if (isLogged != null && !isLogged) {

@@ -1,14 +1,11 @@
 'use client';
 
+import axios from '@lib/axiosInstance';
 import { createContext, useContext, useEffect, useState } from 'react';
 
-type User = {
-  username: string;
-  token: string;
-};
-
 type AuthContextType = {
-  user: User | null;
+  username: string | undefined;
+  accessToken: string | undefined;
   login: (username: string, password: string) => Promise<void>;
   logout: () => void;
   register: (
@@ -27,17 +24,21 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [username, setUsername] = useState<string | undefined>(undefined);
+  const [accessToken, setAccessToken] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isLogged, setIsLogged] = useState<boolean | null>(null);
 
   useEffect(() => {
     // Vérifie si un utilisateur est déjà connecté (par exemple via le localStorage)
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+    const storedUser = localStorage.getItem('username');
+    const storedAccessToken = localStorage.getItem('accessToken');
+    if (storedUser && storedAccessToken) {
+      setUsername(storedUser);
+      setAccessToken(storedAccessToken);
       setIsLogged(true);
+      setLoading(false);
       return;
     }
 
@@ -50,34 +51,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setLoading(true);
     setError(null);
 
-    try {
-      const response = await fetch(
-        process.env.NEXT_PUBLIC_WS_API_URL + '/auth/login',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, password }),
-        },
-      );
+    await axios
+      .post(process.env.NEXT_PUBLIC_WS_API_URL + '/auth/login', {
+        username,
+        password,
+      })
+      .then((res) => {
+        if (res.status == 201) {
+          setIsLogged(true);
+          setAccessToken(res.data.accessToken);
+          setUsername(res.data.username);
+          localStorage.setItem('accessToken', res.data.accessToken);
+          localStorage.setItem('username', res.data.username);
+          return;
+        }
 
-      const data = await response.json();
+        setError(res.data.message || 'Erreur de connexion');
+      });
 
-      if (response.ok) {
-        const { token, ...userData } = data;
-        const user = { ...userData, token };
-
-        setUser(user);
-        setIsLogged(true);
-        localStorage.setItem('user', JSON.stringify(user));
-      } else {
-        setError(data.message || 'Erreur de connexion');
-      }
-    } catch (err) {
-      console.log(err);
-      setError('Erreur serveur');
-    } finally {
-      setLoading(false);
-    }
+    setLoading(false);
   };
 
   // Register
@@ -89,41 +81,40 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setLoading(true);
     setError(null);
 
-    try {
-      const response = await fetch(
-        process.env.NEXT_PUBLIC_WS_API_URL + '/auth/register',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, email, password }),
-        },
-      );
+    await axios
+      .post(process.env.NEXT_PUBLIC_WS_API_URL + '/auth/register', {
+        username,
+        email,
+        password,
+      })
+      .then((res) => {
+        if (res.status == 201) {
+          setIsLogged(true);
+          setAccessToken(res.data.accessToken);
+          setUsername(res.data.username);
+          localStorage.setItem('accessToken', res.data.accessToken);
+          localStorage.setItem('username', res.data.username);
+          return;
+        }
 
-      const data = await response.json();
+        setError(res.data.message || 'Erreur de connexion');
+      });
 
-      if (response.ok) {
-        const { token, ...userData } = data;
-        const user = { ...userData, token };
-
-        setUser(user);
-        setIsLogged(true);
-        localStorage.setItem('user', JSON.stringify(user)); // Sauvegarde l'utilisateur dans le localStorage
-      } else {
-        setError(data.message || "Erreur d'inscription");
-      }
-    } catch (err) {
-      console.log(err);
-      setError('Erreur serveur');
-    } finally {
-      setLoading(false);
-    }
+    setLoading(false);
   };
 
   // Logout
-  const logout = () => {
-    setUser(null);
+  const logout = async () => {
+    await axios.post(
+      process.env.NEXT_PUBLIC_WS_API_URL + '/auth/logout',
+      {},
+      { withCredentials: true },
+    );
+    setUsername(undefined);
+    setAccessToken(undefined);
     setIsLogged(false);
-    localStorage.removeItem('user');
+    localStorage.removeItem('username');
+    localStorage.removeItem('accessToken');
   };
 
   const resetError = () => {
@@ -133,7 +124,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   return (
     <AuthContext.Provider
       value={{
-        user,
+        username,
+        accessToken,
         login,
         logout,
         register,

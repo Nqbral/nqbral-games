@@ -4,6 +4,7 @@ import ModalDeleteAccount from '@/app/components/modals/ModalDeleteAccount';
 import NavigationProfile from '@/app/components/profile/NavigationProfile';
 import NavbarBlack from '@components/navbar/NavbarBlack';
 import { useAuth } from '@context/AuthProvider';
+import axios from '@lib/axiosInstance';
 import { Modal } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -17,7 +18,7 @@ type EditPasswordFormValues = {
 };
 
 export default function ProfilePageInformations() {
-  const { user, logout, isLogged } = useAuth();
+  const { accessToken, logout, isLogged } = useAuth();
   const router = useRouter();
   const [profile, setProfile] = useState<Profile | undefined>(undefined);
   const [passwordMessage, setPasswordMessage] = useState<string | null>(null);
@@ -39,49 +40,19 @@ export default function ProfilePageInformations() {
   } = useForm<EditPasswordFormValues>();
 
   const onEditPassword = async (data: EditPasswordFormValues) => {
-    try {
-      const response = await fetch(
-        process.env.NEXT_PUBLIC_WS_API_URL + '/user/edit_password',
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${user?.token}`,
-          },
-          body: JSON.stringify(data),
-        },
-      );
-
-      const dataResponse = await response.json();
-
-      if (response.ok) {
-        setPasswordMessage('Mot de passe modifié !');
-        reset();
-      } else {
-        setPasswordMessage(dataResponse.message || 'Erreur de connexion');
+    await axios.put('/user/edit_password', data).then((res) => {
+      if (res.status == 200) {
+        setPasswordMessage('Mot de passe changé avec succès !');
       }
-    } catch (err) {
-      console.log(err);
-      setPasswordMessage('Erreur serveur');
-    }
+      reset();
+    });
   };
 
   useEffect(() => {
-    if (!user) return;
+    if (!accessToken) return;
 
-    const fetchProfile = async () => {
-      const res = await fetch(
-        process.env.NEXT_PUBLIC_WS_API_URL + '/user/profile',
-        {
-          headers: { Authorization: `Bearer ${user.token}` },
-        },
-      );
-      const data = await res.json();
-      setProfile(data);
-    };
-
-    fetchProfile();
-  }, [user]);
+    axios.get('/user/profile').then((res) => setProfile(res.data));
+  }, [accessToken]);
 
   useEffect(() => {
     if (isLogged != null && !isLogged) {

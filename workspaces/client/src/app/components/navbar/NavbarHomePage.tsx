@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 export default function NavbarHomePage() {
-  const { resetError, isLogged, user } = useAuth();
+  const { resetError, isLogged, username } = useAuth();
   const router = useRouter();
 
   const toLogin = () => {
@@ -23,7 +23,7 @@ export default function NavbarHomePage() {
       </Link>
       {isLogged == null && <></>}
       {isLogged == true && (
-        <LinkButton href="/profile/informations" buttonText={user?.username} />
+        <LinkButton href="/profile/informations" buttonText={username} />
       )}
       {isLogged == false && (
         <button

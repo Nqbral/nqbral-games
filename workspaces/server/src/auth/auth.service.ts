@@ -1,7 +1,11 @@
 import { LoginDto } from '@app/auth/dto/login.dto';
 import { RegisterDto } from '@app/auth/dto/register.dto';
 import { User, UserDocument } from '@app/auth/schemas/user.schema';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcryptjs';
@@ -36,9 +40,15 @@ export class AuthService {
     await user.save();
 
     const payload = { sub: user._id, username: user.username };
-    const token = await this.jwtService.signAsync(payload);
 
-    return { token: token, username: user.username };
+    const accessToken = this.jwtService.sign(payload, { expiresIn: '1m' });
+    const refreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
+
+    return {
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+      username: user.username,
+    };
   }
 
   async login(loginDto: LoginDto) {
@@ -56,8 +66,28 @@ export class AuthService {
     }
 
     const payload = { sub: user._id, username: user.username };
-    const token = await this.jwtService.signAsync(payload);
 
-    return { token: token, username: user.username };
+    const accessToken = this.jwtService.sign(payload, { expiresIn: '1m' });
+    const refreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
+
+    return {
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+      username: user.username,
+    };
+  }
+
+  async refreshTokens(refreshToken: string) {
+    const token = refreshToken;
+
+    if (!token) throw new UnauthorizedException();
+
+    const payload = this.jwtService.verify(token);
+    const newAccessToken = this.jwtService.sign(
+      { sub: payload.sub },
+      { expiresIn: '1m' },
+    );
+
+    return { accessToken: newAccessToken };
   }
 }
