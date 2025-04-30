@@ -16,7 +16,7 @@ export default function LastHope() {
       }
     >
       <div className="flex w-full flex-col items-center border-b-1 border-slate-700 py-4">
-        <Image src={LastHopeLogo} alt="last-hope-logo" className="w-80" />
+        <Image src={LastHopeLogo} alt="last-hope-logo" className="w-52" />
       </div>
       <div className="flex w-full flex-col items-center gap-4 px-8 py-4">
         <div className="text-center">
