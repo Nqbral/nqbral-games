@@ -67,17 +67,17 @@ export default function ProfilePageStats() {
               />
             </div>
             <div className="border-b-1 border-neutral-700 px-4 py-2">
-              Match(s) joué(s):{' '}
+              Partie(s) jouée(s):{' '}
               <span className="text-amber-500">
                 {stats.loveLetter.gamesPlayed}
               </span>
             </div>
             <div className="border-b-1 border-neutral-700 px-4 py-2">
-              Match(s) gagné(s):{' '}
+              Partie(s) gagnée(s):{' '}
               <span className="text-emerald-500">{stats.loveLetter.wins}</span>
             </div>
             <div className="border-b-1 border-neutral-700 px-4 py-2">
-              Match(s) perdu(s):{' '}
+              Partie(s) perdue(s):{' '}
               <span className="text-red-400">{stats.loveLetter.losses}</span>
             </div>
             <div className="border-b-1 border-neutral-700 px-4 py-2">
@@ -109,17 +109,17 @@ export default function ProfilePageStats() {
               />
             </div>
             <div className="border-b-1 border-neutral-700 px-4 py-2">
-              Match(s) joué(s):{' '}
+              Partie(s) jouée(s):{' '}
               <span className="text-amber-500">
                 {stats.lastHope.gamesPlayed}
               </span>
             </div>
             <div className="border-b-1 border-neutral-700 px-4 py-2">
-              Match(s) gagné(s):{' '}
+              Partie(s) gagnée(s):{' '}
               <span className="text-emerald-500">{stats.lastHope.wins}</span>
             </div>
             <div className="border-b-1 border-neutral-700 px-4 py-2">
-              Match(s) perdu(s):{' '}
+              Partie(s) perdue(s):{' '}
               <span className="text-red-400">{stats.lastHope.losses}</span>
             </div>
           </div>
