@@ -9,13 +9,9 @@ async function bootstrap() {
   app.use(cookieParser());
   let origins: string[] = [];
 
-  if (process.env.CORS_ALLOW_ORIGIN_NQBRAL_GAMES != undefined) {
-    origins.push(process.env.CORS_ALLOW_ORIGIN_NQBRAL_GAMES);
-  }
-
-  if (process.env.CORS_ALLOW_ORIGIN_LAST_HOPE != undefined) {
-    origins.push(process.env.CORS_ALLOW_ORIGIN_LAST_HOPE);
-  }
+  origins.push(process.env.CORS_ALLOW_ORIGIN_NQBRAL_GAMES as string);
+  origins.push(process.env.CORS_ALLOW_ORIGIN_LAST_HOPE as string);
+  origins.push(process.env.CORS_ALLOW_ORIGIN_NQBRAL_GAMES_WEBSOCKET as string);
 
   app.enableCors({
     origin: origins,
