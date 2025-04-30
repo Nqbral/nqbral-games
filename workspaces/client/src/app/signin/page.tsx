@@ -33,8 +33,6 @@ export default function SignIn() {
     resetError();
     const redirectTo = searchParams.get('redirect_to');
 
-    console.log(redirectTo);
-
     if (redirectTo != undefined) {
       router.push('/signup?redirect_to=' + redirectTo);
       return;

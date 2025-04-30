@@ -32,7 +32,7 @@ export class AuthController {
       secure: false, // ← TODO : changer à true en prod
       domain: 'localhost', // ← TODO : changer à '.nqbral-games.fr' en prod
       sameSite: 'lax',
-      path: '/auth/refresh',
+      path: '/',
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -52,7 +52,7 @@ export class AuthController {
       secure: false, // ← TODO : changer à true en prod
       domain: 'localhost', // ← TODO : changer à '.nqbral-games.fr' en prod
       sameSite: 'lax',
-      path: '/auth/refresh',
+      path: '/',
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -75,7 +75,7 @@ export class AuthController {
 
   @Post('logout')
   logout(@Res({ passthrough: true }) res: Response) {
-    res.clearCookie('refreshToken', { path: '/auth/refresh' });
+    res.clearCookie('refreshToken', { path: '/' });
     return { message: 'Déconnecté' };
   }
 

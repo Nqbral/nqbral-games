@@ -51,25 +51,34 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setLoading(true);
     setError(null);
 
-    await axios
-      .post(process.env.NEXT_PUBLIC_WS_API_URL + '/auth/login', {
-        username,
-        password,
-      })
-      .then((res) => {
-        if (res.status == 201) {
-          setIsLogged(true);
-          setAccessToken(res.data.accessToken);
-          setUsername(res.data.username);
-          localStorage.setItem('accessToken', res.data.accessToken);
-          localStorage.setItem('username', res.data.username);
-          return;
-        }
+    try {
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_WS_API_URL + '/auth/login',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password }),
+          credentials: 'include',
+        },
+      );
 
-        setError(res.data.message || 'Erreur de connexion');
-      });
+      const data = await response.json();
 
-    setLoading(false);
+      if (response.ok) {
+        setIsLogged(true);
+        setAccessToken(data.accessToken);
+        setUsername(data.username);
+        localStorage.setItem('accessToken', data.accessToken);
+        localStorage.setItem('username', data.username);
+      } else {
+        setError(data.message || 'Erreur de connexion');
+      }
+    } catch (err) {
+      console.log(err);
+      setError('Erreur serveur');
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Register
@@ -81,26 +90,34 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setLoading(true);
     setError(null);
 
-    await axios
-      .post(process.env.NEXT_PUBLIC_WS_API_URL + '/auth/register', {
-        username,
-        email,
-        password,
-      })
-      .then((res) => {
-        if (res.status == 201) {
-          setIsLogged(true);
-          setAccessToken(res.data.accessToken);
-          setUsername(res.data.username);
-          localStorage.setItem('accessToken', res.data.accessToken);
-          localStorage.setItem('username', res.data.username);
-          return;
-        }
+    try {
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_WS_API_URL + '/auth/register',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, email, password }),
+          credentials: 'include',
+        },
+      );
 
-        setError(res.data.message || 'Erreur de connexion');
-      });
+      const data = await response.json();
 
-    setLoading(false);
+      if (response.ok) {
+        setIsLogged(true);
+        setAccessToken(data.accessToken);
+        setUsername(data.username);
+        localStorage.setItem('accessToken', data.accessToken);
+        localStorage.setItem('username', data.username);
+      } else {
+        setError(data.message || "Erreur d'inscription");
+      }
+    } catch (err) {
+      console.log(err);
+      setError('Erreur serveur');
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Logout

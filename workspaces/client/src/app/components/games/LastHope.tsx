@@ -1,4 +1,4 @@
-import LoveLetterLogo from '@public/love-letter-logo.png';
+import LastHopeLogo from '@public/last-hope-logo.png';
 import { Orbitron } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -16,7 +16,7 @@ export default function LastHope() {
       }
     >
       <div className="flex w-full flex-col items-center border-b-1 border-slate-700 py-4">
-        <Image src={LoveLetterLogo} alt="last-hope-logo" className="w-80" />
+        <Image src={LastHopeLogo} alt="last-hope-logo" className="w-80" />
       </div>
       <div className="flex w-full flex-col items-center gap-4 px-8 py-4">
         <div className="text-center">
