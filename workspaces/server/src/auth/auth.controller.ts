@@ -70,7 +70,7 @@ export class AuthController {
       throw new UnauthorizedException('Refresh token manquant');
     }
 
-    return this.authService.refreshTokens(refreshToken);
+    return this.authService.refreshToken(refreshToken);
   }
 
   @Post('logout')

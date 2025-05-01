@@ -77,7 +77,7 @@ export class AuthService {
     };
   }
 
-  async refreshTokens(refreshToken: string) {
+  async refreshToken(refreshToken: string) {
     const token = refreshToken;
 
     if (!token) throw new UnauthorizedException();
