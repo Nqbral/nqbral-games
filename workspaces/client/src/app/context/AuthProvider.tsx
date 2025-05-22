@@ -1,6 +1,7 @@
 'use client';
 
 import axios from '@lib/axiosInstance';
+import plainAxios from '@lib/plainAxios';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 type AuthContextType = {
@@ -31,19 +32,49 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isLogged, setIsLogged] = useState<boolean | null>(null);
 
   useEffect(() => {
-    // Vérifie si un utilisateur est déjà connecté (par exemple via le localStorage)
-    const storedUser = localStorage.getItem('username');
-    const storedAccessToken = localStorage.getItem('accessToken');
-    if (storedUser && storedAccessToken) {
-      setUsername(storedUser);
-      setAccessToken(storedAccessToken);
-      setIsLogged(true);
-      setLoading(false);
-      return;
-    }
+    const authenticate = async () => {
+      try {
+        const refreshRes = await plainAxios.post(
+          `${process.env.NEXT_PUBLIC_WS_API_URL}/auth/refresh`,
+          {},
+          { withCredentials: true },
+        );
 
-    setIsLogged(false);
-    setLoading(false);
+        if (refreshRes.status === 201) {
+          const newAccessToken = refreshRes.data.accessToken;
+          setAccessToken(newAccessToken);
+          setIsLogged(true);
+          localStorage.setItem('accessToken', newAccessToken);
+
+          const profileRes = await axios.get(
+            `${process.env.NEXT_PUBLIC_WS_API_URL}/user/profile`,
+            {
+              headers: { Authorization: `Bearer ${newAccessToken}` },
+              withCredentials: true,
+            },
+          );
+
+          if (profileRes.status === 200) {
+            setUsername(profileRes.data.username);
+          } else {
+            setUsername(undefined);
+          }
+        } else {
+          setAccessToken(undefined);
+          setIsLogged(false);
+          setUsername(undefined);
+        }
+      } catch (error) {
+        console.error('Erreur lors de l’authentification', error);
+        setAccessToken(undefined);
+        setIsLogged(false);
+        setUsername(undefined);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    authenticate();
   }, []);
 
   // Login
