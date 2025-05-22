@@ -32,7 +32,7 @@ export default function LastHope() {
           sa chute ?
         </div>
         {/* TODO : changer le lien pour la prod */}
-        <Link href={'http://localhost:3034'}>
+        <Link href={'http://last-hope.nqbral-games.local:3034'}>
           <button className="button border-last-hope-primary hover:border-last-hope-primary-hover my-1 rounded-md border-2 px-6 py-2 transition-colors">
             Jouer à Last Hope
           </button>

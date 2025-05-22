@@ -30,7 +30,7 @@ export class AuthController {
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
       secure: false, // ← TODO : changer à true en prod
-      domain: 'localhost', // ← TODO : changer à '.nqbral-games.fr' en prod
+      domain: '.nqbral-games.local', // ← TODO : changer à '.nqbral-games.fr' en prod
       sameSite: 'lax',
       path: '/',
       maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -50,7 +50,7 @@ export class AuthController {
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
       secure: false, // ← TODO : changer à true en prod
-      domain: 'localhost', // ← TODO : changer à '.nqbral-games.fr' en prod
+      domain: '.nqbral-games.local', // ← TODO : changer à '.nqbral-games.fr' en prod
       sameSite: 'lax',
       path: '/',
       maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -75,7 +75,12 @@ export class AuthController {
 
   @Post('logout')
   logout(@Res({ passthrough: true }) res: Response) {
-    res.clearCookie('refreshToken', { path: '/' });
+    res.clearCookie('refreshToken', {
+      httpOnly: true,
+      sameSite: 'lax',
+      secure: false, // true en production avec HTTPS
+      domain: '.nqbral-games.local', // <- Important pour tous les sous-domaines
+    });
     return { message: 'Déconnecté' };
   }
 
