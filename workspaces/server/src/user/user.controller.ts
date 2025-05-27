@@ -1,4 +1,5 @@
 import { JwtAuthGuard } from '@app/auth/jwt-auth.guard';
+import { StatsLastHope } from '@app/auth/schemas/user.schema';
 import { AuthenticatedRequest } from '@app/types/authenticated.request.type';
 import { UserService } from '@app/user/user.service';
 import {
@@ -44,6 +45,15 @@ export class UserController {
   @Get('stats')
   async getStats(@Req() req: AuthenticatedRequest) {
     return this.userService.getStats(req.user.userId);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Put('stats/last-hope')
+  async updateLastHopeStats(
+    @Req() req: AuthenticatedRequest,
+    @Body() statsUpdate: Partial<StatsLastHope>,
+  ) {
+    return this.userService.updateLastHopeStats(req.user.userId, statsUpdate);
   }
 
   @UseGuards(JwtAuthGuard)

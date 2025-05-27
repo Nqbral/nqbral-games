@@ -1,4 +1,4 @@
-import { UserDocument } from '@app/auth/schemas/user.schema';
+import { StatsLastHope, UserDocument } from '@app/auth/schemas/user.schema';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcryptjs';
@@ -37,6 +37,23 @@ export class UserService {
       loveLetter: user?.statsLoveLetter,
       lastHope: user?.statsLastHope,
     };
+  }
+
+  async updateLastHopeStats(
+    userId: string,
+    statsUpdate: Partial<StatsLastHope>,
+  ) {
+    return this.userModel.findByIdAndUpdate(
+      userId,
+      {
+        $inc: {
+          'statsLastHope.gamesPlayed': statsUpdate.gamesPlayed || 0,
+          'statsLastHope.wins': statsUpdate.wins || 0,
+          'statsLastHope.losses': statsUpdate.losses || 0,
+        },
+      },
+      { new: true },
+    );
   }
 
   async deleteAccount(userId: string): Promise<void> {
