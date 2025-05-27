@@ -34,9 +34,9 @@ export default function ProfilePageStats() {
     return (
       <>
         <NavbarBlack />
-        <div className="flex min-h-screen flex-row">
+        <div className="flex flex-col md:min-h-screen md:flex-row">
           <NavigationProfile />
-          <div className="flex min-h-screen w-full flex-col items-center justify-center">
+          <div className="flex w-full flex-col items-center justify-center py-8 md:min-h-screen">
             <ThreeDots
               visible={true}
               height="40"
@@ -53,13 +53,13 @@ export default function ProfilePageStats() {
   return (
     <>
       <NavbarBlack />
-      <div className="flex min-h-screen flex-row">
+      <div className="flex flex-col md:min-h-screen md:flex-row">
         <NavigationProfile />
-        <div className="flex w-full flex-col items-center gap-8 pt-24">
+        <div className="flex w-full flex-col items-center gap-8 py-8 md:pt-24">
           <h1 className="text-xl font-bold">Vos stastistiques de jeu</h1>
 
-          <div className="flex flex-col rounded-lg border-1 border-neutral-100">
-            <div className="w-full border-b-1 border-neutral-100 px-8">
+          <div className="flex flex-col rounded-lg border-1 border-neutral-700 shadow-md shadow-neutral-800">
+            <div className="w-full border-b-1 border-neutral-700 px-8">
               <Image
                 src={LoveLetterLogo}
                 alt="love-letter-logo"
@@ -100,8 +100,8 @@ export default function ProfilePageStats() {
             </div>
           </div>
 
-          <div className="flex flex-col rounded-lg border-1 border-neutral-100">
-            <div className="w-full border-b-1 border-neutral-100 px-8">
+          <div className="flex flex-col rounded-lg border-1 border-neutral-700 shadow-md shadow-neutral-800">
+            <div className="w-full border-b-1 border-neutral-700 px-8">
               <Image
                 src={LastHopeLogo}
                 alt="last-hope-logo"

@@ -7,7 +7,7 @@ type Props = {
 };
 
 export default function ModalDeleteAccount({ handleClose }: Props) {
-  const { user, logout } = useAuth();
+  const { accessToken, logout } = useAuth();
 
   const onDeleteAccount = async () => {
     try {
@@ -17,7 +17,7 @@ export default function ModalDeleteAccount({ handleClose }: Props) {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         },
       );
@@ -39,7 +39,7 @@ export default function ModalDeleteAccount({ handleClose }: Props) {
         <p>
           Vous êtes sur le point de supprimer votre compte. En êtes-vous sûr ?
         </p>
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-col gap-4 md:flex-row">
           <button
             className="w-48 rounded-lg border-1 border-red-400 px-4 py-2 text-red-400 transition-colors hover:border-red-500 hover:text-red-500"
             onClick={() => {

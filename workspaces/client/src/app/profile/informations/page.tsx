@@ -64,16 +64,9 @@ export default function ProfilePageInformations() {
     return (
       <>
         <NavbarBlack />
-        <Modal
-          open={openModalDeleteAccount}
-          onClose={handleCloseModalDeleteAccount}
-          aria-labelledby="modal-delete-account"
-        >
-          <ModalDeleteAccount handleClose={handleCloseModalDeleteAccount} />
-        </Modal>
-        <div className="flex min-h-screen flex-row">
+        <div className="flex flex-col md:min-h-screen md:flex-row">
           <NavigationProfile />
-          <div className="flex min-h-screen w-full flex-col items-center justify-center">
+          <div className="flex w-full flex-col items-center justify-center py-8 md:min-h-screen">
             <ThreeDots
               visible={true}
               height="40"
@@ -97,9 +90,9 @@ export default function ProfilePageInformations() {
       >
         <ModalDeleteAccount handleClose={handleCloseModalDeleteAccount} />
       </Modal>
-      <div className="flex min-h-screen flex-row">
+      <div className="flex flex-col md:min-h-screen md:flex-row">
         <NavigationProfile />
-        <div className="flex w-full flex-col items-center pt-24">
+        <div className="flex w-full flex-col items-center py-8 md:pt-24">
           <h1 className="mb-8 text-xl font-bold">Votre profil</h1>
           <div className="mb-4 flex w-96 flex-col gap-4 rounded-lg border-1 border-neutral-100 p-4 text-center">
             <h2 className="w-full text-center text-lg font-semibold">
