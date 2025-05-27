@@ -94,7 +94,7 @@ export default function ProfilePageInformations() {
         <NavigationProfile />
         <div className="flex w-full flex-col items-center py-8 md:pt-24">
           <h1 className="mb-8 text-xl font-bold">Votre profil</h1>
-          <div className="mb-4 flex w-96 flex-col gap-4 rounded-lg border-1 border-neutral-100 p-4 text-center">
+          <div className="mb-4 flex w-80 flex-col gap-4 rounded-lg border-1 border-neutral-100 p-4 text-center md:w-96">
             <h2 className="w-full text-center text-lg font-semibold">
               Informations
             </h2>
@@ -106,7 +106,7 @@ export default function ProfilePageInformations() {
               </div>
             </div>
           </div>
-          <div className="mb-4 flex w-96 flex-col gap-4 rounded-lg border-1 border-neutral-100 p-4 text-center">
+          <div className="mb-4 flex w-80 flex-col gap-4 rounded-lg border-1 border-neutral-100 p-4 text-center md:w-96">
             <h2 className="w-full text-center text-lg font-semibold">
               Changer le mot de passe
             </h2>
@@ -137,7 +137,7 @@ export default function ProfilePageInformations() {
               </form>
             </div>
           </div>
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-col gap-2 md:flex-row">
             <button
               className="w-48 rounded-lg border-1 border-blue-400 px-4 py-2 text-blue-400 transition-colors hover:border-blue-500 hover:text-blue-500"
               onClick={() => {
