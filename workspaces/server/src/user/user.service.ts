@@ -14,6 +14,10 @@ export class UserService {
     return this.userModel.findById(userId).select('username email createdAt');
   }
 
+  async findByEmail(email: string) {
+    return this.userModel.findOne({ email }).exec();
+  }
+
   async updatePassword(userId: string, updateData: EditPasswordDto) {
     const hashedPassword = await bcrypt.hash(updateData.password, 10);
 
@@ -22,10 +26,6 @@ export class UserService {
       { password: hashedPassword },
       { new: true },
     );
-  }
-
-  async updateProfile(userId: string, updateData: any) {
-    return this.userModel.findByIdAndUpdate(userId, updateData, { new: true });
   }
 
   async getStats(userId: string) {

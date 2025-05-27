@@ -14,8 +14,12 @@ type AuthContextType = {
     email: string,
     password: string,
   ) => Promise<void>;
+  forgotPassword: (email: string) => Promise<void>;
+  resetPassword: (token: string, password: string) => Promise<void>;
   resetError: () => void;
+  resetMessage: () => void;
   loading: boolean;
+  message: string | null;
   error: string | null;
   isLogged: boolean | null;
 };
@@ -28,6 +32,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [username, setUsername] = useState<string | undefined>(undefined);
   const [accessToken, setAccessToken] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
+  const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLogged, setIsLogged] = useState<boolean | null>(null);
 
@@ -151,6 +156,74 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
+  // Forgot password
+  const forgotPassword = async (email: string) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_WS_API_URL + '/auth/forgot-password',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+          credentials: 'include',
+        },
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage(
+          "Si l'adresse est enregistrée, un mail de réinitialisation a été envoyé.",
+        );
+      } else {
+        setError(data.message || 'Erreur');
+      }
+    } catch (err) {
+      console.log(err);
+      setError('Erreur serveur');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Forgot password
+  const resetPassword = async (token: string, password: string) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_WS_API_URL + '/auth/reset-password',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token, password }),
+          credentials: 'include',
+        },
+      );
+
+      console.log(response.status);
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage(
+          'Votre mot de passe a bien été réinitialisé. Vous pouvez maintenant vous connecter.',
+        );
+      } else {
+        setError(data.message || 'Erreur');
+      }
+    } catch (err) {
+      console.log(err);
+      setError('Erreur serveur');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Logout
   const logout = async () => {
     await axios.post(
@@ -163,6 +236,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setIsLogged(false);
     localStorage.removeItem('username');
     localStorage.removeItem('accessToken');
+  };
+
+  const resetMessage = () => {
+    setMessage(null);
   };
 
   const resetError = () => {
@@ -178,7 +255,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         logout,
         register,
         resetError,
+        resetMessage,
+        forgotPassword,
+        resetPassword,
         loading,
+        message,
         error,
         isLogged,
       }}

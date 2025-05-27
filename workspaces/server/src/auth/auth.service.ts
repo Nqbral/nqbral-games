@@ -2,9 +2,11 @@ import { LoginDto } from '@app/auth/dto/login.dto';
 import { RegisterDto } from '@app/auth/dto/register.dto';
 import { User, UserDocument } from '@app/auth/schemas/user.schema';
 import { MailService } from '@app/mail/mail.service';
+import { UserService } from '@app/user/user.service';
 import {
   BadRequestException,
   Injectable,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -18,6 +20,7 @@ export class AuthService {
     @InjectModel(User.name) private userModel: Model<UserDocument>,
     private jwtService: JwtService,
     private readonly mailService: MailService,
+    private readonly userService: UserService,
   ) {}
 
   async register(registerDto: RegisterDto) {
@@ -113,6 +116,31 @@ export class AuthService {
       return user;
     } catch (error) {
       throw new UnauthorizedException('Invalid or expired token');
+    }
+  }
+
+  async forgotPassword(email: string) {
+    const user = await this.userService.findByEmail(email);
+
+    if (!user) return;
+
+    const token = this.jwtService.sign({ sub: user.id }, { expiresIn: '15m' });
+
+    await this.mailService.sendPasswordReset(user.email, user.username, token);
+    return { message: 'Email de réinitialisation envoyé' };
+  }
+
+  async resetPassword(token: string, password: string) {
+    try {
+      const payload = this.jwtService.verify(token);
+
+      await this.userService.updatePassword(payload.sub, {
+        password: password,
+      });
+
+      return { message: 'Mot de passe mis à jour' };
+    } catch {
+      throw new UnauthorizedException('Token invalide ou expiré');
     }
   }
 }

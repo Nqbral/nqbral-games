@@ -36,12 +36,6 @@ export class UserController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Put('update')
-  async updateProfile(@Req() req: AuthenticatedRequest, @Body() updateData) {
-    return this.userService.updateProfile(req.user.userId, updateData);
-  }
-
-  @UseGuards(JwtAuthGuard)
   @Get('stats')
   async getStats(@Req() req: AuthenticatedRequest) {
     return this.userService.getStats(req.user.userId);

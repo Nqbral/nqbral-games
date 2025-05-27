@@ -3,6 +3,7 @@ import { AuthService } from '@app/auth/auth.service';
 import { JwtStrategy } from '@app/auth/jwt.strategy';
 import { User, UserSchema } from '@app/auth/schemas/user.schema';
 import { MailModule } from '@app/mail/mail.module';
+import { UserModule } from '@app/user/user.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
@@ -14,6 +15,7 @@ import { PassportModule } from '@nestjs/passport';
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     PassportModule,
     MailModule,
+    UserModule,
     JwtModule.registerAsync({
       imports: [ConfigModule], // Si tu utilises ConfigModule pour charger .env
       inject: [ConfigService],

@@ -22,7 +22,8 @@ export default function SignUp() {
     formState: { errors },
   } = useForm<RegisterFormValues>();
 
-  const { register, resetError, error, loading, isLogged } = useAuth();
+  const { register, resetError, resetMessage, error, loading, isLogged } =
+    useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -32,6 +33,7 @@ export default function SignUp() {
 
   const toLogin = () => {
     resetError();
+    resetMessage();
     const redirectTo = searchParams.get('redirect_to');
 
     if (redirectTo != undefined) {

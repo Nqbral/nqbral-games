@@ -21,7 +21,8 @@ export default function SignIn() {
     formState: { errors },
   } = useForm<SignInFormValues>();
 
-  const { login, resetError, error, loading, isLogged } = useAuth();
+  const { login, resetError, resetMessage, error, loading, isLogged } =
+    useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -31,6 +32,7 @@ export default function SignIn() {
 
   const toSignup = () => {
     resetError();
+    resetMessage();
     const redirectTo = searchParams.get('redirect_to');
 
     if (redirectTo != undefined) {
@@ -38,6 +40,12 @@ export default function SignIn() {
       return;
     }
     router.push('/signup');
+  };
+
+  const toForgotPassword = () => {
+    resetError();
+    resetMessage();
+    router.push('/forgot-password');
   };
 
   useEffect(() => {
@@ -123,6 +131,12 @@ export default function SignIn() {
               <p className="mt-4 text-center text-sm text-red-500">{error}</p>
             )}
           </form>
+          <button
+            className="pt-4 italic underline transition-colors hover:text-neutral-300"
+            onClick={toForgotPassword}
+          >
+            Mot de passe oublié ?
+          </button>
         </div>
 
         <div className="flex w-96 flex-row items-center justify-center gap-2 rounded-sm border-1 border-neutral-600 px-8 py-4">

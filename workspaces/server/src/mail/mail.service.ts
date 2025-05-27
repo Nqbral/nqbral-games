@@ -17,13 +17,18 @@ export class MailService {
     });
   }
 
-  async sendPasswordReset(to: string, token: string) {
-    const resetUrl = `https://nqbral-games.fr/reset-password?token=${token}`;
+  async sendPasswordReset(to: string, username: string, token: string) {
+    // TODO changer url
+    const resetUrl = `http://nqbral-games.local:3033/reset-password?token=${token}`;
     await this.mailerService.sendMail({
       to,
       subject: 'Réinitialisation du mot de passe',
       template: './reset-password',
-      context: { resetUrl },
+      context: {
+        username: username,
+        resetLink: resetUrl,
+        year: new Date().getFullYear(),
+      },
     });
   }
 }

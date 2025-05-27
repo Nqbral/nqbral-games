@@ -102,4 +102,21 @@ export class AuthController {
       message: 'Token vérifié',
     };
   }
+
+  @Post('forgot-password')
+  async forgotPassword(@Body('email') email: string) {
+    await this.authService.forgotPassword(email);
+
+    return { message: 'Email de réinitialisation envoyé' };
+  }
+
+  @Post('reset-password')
+  async resetPassword(
+    @Body('token') token: string,
+    @Body('password') password: string,
+  ) {
+    this.authService.resetPassword(token, password);
+
+    return { message: 'Mot de passe réinitialisé.' };
+  }
 }
