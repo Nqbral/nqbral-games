@@ -25,6 +25,7 @@ axiosInstance.interceptors.response.use(
         const newAccessToken = refreshRes.data.accessToken;
 
         localStorage.setItem('accessToken', newAccessToken);
+        console.log('SET AXIOS');
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         return axiosInstance(originalRequest);
       } catch (e) {

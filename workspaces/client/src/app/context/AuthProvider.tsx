@@ -2,11 +2,17 @@
 
 import axios from '@lib/axiosInstance';
 import plainAxios from '@lib/plainAxios';
-import { createContext, useContext, useEffect, useState } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 type AuthContextType = {
   username: string | undefined;
-  accessToken: string | undefined;
+  accessToken: string | null;
   login: (username: string, password: string) => Promise<void>;
   logout: () => void;
   register: (
@@ -30,11 +36,38 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [username, setUsername] = useState<string | undefined>(undefined);
-  const [accessToken, setAccessToken] = useState<string | undefined>(undefined);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLogged, setIsLogged] = useState<boolean | null>(null);
+
+  const handleStorageChange = useCallback(() => {
+    const token = localStorage.getItem('accessToken');
+    console.log('TEST local');
+    setAccessToken(token);
+  }, []);
+
+  useEffect(() => {
+    const originalSetItem = localStorage.setItem;
+    localStorage.setItem = function (key, value) {
+      const event = new Event('localStorageUpdate');
+      originalSetItem.apply(this, [key, value]);
+      if (key === 'accessToken') window.dispatchEvent(event);
+    };
+
+    return () => {
+      localStorage.setItem = originalSetItem;
+    };
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('localStorageUpdate', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('localStorageUpdate', handleStorageChange);
+    };
+  }, [handleStorageChange]);
 
   useEffect(() => {
     const authenticate = async () => {
@@ -65,13 +98,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
             setUsername(undefined);
           }
         } else {
-          setAccessToken(undefined);
+          setAccessToken(null);
           setIsLogged(false);
           setUsername(undefined);
         }
       } catch (error) {
         console.error('Erreur lors de l’authentification', error);
-        setAccessToken(undefined);
+        setAccessToken(null);
         setIsLogged(false);
         setUsername(undefined);
       } finally {
@@ -232,7 +265,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       { withCredentials: true },
     );
     setUsername(undefined);
-    setAccessToken(undefined);
+    setAccessToken(null);
     setIsLogged(false);
     localStorage.removeItem('username');
     localStorage.removeItem('accessToken');
