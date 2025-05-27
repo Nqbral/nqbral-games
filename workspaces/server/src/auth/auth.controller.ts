@@ -2,6 +2,7 @@ import { AuthService } from '@app/auth/auth.service';
 import { LoginDto } from '@app/auth/dto/login.dto';
 import { RegisterDto } from '@app/auth/dto/register.dto';
 import { JwtAuthGuard } from '@app/auth/jwt-auth.guard';
+import { MailService } from '@app/mail/mail.service';
 import { AuthenticatedRequest } from '@app/types/authenticated.request.type';
 import {
   Body,
@@ -17,7 +18,10 @@ import { Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly mailService: MailService,
+  ) {}
 
   @Post('register')
   async register(

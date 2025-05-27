@@ -1,6 +1,7 @@
 import { LoginDto } from '@app/auth/dto/login.dto';
 import { RegisterDto } from '@app/auth/dto/register.dto';
 import { User, UserDocument } from '@app/auth/schemas/user.schema';
+import { MailService } from '@app/mail/mail.service';
 import {
   BadRequestException,
   Injectable,
@@ -16,6 +17,7 @@ export class AuthService {
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDocument>,
     private jwtService: JwtService,
+    private readonly mailService: MailService,
   ) {}
 
   async register(registerDto: RegisterDto) {
@@ -43,6 +45,10 @@ export class AuthService {
 
     const accessToken = this.jwtService.sign(payload, { expiresIn: '15m' });
     const refreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
+
+    this.mailService
+      .sendWelcome(user.email, user.username)
+      .catch((e) => console.error('Erreur envoi mail de bienvenue', e));
 
     return {
       accessToken: accessToken,

@@ -1,0 +1,82 @@
+<html lang='fr'>
+  <head>
+    <meta charset='UTF-8' />
+    <title>Bienvenue sur Nqbral Games</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f3f4f6;
+        color: #111827;
+        padding: 20px;
+      }
+
+      .container {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      img {
+        width: 120px;
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        color: #111827;
+      }
+
+      p {
+        font-size: 16px;
+        margin: 10px 0;
+      }
+
+      .button {
+        margin-top: 20px;
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #2563eb;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+      }
+
+      .footer {
+        margin-top: 30px;
+        font-size: 12px;
+        color: #6b7280;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='container'>
+      {{! TODO changer URL }}
+      <img src='URL_DU_LOGO' alt='Nqbral Games' />
+      <h1>Bienvenue {{username}} !</h1>
+      <p>
+        Merci de vous être inscrit sur
+        <strong>nqbral-games.fr</strong>
+        🎉
+      </p>
+      <p>
+        Nqbral Games est une plateforme de jeux de société en ligne où vous
+        pouvez retrouver vos amis, créer des parties, et découvrir de nouveaux
+        jeux, directement depuis votre navigateur.
+      </p>
+      <p>
+        Cliquez ci-dessous pour visiter le site :
+      </p>
+      <a class='button' href='https://nqbral-games.fr/'>Accéder à Nqbral Games</a>
+
+      <div class='footer'>
+        &copy;
+        {{year}}
+        Nqbral Games. Tous droits réservés.
+      </div>
+    </div>
+  </body>
+</html>
