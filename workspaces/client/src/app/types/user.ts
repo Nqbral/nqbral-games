@@ -10,8 +10,6 @@ export interface StatsLoveLetter {
   wins: number;
   losses: number;
   roundsPlayed: number;
-  roundsWin: number;
-  roundsLosses: number;
 }
 
 export interface StatsLastHope {

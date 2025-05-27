@@ -16,12 +16,6 @@ export class StatsLoveLetter {
 
   @Prop({ default: 0 })
   roundsPlayed: number;
-
-  @Prop({ default: 0 })
-  roundsWin: number;
-
-  @Prop({ default: 0 })
-  roundsLosses: number;
 }
 
 @Schema({ _id: false })

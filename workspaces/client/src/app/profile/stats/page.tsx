@@ -82,20 +82,8 @@ export default function ProfilePageStats() {
             </div>
             <div className="border-b-1 border-neutral-700 px-4 py-2">
               Manche(s) jouée(s):{' '}
-              <span className="text-amber-500">
-                {stats.loveLetter.roundsPlayed}
-              </span>
-            </div>
-            <div className="border-b-1 border-neutral-700 px-4 py-2">
-              Manche(s) gagnée(s):{' '}
               <span className="text-emerald-500">
-                {stats.loveLetter.roundsWin}
-              </span>
-            </div>
-            <div className="border-b-1 border-neutral-700 px-4 py-2">
-              Manche(s) perdue(s):{' '}
-              <span className="text-red-400">
-                {stats.loveLetter.roundsLosses}
+                {stats.loveLetter.roundsPlayed}
               </span>
             </div>
           </div>
