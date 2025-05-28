@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
+import { Suspense } from 'react';
 
 import { AuthProvider } from './context/AuthProvider';
 import './globals.css';
@@ -20,9 +21,11 @@ export default function RootLayout({
 }>) {
   return (
     <AuthProvider>
-      <html lang="fr">
-        <body className={roboto.className}>{children}</body>
-      </html>
+      <Suspense>
+        <html lang="fr">
+          <body className={roboto.className}>{children}</body>
+        </html>
+      </Suspense>
     </AuthProvider>
   );
 }

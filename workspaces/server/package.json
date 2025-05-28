@@ -6,7 +6,7 @@
   "scripts": {
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main"
+    "start:prod": "rimraf dist && nest build && node dist/main"
   },
   "dependencies": {
     "@nestjs-modules/mailer": "^2.0.2",
@@ -25,6 +25,7 @@
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.2.2",
+    "rimraf": "^6.0.1",
     "rxjs": "^7.8.1"
   },
   "devDependencies": {
