@@ -52,7 +52,7 @@ export class UserController {
 
   @UseGuards(JwtAuthGuard)
   @Delete('delete_account')
-  @HttpCode(HttpStatus.NO_CONTENT) // 204 No Content
+  @HttpCode(HttpStatus.NO_CONTENT)
   async deleteAccount(@Req() req: AuthenticatedRequest): Promise<void> {
     await this.userService.deleteAccount(req.user.userId);
   }

@@ -30,4 +30,15 @@ export class MailService {
       },
     });
   }
+
+  async sendDeletionMail(to: string, username: string) {
+    await this.mailerService.sendMail({
+      to,
+      subject: 'Suppression du compte',
+      template: './delete-account',
+      context: {
+        username: username,
+      },
+    });
+  }
 }

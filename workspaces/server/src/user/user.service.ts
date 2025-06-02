@@ -1,4 +1,5 @@
 import { StatsLastHope, UserDocument } from '@app/auth/schemas/user.schema';
+import { MailService } from '@app/mail/mail.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcryptjs';
@@ -8,7 +9,10 @@ import { EditPasswordDto } from './dto/edit.password.dto';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel('User') private userModel: Model<UserDocument>) {}
+  constructor(
+    @InjectModel('User') private userModel: Model<UserDocument>,
+    private readonly mailService: MailService,
+  ) {}
 
   async getProfile(userId: string) {
     return this.userModel.findById(userId).select('username email createdAt');
@@ -57,10 +61,16 @@ export class UserService {
   }
 
   async deleteAccount(userId: string): Promise<void> {
+    const user = await this.userModel.findById(userId);
+
     const result = await this.userModel.deleteOne({ _id: userId });
 
     if (result.deletedCount === 0) {
       throw new NotFoundException('Utilisateur non trouvé.');
+    }
+
+    if (user != null) {
+      this.mailService.sendDeletionMail(user.email, user.username);
     }
   }
 }
