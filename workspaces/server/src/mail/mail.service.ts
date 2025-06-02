@@ -18,8 +18,7 @@ export class MailService {
   }
 
   async sendPasswordReset(to: string, username: string, token: string) {
-    // TODO changer url
-    const resetUrl = `http://nqbral-games.local:3033/reset-password?token=${token}`;
+    const resetUrl = `${process.env.CORS_ALLOW_ORIGIN_NQBRAL_GAMES ?? ''}/reset-password?token=${token}`;
     await this.mailerService.sendMail({
       to,
       subject: 'Réinitialisation du mot de passe',
