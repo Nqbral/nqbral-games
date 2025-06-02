@@ -38,6 +38,7 @@ export class MailService {
       template: './delete-account',
       context: {
         username: username,
+        year: new Date().getFullYear(),
       },
     });
   }
