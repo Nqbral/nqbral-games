@@ -44,7 +44,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const handleStorageChange = useCallback(() => {
     const token = localStorage.getItem('accessToken');
-    console.log('TEST local');
     setAccessToken(token);
   }, []);
 

@@ -2,7 +2,6 @@ import { AuthService } from '@app/auth/auth.service';
 import { LoginDto } from '@app/auth/dto/login.dto';
 import { RegisterDto } from '@app/auth/dto/register.dto';
 import { JwtAuthGuard } from '@app/auth/jwt-auth.guard';
-import { MailService } from '@app/mail/mail.service';
 import { AuthenticatedRequest } from '@app/types/authenticated.request.type';
 import {
   Body,
@@ -18,10 +17,7 @@ import { Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
-  constructor(
-    private readonly authService: AuthService,
-    private readonly mailService: MailService,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Post('register')
   async register(
@@ -33,8 +29,11 @@ export class AuthController {
 
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
-      secure: false, // ← TODO : changer à true en prod
-      domain: '.nqbral-games.local', // ← TODO : changer à '.nqbral-games.fr' en prod
+      secure: process.env.IS_PROD === 'true' ? true : false,
+      domain:
+        process.env.IS_PROD === 'true'
+          ? '.nqbral-games.fr'
+          : '.nqbral-games.local',
       sameSite: 'lax',
       path: '/',
       maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -53,8 +52,11 @@ export class AuthController {
 
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
-      secure: false, // ← TODO : changer à true en prod
-      domain: '.nqbral-games.local', // ← TODO : changer à '.nqbral-games.fr' en prod
+      secure: process.env.IS_PROD === 'true' ? true : false,
+      domain:
+        process.env.IS_PROD === 'true'
+          ? '.nqbral-games.fr'
+          : '.nqbral-games.local',
       sameSite: 'lax',
       path: '/',
       maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -82,8 +84,11 @@ export class AuthController {
     res.clearCookie('refreshToken', {
       httpOnly: true,
       sameSite: 'lax',
-      secure: false, // true en production avec HTTPS
-      domain: '.nqbral-games.local', // <- Important pour tous les sous-domaines
+      secure: process.env.IS_PROD === 'true' ? true : false,
+      domain:
+        process.env.IS_PROD === 'true'
+          ? '.nqbral-games.fr'
+          : '.nqbral-games.local',
     });
     return { message: 'Déconnecté' };
   }
