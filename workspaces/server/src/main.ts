@@ -12,6 +12,8 @@ async function bootstrap() {
   origins.push(process.env.CORS_ALLOW_ORIGIN_NQBRAL_GAMES as string);
   origins.push(process.env.CORS_ALLOW_ORIGIN_LAST_HOPE as string);
   origins.push(process.env.CORS_ALLOW_ORIGIN_LAST_HOPE_WEBSOCKET as string);
+  origins.push(process.env.CORS_ALLOW_ORIGIN_LOVE_LETTER_WEBSOCKET as string);
+  origins.push(process.env.CORS_ALLOW_ORIGIN_LOVE_LETTER as string);
 
   app.enableCors({
     origin: origins,

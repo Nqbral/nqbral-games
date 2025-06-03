@@ -27,13 +27,12 @@ export class AuthController {
     const { accessToken, refreshToken, username } =
       await this.authService.register(dto);
 
+    const isProd = process.env.IS_PROD === 'true';
+
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
-      secure: process.env.IS_PROD === 'true' ? true : false,
-      domain:
-        process.env.IS_PROD === 'true'
-          ? '.nqbral-games.fr'
-          : '.nqbral-games.local',
+      secure: isProd,
+      domain: isProd ? '.nqbral-games.fr' : '.nqbral-games.local',
       sameSite: 'lax',
       path: '/',
       maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -50,13 +49,12 @@ export class AuthController {
     const { accessToken, refreshToken, username } =
       await this.authService.login(dto);
 
+    const isProd = process.env.IS_PROD === 'true';
+
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
-      secure: process.env.IS_PROD === 'true' ? true : false,
-      domain:
-        process.env.IS_PROD === 'true'
-          ? '.nqbral-games.fr'
-          : '.nqbral-games.local',
+      secure: isProd,
+      domain: isProd ? '.nqbral-games.fr' : '.nqbral-games.local',
       sameSite: 'lax',
       path: '/',
       maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -81,14 +79,15 @@ export class AuthController {
 
   @Post('logout')
   logout(@Res({ passthrough: true }) res: Response) {
+    const isProd = process.env.IS_PROD === 'true';
+
     res.clearCookie('refreshToken', {
       httpOnly: true,
+      secure: isProd,
+      domain: isProd ? '.nqbral-games.fr' : '.nqbral-games.local',
       sameSite: 'lax',
-      secure: process.env.IS_PROD === 'true' ? true : false,
-      domain:
-        process.env.IS_PROD === 'true'
-          ? '.nqbral-games.fr'
-          : '.nqbral-games.local',
+      path: '/',
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     return { message: 'Déconnecté' };
   }
