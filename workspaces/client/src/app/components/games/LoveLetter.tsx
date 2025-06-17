@@ -30,7 +30,7 @@ export default function LoveLetter() {
           adversaires et tentent d&apos;être le dernier survivant ou
           d&apos;avoir la carte la plus haute à la fin de la manche.
         </div>
-        <Link href={process.env.NEXT_PUBLIC_WS_URL_LOVE_LETTER ?? ''}>
+        <Link href={process.env.NEXT_PUBLIC_WS_URL_SHADOW_NETWORK ?? ''}>
           <button className="button border-love-letter-primary hover:border-love-letter-primary-hover my-1 rounded-md border-2 px-6 py-2 transition-colors">
             Jouer à Love Letter
           </button>
