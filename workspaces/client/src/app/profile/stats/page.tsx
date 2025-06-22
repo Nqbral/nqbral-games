@@ -56,7 +56,7 @@ export default function ProfilePageStats() {
       <div className="flex flex-col md:min-h-screen md:flex-row">
         <NavigationProfile />
         <div className="flex w-full flex-col items-center gap-8 py-8 md:pt-24">
-          <h1 className="text-xl font-bold">Vos stastistiques de jeu</h1>
+          <h1 className="text-xl font-bold">Vos statistiques de jeu</h1>
 
           <div className="flex w-72 flex-col rounded-lg border-1 border-neutral-700 shadow-md shadow-neutral-800">
             <div className="flex w-full flex-col items-center border-b-1 border-neutral-700 px-8">
