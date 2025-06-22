@@ -5,7 +5,7 @@ import NavbarBlack from '@components/navbar/NavbarBlack';
 import { useAuth } from '@context/AuthProvider';
 import axios from '@lib/axiosInstance';
 import LastHopeLogo from '@public/last-hope-logo.png';
-import LoveLetterLogo from '@public/love-letter-logo.png';
+import ShadowNetworkLogo from '@public/shadow_network_logo.png';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -58,12 +58,12 @@ export default function ProfilePageStats() {
         <div className="flex w-full flex-col items-center gap-8 py-8 md:pt-24">
           <h1 className="text-xl font-bold">Vos stastistiques de jeu</h1>
 
-          <div className="flex flex-col rounded-lg border-1 border-neutral-700 shadow-md shadow-neutral-800">
-            <div className="w-full border-b-1 border-neutral-700 px-8">
+          <div className="flex w-72 flex-col rounded-lg border-1 border-neutral-700 shadow-md shadow-neutral-800">
+            <div className="flex w-full flex-col items-center border-b-1 border-neutral-700 px-8">
               <Image
-                src={LoveLetterLogo}
+                src={ShadowNetworkLogo}
                 alt="love-letter-logo"
-                className="w-64 p-4"
+                className="w-48 p-4"
               />
             </div>
             <div className="border-b-1 border-neutral-700 px-4 py-2">
@@ -80,20 +80,14 @@ export default function ProfilePageStats() {
               Partie(s) perdue(s):{' '}
               <span className="text-red-400">{stats.loveLetter.losses}</span>
             </div>
-            <div className="border-b-1 border-neutral-700 px-4 py-2">
-              Manche(s) jouée(s):{' '}
-              <span className="text-emerald-500">
-                {stats.loveLetter.roundsPlayed}
-              </span>
-            </div>
           </div>
 
-          <div className="flex flex-col rounded-lg border-1 border-neutral-700 shadow-md shadow-neutral-800">
-            <div className="w-full border-b-1 border-neutral-700 px-8">
+          <div className="flex w-72 flex-col rounded-lg border-1 border-neutral-700 shadow-md shadow-neutral-800">
+            <div className="flex w-full flex-col items-center border-b-1 border-neutral-700 px-8">
               <Image
                 src={LastHopeLogo}
                 alt="last-hope-logo"
-                className="w-64 p-4"
+                className="w-56 p-4"
               />
             </div>
             <div className="border-b-1 border-neutral-700 px-4 py-2">

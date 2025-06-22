@@ -6,6 +6,12 @@ export class MailService {
   constructor(private readonly mailerService: MailerService) {}
 
   async sendWelcome(to: string, username: string) {
+    const isProd = process.env.IS_PROD === 'true';
+
+    if (!isProd) {
+      return;
+    }
+
     await this.mailerService.sendMail({
       to,
       subject: 'Bienvenue sur Nqbral Games !',
@@ -18,6 +24,12 @@ export class MailService {
   }
 
   async sendPasswordReset(to: string, username: string, token: string) {
+    const isProd = process.env.IS_PROD === 'true';
+
+    if (!isProd) {
+      return;
+    }
+
     const resetUrl = `${process.env.CORS_ALLOW_ORIGIN_NQBRAL_GAMES ?? ''}/reset-password?token=${token}`;
     await this.mailerService.sendMail({
       to,
@@ -32,6 +44,12 @@ export class MailService {
   }
 
   async sendDeletionMail(to: string, username: string) {
+    const isProd = process.env.IS_PROD === 'true';
+
+    if (!isProd) {
+      return;
+    }
+
     await this.mailerService.sendMail({
       to,
       subject: 'Suppression du compte',

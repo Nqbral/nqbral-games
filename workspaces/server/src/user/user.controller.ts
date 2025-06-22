@@ -1,5 +1,8 @@
 import { JwtAuthGuard } from '@app/auth/jwt-auth.guard';
-import { StatsLastHope } from '@app/auth/schemas/user.schema';
+import {
+  StatsLastHope,
+  StatsShadowNetwork,
+} from '@app/auth/schemas/user.schema';
 import { AuthenticatedRequest } from '@app/types/authenticated.request.type';
 import { UserService } from '@app/user/user.service';
 import {
@@ -48,6 +51,18 @@ export class UserController {
     @Body() statsUpdate: Partial<StatsLastHope>,
   ) {
     return this.userService.updateLastHopeStats(req.user.userId, statsUpdate);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Put('stats/shadow-network')
+  async updateShadowNetworkStats(
+    @Req() req: AuthenticatedRequest,
+    @Body() statsUpdate: Partial<StatsShadowNetwork>,
+  ) {
+    return this.userService.updateShadowNetworkStats(
+      req.user.userId,
+      statsUpdate,
+    );
   }
 
   @UseGuards(JwtAuthGuard)

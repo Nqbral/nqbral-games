@@ -4,7 +4,7 @@ import { Document } from 'mongoose';
 export type UserDocument = User & Document;
 
 @Schema({ _id: false })
-export class StatsLoveLetter {
+export class StatsShadowNetwork {
   @Prop({ default: 0 })
   gamesPlayed: number;
 
@@ -44,8 +44,8 @@ export class User {
   @Prop({ default: Date.now })
   createdAt: Date;
 
-  @Prop({ type: StatsLoveLetter, default: () => ({}) })
-  statsLoveLetter: StatsLoveLetter;
+  @Prop({ type: StatsShadowNetwork, default: () => ({}) })
+  statsShadowNetwork: StatsShadowNetwork;
 
   @Prop({ type: StatsLastHope, default: () => ({}) })
   statsLastHope: StatsLastHope;

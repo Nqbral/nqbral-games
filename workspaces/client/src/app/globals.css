@@ -18,8 +18,8 @@ html {
   color: var(--color-sky-50);
 }
 
-.love-letter-bg {
-  background: radial-gradient(oklch(28.2% 0.091 267.935), oklch(14.5% 0 0));
+.shadow-network-bg {
+  background: radial-gradient(#1d1e33, oklch(14.5% 0 0));
   background-size: cover;
   color: var(--color-sky-50);
 }

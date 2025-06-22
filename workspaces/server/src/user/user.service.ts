@@ -1,4 +1,8 @@
-import { StatsLastHope, UserDocument } from '@app/auth/schemas/user.schema';
+import {
+  StatsLastHope,
+  StatsShadowNetwork,
+  UserDocument,
+} from '@app/auth/schemas/user.schema';
 import { MailService } from '@app/mail/mail.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
@@ -35,10 +39,10 @@ export class UserService {
   async getStats(userId: string) {
     const user = await this.userModel
       .findById(userId)
-      .select('statsLoveLetter statsLastHope');
+      .select('statsShadowNetwork statsLastHope');
 
     return {
-      loveLetter: user?.statsLoveLetter,
+      loveLetter: user?.statsShadowNetwork,
       lastHope: user?.statsLastHope,
     };
   }
@@ -54,6 +58,23 @@ export class UserService {
           'statsLastHope.gamesPlayed': statsUpdate.gamesPlayed || 0,
           'statsLastHope.wins': statsUpdate.wins || 0,
           'statsLastHope.losses': statsUpdate.losses || 0,
+        },
+      },
+      { new: true },
+    );
+  }
+
+  async updateShadowNetworkStats(
+    userId: string,
+    statsUpdate: Partial<StatsShadowNetwork>,
+  ) {
+    return this.userModel.findByIdAndUpdate(
+      userId,
+      {
+        $inc: {
+          'statsShadowNetwork.gamesPlayed': statsUpdate.gamesPlayed || 0,
+          'statsShadowNetwork.wins': statsUpdate.wins || 0,
+          'statsShadowNetwork.losses': statsUpdate.losses || 0,
         },
       },
       { new: true },
