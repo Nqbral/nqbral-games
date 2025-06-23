@@ -28,6 +28,7 @@ type AuthContextType = {
   message: string | null;
   error: string | null;
   isLogged: boolean | null;
+  isAdmin: boolean | undefined;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -36,6 +37,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [username, setUsername] = useState<string | undefined>(undefined);
+  const [isAdmin, setIsAdmin] = useState<boolean | undefined>(undefined);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [message, setMessage] = useState<string | null>(null);
@@ -93,19 +95,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
           if (profileRes.status === 200) {
             setUsername(profileRes.data.username);
+            setIsAdmin(profileRes.data.isAdmin);
           } else {
             setUsername(undefined);
+            setIsAdmin(undefined);
           }
         } else {
           setAccessToken(null);
           setIsLogged(false);
           setUsername(undefined);
+          setIsAdmin(undefined);
         }
       } catch (error) {
         console.error('Erreur lors de l’authentification', error);
         setAccessToken(null);
         setIsLogged(false);
         setUsername(undefined);
+        setIsAdmin(undefined);
       } finally {
         setLoading(false);
       }
@@ -136,6 +142,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         setIsLogged(true);
         setAccessToken(data.accessToken);
         setUsername(data.username);
+        setIsAdmin(data.isAdmin);
         localStorage.setItem('accessToken', data.accessToken);
         localStorage.setItem('username', data.username);
       } else {
@@ -175,6 +182,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         setIsLogged(true);
         setAccessToken(data.accessToken);
         setUsername(data.username);
+        setIsAdmin(data.isAdmin);
         localStorage.setItem('accessToken', data.accessToken);
         localStorage.setItem('username', data.username);
       } else {
@@ -264,6 +272,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       { withCredentials: true },
     );
     setUsername(undefined);
+    setIsAdmin(undefined);
     setAccessToken(null);
     setIsLogged(false);
     localStorage.removeItem('username');
@@ -294,6 +303,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         message,
         error,
         isLogged,
+        isAdmin,
       }}
     >
       {children}
