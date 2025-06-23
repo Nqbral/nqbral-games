@@ -15,7 +15,10 @@ export default function LastHope() {
         ' last-hope-bg flex w-96 flex-col items-center rounded-lg sm:w-xl md:w-2xl'
       }
     >
-      <div className="flex w-full flex-col items-center border-b-1 border-slate-700 py-4">
+      <div
+        className="flex w-full flex-col items-center border-b-1 border-slate-700 py-4"
+        id="last-hope-game"
+      >
         <Image src={LastHopeLogo} alt="last-hope-logo" className="w-52" />
       </div>
       <div className="flex w-full flex-col items-center gap-4 px-8 py-4">
