@@ -1,5 +1,6 @@
 'use client';
 
+import HeadDescription from '@/app/components/head/Head';
 import NavigationProfile from '@/app/components/profile/NavigationProfile';
 import NavbarBlack from '@components/navbar/NavbarBlack';
 import { useAuth } from '@context/AuthProvider';
@@ -33,6 +34,7 @@ export default function ProfilePageStats() {
   if (!stats)
     return (
       <>
+        <HeadDescription />
         <NavbarBlack />
         <div className="flex flex-col md:min-h-screen md:flex-row">
           <NavigationProfile />
@@ -52,6 +54,7 @@ export default function ProfilePageStats() {
 
   return (
     <>
+      <HeadDescription />
       <NavbarBlack />
       <div className="flex flex-col md:min-h-screen md:flex-row">
         <NavigationProfile />

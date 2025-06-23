@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ThreeDots } from 'react-loader-spinner';
 
+import HeadDescription from '../components/head/Head';
 import NavbarBlack from '../components/navbar/NavbarBlack';
 import { useAuth } from '../context/AuthProvider';
 
@@ -60,6 +61,7 @@ export default function ResetPasswordPage() {
 
   return (
     <>
+      <HeadDescription />
       <NavbarBlack />
       <div className="flex min-h-screen w-full flex-col items-center justify-center gap-16">
         <div className="flex w-96 flex-col items-center gap-2 rounded-sm border-1 border-neutral-600 px-8 py-4">

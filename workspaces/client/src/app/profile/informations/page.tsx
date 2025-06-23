@@ -1,5 +1,6 @@
 'use client';
 
+import HeadDescription from '@/app/components/head/Head';
 import ModalDeleteAccount from '@/app/components/modals/ModalDeleteAccount';
 import NavigationProfile from '@/app/components/profile/NavigationProfile';
 import NavbarBlack from '@components/navbar/NavbarBlack';
@@ -63,6 +64,7 @@ export default function ProfilePageInformations() {
   if (!profile)
     return (
       <>
+        <HeadDescription />
         <NavbarBlack />
         <div className="flex flex-col md:min-h-screen md:flex-row">
           <NavigationProfile />
@@ -82,6 +84,7 @@ export default function ProfilePageInformations() {
 
   return (
     <>
+      <HeadDescription />
       <NavbarBlack />
       <Modal
         open={openModalDeleteAccount}

@@ -6,6 +6,7 @@ import LastHope from '@components/games/LastHope';
 import { useAuth } from '@context/AuthProvider';
 import { ThreeDots } from 'react-loader-spinner';
 
+import HeadDescription from './components/head/Head';
 import NavbarBlack from './components/navbar/NavbarBlack';
 
 export default function Home() {
@@ -29,6 +30,7 @@ export default function Home() {
 
   return (
     <div className="mt-16 flex w-full flex-col items-center gap-16 py-8">
+      <HeadDescription />
       <NavbarHomePage />
       <ShadowNetwork />
       <LastHope />
