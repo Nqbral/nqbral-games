@@ -5,14 +5,18 @@ import NavbarHomePage from '@/app/components/navbar/NavbarHomePage';
 import LastHope from '@components/games/LastHope';
 import { useAuth } from '@context/AuthProvider';
 import NqbralGamesLogo from '@public/nqbral-games-logo.png';
+import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
+import { useState } from 'react';
 import { ThreeDots } from 'react-loader-spinner';
 
+import BurgerBar from './components/burger_bar/BurgerBar';
 import HeadDescription from './components/head/Head';
 import NavbarBlack from './components/navbar/NavbarBlack';
 
 export default function Home() {
-  const { loading } = useAuth();
+  const { loading, isLogged } = useAuth();
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   if (loading) {
     return (
@@ -33,9 +37,36 @@ export default function Home() {
   return (
     <div className="mt-16 flex w-full flex-col items-center gap-16 py-8">
       <HeadDescription />
-      <div className="bg- flex w-72 flex-col items-center gap-4 rounded-lg bg-neutral-900 text-center sm:w-xl md:w-2xl">
+      {isLogged && (
+        <button
+          className="fixed top-12 left-4 z-50 sm:top-16 md:top-20"
+          onClick={() => setSidebarOpen(true)}
+        >
+          <Menu
+            size={36}
+            className="rounded-sm border-1 border-neutral-600 bg-black p-2"
+          />
+        </button>
+      )}
+
+      {isSidebarOpen && (
         <div
-          className="flex w-full flex-col items-center border-b-1 border-slate-700 py-4"
+          className="fixed inset-0 z-40 bg-black/50"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      <div
+        className={`fixed top-0 left-0 z-50 h-full w-80 transform bg-neutral-950 p-4 shadow-lg transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
+      >
+        <button className="mb-4 ml-auto" onClick={() => setSidebarOpen(false)}>
+          <X size={24} />
+          <BurgerBar />
+        </button>
+      </div>
+      <div className="flex w-72 flex-col items-center gap-4 rounded-lg bg-neutral-900 text-center sm:w-xl md:w-2xl">
+        <div
+          className="flex w-full flex-col items-center border-b-1 border-neutral-600 py-4"
           id="last-hope-game"
         >
           <Image

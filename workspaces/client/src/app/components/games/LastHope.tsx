@@ -16,7 +16,7 @@ export default function LastHope() {
       }
     >
       <div
-        className="flex w-full flex-col items-center border-b-1 border-slate-700 py-4"
+        className="flex w-full flex-col items-center border-b-1 border-neutral-600 py-4"
         id="last-hope-game"
       >
         <Image
