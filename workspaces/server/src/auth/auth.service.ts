@@ -57,6 +57,7 @@ export class AuthService {
       accessToken: accessToken,
       refreshToken: refreshToken,
       username: user.username,
+      isAdmin: user.isAdmin,
     };
   }
 
@@ -83,6 +84,7 @@ export class AuthService {
       accessToken: accessToken,
       refreshToken: refreshToken,
       username: user.username,
+      isAdmin: user.isAdmin,
     };
   }
 

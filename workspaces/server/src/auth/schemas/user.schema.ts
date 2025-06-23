@@ -44,6 +44,9 @@ export class User {
   @Prop({ default: Date.now })
   createdAt: Date;
 
+  @Prop({ required: true, default: false })
+  isAdmin: boolean;
+
   @Prop({ type: StatsShadowNetwork, default: () => ({}) })
   statsShadowNetwork: StatsShadowNetwork;
 

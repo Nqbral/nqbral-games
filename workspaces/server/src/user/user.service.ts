@@ -19,7 +19,9 @@ export class UserService {
   ) {}
 
   async getProfile(userId: string) {
-    return this.userModel.findById(userId).select('username email createdAt');
+    return this.userModel
+      .findById(userId)
+      .select('username email createdAt isAdmin');
   }
 
   async findByEmail(email: string) {
