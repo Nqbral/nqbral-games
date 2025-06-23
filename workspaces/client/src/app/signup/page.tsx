@@ -60,17 +60,19 @@ export default function SignUp() {
     <>
       <HeadDescription />
       <NavbarWhite />
-      <div className="flex min-h-screen w-full flex-col items-center justify-center gap-16 bg-neutral-200 text-neutral-950">
-        <div className="flex w-96 flex-col items-center gap-2 rounded-sm border-1 border-neutral-600 px-8 py-4">
+      <div className="flex min-h-screen w-full flex-col items-center justify-center gap-8 bg-neutral-200 text-neutral-950 sm:gap-16">
+        <div className="flex w-72 flex-col items-center gap-2 rounded-sm border-1 border-neutral-600 px-8 py-2 sm:w-96 sm:py-4">
           <Image
             src={NqbralGamesLogo}
-            className="w-48"
+            className="w-24 sm:w-36 md:w-48"
             alt="nqbral-games-logo"
           />
-          <h1 className="mb-4 text-xl underline">INSCRIPTION</h1>
+          <h1 className="mb-2 text-base underline sm:mb-4 sm:text-lg md:text-xl">
+            INSCRIPTION
+          </h1>
           <form
             onSubmit={handleSubmit(onRegister)}
-            className="flex w-full flex-col items-center gap-4"
+            className="flex w-full flex-col items-center gap-2 text-sm sm:gap-4 sm:text-base"
           >
             <div className="flex w-full flex-col items-center gap-2">
               <label>Nom d&apos;utilisateur</label>
@@ -149,20 +151,22 @@ export default function SignUp() {
               <button
                 type="submit"
                 disabled={loading}
-                className="mt-4 w-full rounded-lg bg-blue-600 py-2 font-bold text-white transition hover:bg-blue-700"
+                className="mt-4 mb-2 w-full rounded-lg bg-blue-600 py-2 font-bold text-white transition hover:bg-blue-700"
               >
                 Créer un compte
               </button>
             )}
 
             {error && (
-              <p className="mt-4 text-center text-sm text-red-500">{error}</p>
+              <p className="mt-4 mb-2 text-center text-sm text-red-500">
+                {error}
+              </p>
             )}
           </form>
         </div>
 
-        <div className="flex w-96 flex-row items-center justify-center gap-2 rounded-sm border-1 border-neutral-600 px-8 py-4">
-          <div>Vous avez déjà un compte ?</div>
+        <div className="flex w-72 flex-row items-center justify-center gap-2 rounded-sm border-1 border-neutral-600 px-8 py-4 text-sm sm:w-96 sm:text-base">
+          <div className="text-center">Déjà un compte ?</div>
           <button
             className="underline transition-colors hover:text-neutral-300"
             onClick={toLogin}

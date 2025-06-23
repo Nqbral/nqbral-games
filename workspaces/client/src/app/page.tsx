@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <div className="mt-16 flex w-full flex-col items-center gap-16 py-8">
       <HeadDescription />
-      <div className="bg- flex w-96 flex-col items-center gap-4 rounded-lg bg-neutral-900 text-center sm:w-xl md:w-2xl">
+      <div className="bg- flex w-72 flex-col items-center gap-4 rounded-lg bg-neutral-900 text-center sm:w-xl md:w-2xl">
         <div
           className="flex w-full flex-col items-center border-b-1 border-slate-700 py-4"
           id="last-hope-game"
@@ -41,11 +41,13 @@ export default function Home() {
           <Image
             src={NqbralGamesLogo}
             alt="nqbral-games-logo"
-            className="w-52"
+            className="w-32 sm:w-52"
           />
         </div>
-        <h1 className="text-xl font-bold">Bienvenue sur Nqbral Games !</h1>
-        <div className="px-4 pb-4 text-center">
+        <h1 className="text-lg font-bold sm:text-xl">
+          Bienvenue sur Nqbral Games !
+        </h1>
+        <div className="px-4 pb-4 text-center text-sm sm:text-base">
           <span className="italic">Nqbral Games</span> est une plateforme
           française dédiée aux jeux de société en ligne, repensés pour le web.
           Découvrez des expériences multijoueurs uniques, inspirées de grands

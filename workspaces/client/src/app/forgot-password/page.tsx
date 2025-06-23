@@ -42,16 +42,18 @@ export default function ForgotPasswordPage() {
       <HeadDescription />
       <NavbarBlack />
       <div className="flex min-h-screen w-full flex-col items-center justify-center gap-16">
-        <div className="flex w-96 flex-col items-center gap-2 rounded-sm border-1 border-neutral-600 px-8 py-4">
+        <div className="flex w-72 flex-col items-center gap-2 rounded-sm border-1 border-neutral-600 px-8 py-2 sm:w-96 sm:py-4">
           <Image
             src={NqbralGamesLogo}
-            className="w-48"
+            className="w-24 sm:w-36 md:w-48"
             alt="nqbral-games-logo"
           />
-          <h1 className="mb-4 text-xl underline">MOT DE PASSE OUBLIÉ</h1>
+          <h1 className="mb-2 text-base underline sm:mb-4 sm:text-lg md:text-xl">
+            MOT DE PASSE OUBLIÉ
+          </h1>
           <form
             onSubmit={handleSubmit(onForgetPassword)}
-            className="flex w-full flex-col items-center gap-4"
+            className="flex w-full flex-col items-center gap-2 text-sm sm:gap-4 sm:text-base"
           >
             <div className="flex w-full flex-col items-center gap-2">
               <label>Adresse email</label>
@@ -86,7 +88,7 @@ export default function ForgotPasswordPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="mt-4 w-full rounded-lg bg-blue-600 py-2 font-bold text-white transition hover:bg-blue-700"
+                className="mt-4 mb-2 w-full rounded-lg bg-blue-600 py-2 font-bold text-white transition hover:bg-blue-700"
               >
                 Envoyer le mail
               </button>
