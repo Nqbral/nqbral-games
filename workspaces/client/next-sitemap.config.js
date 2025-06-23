@@ -1,4 +1,4 @@
 module.exports = {
-  siteUrl: 'https://www.nqbral-games.fr',
+  siteUrl: 'https://nqbral-games.fr',
   generateRobotsTxt: true,
 };
