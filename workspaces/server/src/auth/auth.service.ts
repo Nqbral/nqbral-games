@@ -44,7 +44,11 @@ export class AuthService {
 
     await user.save();
 
-    const payload = { sub: user._id, username: user.username };
+    const payload = {
+      sub: user._id,
+      username: user.username,
+      isAdmin: user.isAdmin,
+    };
 
     const accessToken = this.jwtService.sign(payload, { expiresIn: '15m' });
     const refreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
@@ -75,7 +79,11 @@ export class AuthService {
       throw new BadRequestException('Identifiants invalides');
     }
 
-    const payload = { sub: user._id, username: user.username };
+    const payload = {
+      sub: user._id,
+      username: user.username,
+      isAdmin: user.isAdmin,
+    };
 
     const accessToken = this.jwtService.sign(payload, { expiresIn: '15m' });
     const refreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });

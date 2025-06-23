@@ -6,6 +6,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
+import { MessageErrorModule } from './message_error/message.error.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -17,6 +19,7 @@ import { MongooseModule } from '@nestjs/mongoose';
       }),
     }),
     AuthModule,
+    MessageErrorModule,
     UserModule,
   ],
   controllers: [AppController],
