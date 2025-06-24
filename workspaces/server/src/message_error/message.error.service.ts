@@ -27,8 +27,7 @@ export class MessageErrorService {
     const messageError = await this.messageErrorModel.findOne();
 
     if (messageError) {
-      await this.messageErrorModel.findOneAndUpdate(updateData);
-      return { message: "Le message d'erreur est mis à jour." };
+      await this.messageErrorModel.findOneAndDelete();
     }
 
     await this.messageErrorModel.create(updateData);

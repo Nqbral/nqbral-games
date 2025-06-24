@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { ThreeDots } from 'react-loader-spinner';
 
 import BurgerBar from './components/burger_bar/BurgerBar';
+import ErrorMessage from './components/error_message/ErrorMessage';
 import HeadDescription from './components/head/Head';
 import NavbarBlack from './components/navbar/NavbarBlack';
 
@@ -98,6 +99,7 @@ export default function Home() {
           en quelques clics.
         </div>
       </div>
+      <ErrorMessage />
       <NavbarHomePage />
       <ShadowNetwork />
       <LastHope />
