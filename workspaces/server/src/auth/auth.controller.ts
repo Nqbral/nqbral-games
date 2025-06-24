@@ -24,7 +24,7 @@ export class AuthController {
     @Body() dto: RegisterDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { accessToken, refreshToken, username } =
+    const { accessToken, refreshToken, username, isAdmin } =
       await this.authService.register(dto);
 
     const isProd = process.env.IS_PROD === 'true';
@@ -38,7 +38,7 @@ export class AuthController {
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    return { accessToken, username };
+    return { accessToken, username, isAdmin };
   }
 
   @Post('login')
@@ -46,7 +46,7 @@ export class AuthController {
     @Body() dto: LoginDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { accessToken, refreshToken, username } =
+    const { accessToken, refreshToken, username, isAdmin } =
       await this.authService.login(dto);
 
     const isProd = process.env.IS_PROD === 'true';
@@ -60,7 +60,7 @@ export class AuthController {
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    return { accessToken, username };
+    return { accessToken, username, isAdmin };
   }
 
   @Post('refresh')

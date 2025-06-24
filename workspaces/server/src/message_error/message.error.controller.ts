@@ -29,22 +29,12 @@ export class MessageErrorController {
     @Req() req: AuthenticatedRequest,
     @Body() updateData: EditMessageErrorDto,
   ) {
-    this.checkAdmin(req);
-
-    return this.messageErrorService.updateMessageError(updateData);
+    return this.messageErrorService.updateMessageError(req, updateData);
   }
 
   @UseGuards(JwtAuthGuard)
   @Delete('delete')
   async delete(@Req() req: AuthenticatedRequest) {
-    this.checkAdmin(req);
-
-    return this.messageErrorService.deleteMessageError();
-  }
-
-  private checkAdmin(req: AuthenticatedRequest) {
-    if (!req.user.isAdmin) {
-      throw new UnauthorizedException('Not an administrator');
-    }
+    return this.messageErrorService.deleteMessageError(req);
   }
 }

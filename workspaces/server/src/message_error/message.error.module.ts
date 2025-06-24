@@ -1,3 +1,4 @@
+import { User, UserSchema } from '@app/auth/schemas/user.schema';
 import {
   MessageError,
   MessageErrorSchema,
@@ -13,6 +14,7 @@ import { MessageErrorService } from './message.error.service';
     MongooseModule.forFeature([
       { name: MessageError.name, schema: MessageErrorSchema },
     ]),
+    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
   ],
   controllers: [MessageErrorController],
   providers: [MessageErrorService],

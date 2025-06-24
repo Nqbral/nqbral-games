@@ -4,6 +4,5 @@ export interface AuthenticatedRequest extends Request {
   user: {
     userId: string;
     username: string;
-    isAdmin: boolean;
   };
 }

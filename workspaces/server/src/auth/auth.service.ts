@@ -47,7 +47,6 @@ export class AuthService {
     const payload = {
       sub: user._id,
       username: user.username,
-      isAdmin: user.isAdmin,
     };
 
     const accessToken = this.jwtService.sign(payload, { expiresIn: '15m' });
@@ -75,6 +74,7 @@ export class AuthService {
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
+
     if (!isMatch) {
       throw new BadRequestException('Identifiants invalides');
     }
@@ -82,7 +82,6 @@ export class AuthService {
     const payload = {
       sub: user._id,
       username: user.username,
-      isAdmin: user.isAdmin,
     };
 
     const accessToken = this.jwtService.sign(payload, { expiresIn: '15m' });
