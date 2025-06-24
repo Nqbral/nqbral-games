@@ -5,10 +5,10 @@ export type MessageErrorDocument = MessageError & Document;
 
 @Schema()
 export class MessageError {
-  @Prop({ required: true })
+  @Prop({ required: true, maxlength: 52 })
   title: string;
 
-  @Prop({ required: true })
+  @Prop({ required: true, maxlength: 256 })
   message: string;
 }
 

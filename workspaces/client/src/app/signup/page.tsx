@@ -86,7 +86,7 @@ export default function SignUp() {
                       'Utilisez uniquement des lettres, chiffres, - ou _',
                   },
                   minLength: { value: 3, message: 'Minimum 3 caractères' },
-                  maxLength: { value: 20, message: 'Maximum 20 caractères' },
+                  maxLength: { value: 16, message: 'Maximum 16 caractères' },
                 })}
                 className="w-full rounded-lg border border-neutral-500 px-4 py-2 text-center outline-none focus:border-blue-400"
               />

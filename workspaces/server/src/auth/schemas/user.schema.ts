@@ -32,7 +32,7 @@ export class StatsLastHope {
 
 @Schema()
 export class User {
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true, unique: true, maxlength: 16 })
   username: string;
 
   @Prop({ required: true, unique: true })
