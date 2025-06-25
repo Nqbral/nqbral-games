@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 
-import HomeClient from './components/client/HomeClient';
+import HomeClient from './components/clients/HomeClient';
 
 export const metadata: Metadata = {
   title: 'Nqbral Games – Plateforme de jeux de société en ligne',

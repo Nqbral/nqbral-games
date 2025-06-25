@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import SignupClient from '../components/client/SignupClient';
+import SignupClient from '../components/clients/SignupClient';
 
 export const metadata: Metadata = {
   title: 'Inscription – Nqbral Games',

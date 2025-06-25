@@ -1,4 +1,4 @@
-import ProfileInformationsClient from '@/app/components/client/ProfileInformationsClient';
+import ProfileInformationsClient from '@/app/components/clients/ProfileInformationsClient';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

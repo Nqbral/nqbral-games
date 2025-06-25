@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import SignInClient from '../components/client/SigninClient';
+import SignInClient from '../components/clients/SigninClient';
 
 export const metadata: Metadata = {
   title: 'Connexion – Nqbral Games',

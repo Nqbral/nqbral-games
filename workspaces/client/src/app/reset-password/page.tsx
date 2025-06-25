@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import ResetPasswordClient from '../components/client/ResetPasswordClient';
+import ResetPasswordClient from '../components/clients/ResetPasswordClient';
 
 export const metadata: Metadata = {
   title: 'Réinitialiser le mot de passe – Nqbral Games',

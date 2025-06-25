@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import ForgotPasswordClient from '../components/client/ForgotPasswordClient';
+import ForgotPasswordClient from '../components/clients/ForgotPasswordClient';
 
 export const metadata: Metadata = {
   title: 'Mot de passe oublié – Nqbral Games',
