@@ -7,8 +7,17 @@ export const metadata: Metadata = {
   title: 'Nqbral Games – Plateforme de jeux de société en ligne',
   description:
     "Jouez à des jeux de société en ligne sur Nqbral Games : Last Hope, Shadow Network et bien d'autres. Plateforme multijoueur, accessible partout, sans installation.",
-  keywords:
-    'jeux de société en ligne, plateforme, multijoueur, Last Hope, Shadow Network, stratégie, bluff, rôles cachés, Nqbral Games',
+  keywords: [
+    'jeux de société en ligne',
+    'multijoueur',
+    'nqbral games',
+    'stratégie',
+    'bluff',
+    'rôles cachés',
+    'last hope',
+    'shadow network',
+    'plateforme de jeux',
+  ],
   openGraph: {
     title: 'Nqbral Games – Plateforme de jeux de société en ligne',
     description:
