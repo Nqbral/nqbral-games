@@ -9,7 +9,7 @@ const montserrat = Montserrat({
 
 export default function ShadowNetwork() {
   return (
-    <div
+    <section
       className={
         montserrat.className +
         ' shadow-network-bg flex w-72 flex-col items-center rounded-lg sm:w-xl md:w-2xl'
@@ -40,6 +40,6 @@ export default function ShadowNetwork() {
           </button>
         </Link>
       </div>
-    </div>
+    </section>
   );
 }

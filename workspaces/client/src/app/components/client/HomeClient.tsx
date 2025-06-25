@@ -77,7 +77,7 @@ export default function HomeClient() {
         <h1 className="text-lg font-bold sm:text-xl">
           Bienvenue sur Nqbral Games !
         </h1>
-        <div className="px-4 pb-4 text-center text-sm sm:text-base">
+        <section className="px-4 pb-4 text-center text-sm sm:text-base">
           <span className="italic">Nqbral Games</span> est une plateforme
           française dédiée aux jeux de société en ligne, repensés pour le web.
           Découvrez des expériences multijoueurs uniques, inspirées de grands
@@ -95,7 +95,7 @@ export default function HomeClient() {
           <span className="font-bold">Last Hope</span> ou{' '}
           <span className="font-bold">Shadow Network</span>, et défiez vos amis
           en quelques clics.
-        </div>
+        </section>
       </div>
       <ErrorMessage />
       <NavbarHomePage />
