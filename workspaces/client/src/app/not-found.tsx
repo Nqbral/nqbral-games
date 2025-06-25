@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 import NavbarBlack from './components/navbar/NavbarBlack';
 
 export const metadata: Metadata = {
-  title: 'Page incorrect - Shadow Network',
+  title: 'Page incorrecte - Shadow Network',
   robots: 'noindex, nofollow',
 };
 
