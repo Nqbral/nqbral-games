@@ -1,6 +1,12 @@
 import LinkButton from '@components/buttons/LinkButton';
+import { Metadata } from 'next';
 
 import NavbarBlack from './components/navbar/NavbarBlack';
+
+export const metadata: Metadata = {
+  title: 'Page incorrect - Shadow Network',
+  robots: 'noindex, nofollow',
+};
 
 export default function NotFound() {
   return (
