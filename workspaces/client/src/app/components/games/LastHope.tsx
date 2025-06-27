@@ -26,6 +26,9 @@ export default function LastHope() {
         />
       </div>
       <div className="flex w-full flex-col items-center gap-4 px-8 py-4">
+        <h2 className="text-center text-base sm:text-lg">
+          Last Hope - Jeu de bluff à rôles cachés
+        </h2>
         <div className="text-center text-sm sm:text-base">
           Dans un laboratoire isolé, alors que l&apos;infection se propage,
           quelques docteurs tentent désespérément de trouver un remède. Mais

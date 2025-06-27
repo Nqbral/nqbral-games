@@ -26,6 +26,9 @@ export default function ShadowNetwork() {
         className="flex w-full flex-col items-center gap-4 px-8 py-4"
         id="shadow-network-game"
       >
+        <h2 className="text-center text-base sm:text-lg">
+          Shadow Network - Jeu de cartes stratégique
+        </h2>
         <div className="text-center text-sm sm:text-base">
           Shadow Network est un jeu de cartes rapide et stratégique où les
           joueurs s&apos;affrontent pour livrer un message crucial entre les
