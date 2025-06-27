@@ -1,7 +1,6 @@
 import NqbralGamesLogo from '@public/nqbral-games-logo.png';
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import Script from 'next/script';
 
 import HomeClient from './components/clients/HomeClient';
 import LastHope from './components/games/LastHope';
@@ -54,22 +53,6 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <Script
-        id="json-ld"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebSite',
-            name: 'Nqbral Games',
-            url: 'https://nqbral-games.fr/',
-            sameAs: [
-              'https://last-hope.nqbral-games.fr',
-              'https://shadow-network.nqbral-games.fr',
-            ],
-          }),
-        }}
-      />
       <HomeClient />
       <div className="flex w-full flex-col items-center gap-16 py-8">
         <div className="flex w-72 flex-col items-center gap-4 rounded-lg bg-neutral-900 text-center sm:w-xl md:w-2xl">
@@ -110,6 +93,21 @@ export default function Home() {
         <ShadowNetwork />
         <LastHope />
       </div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: 'Nqbral Games',
+            url: 'https://nqbral-games.fr/',
+            sameAs: [
+              'https://last-hope.nqbral-games.fr',
+              'https://shadow-network.nqbral-games.fr',
+            ],
+          }),
+        }}
+      />
     </>
   );
 }
