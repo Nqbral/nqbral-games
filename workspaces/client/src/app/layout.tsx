@@ -23,6 +23,28 @@ export default function RootLayout({
     <AuthProvider>
       <Suspense>
         <html lang="fr">
+          <head>
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1"
+            />
+            <meta name="theme-color" content="#18181b" />
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                  '@context': 'https://schema.org',
+                  '@type': 'WebSite',
+                  name: 'Nqbral Games',
+                  url: 'https://nqbral-games.fr/',
+                  sameAs: [
+                    'https://last-hope.nqbral-games.fr',
+                    'https://shadow-network.nqbral-games.fr',
+                  ],
+                }),
+              }}
+            />
+          </head>
           <body className={roboto.className}>{children}</body>
         </html>
       </Suspense>

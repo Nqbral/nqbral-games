@@ -93,21 +93,6 @@ export default function Home() {
         <ShadowNetwork />
         <LastHope />
       </div>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebSite',
-            name: 'Nqbral Games',
-            url: 'https://nqbral-games.fr/',
-            sameAs: [
-              'https://last-hope.nqbral-games.fr',
-              'https://shadow-network.nqbral-games.fr',
-            ],
-          }),
-        }}
-      />
     </>
   );
 }
