@@ -38,13 +38,6 @@ export const metadata: Metadata = {
     siteName: 'Nqbral Games',
     type: 'website',
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Nqbral Games – Plateforme de jeux de société en ligne',
-    description:
-      'Découvrez Nqbral Games, la plateforme française pour jouer à des jeux de société en ligne comme Last Hope et Shadow Network. Rejoignez la communauté !',
-    images: ['https://nqbral-games.fr/nqbral-games-logo-with-bg.png'],
-  },
   alternates: {
     canonical: 'https://nqbral-games.fr/',
     languages: {
