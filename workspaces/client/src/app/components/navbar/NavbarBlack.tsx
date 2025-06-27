@@ -9,7 +9,7 @@ export default function NavbarBlack() {
         <Image
           src={NqbralGamesLogo}
           className="w-14 sm:w-20"
-          alt="nqbral-games-logo"
+          alt="nqbral-games-logo-navbar"
         />
       </Link>
     </div>
