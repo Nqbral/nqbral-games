@@ -60,4 +60,18 @@ export class MailService {
       },
     });
   }
+
+  async sendContactMail(name: string, email: string, message: string) {
+    await this.mailerService.sendMail({
+      to: 'contact@nqbral-games.fr',
+      subject: 'Message de support',
+      template: './support-message',
+      context: {
+        name: name,
+        email: email,
+        message: message,
+        year: new Date().getFullYear(),
+      },
+    });
+  }
 }

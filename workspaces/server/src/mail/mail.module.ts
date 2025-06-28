@@ -5,6 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { existsSync } from 'fs';
 import { join } from 'path';
 
+import { MailController } from './mail.controller';
 import { MailService } from './mail.service';
 
 const templatePath = join(__dirname, '..', '..', 'src', 'mail', 'templates');
@@ -39,6 +40,7 @@ const templatePath = join(__dirname, '..', '..', 'src', 'mail', 'templates');
       }),
     }),
   ],
+  controllers: [MailController],
   providers: [MailService],
   exports: [MailService],
 })

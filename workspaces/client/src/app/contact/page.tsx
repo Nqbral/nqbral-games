@@ -1,3 +1,4 @@
+import ContactForm from '../components/form/ContactForm';
 import NavAndSideBar from '../components/navbar/NavAndSideBar';
 import Footer from '../footer/Footer';
 
@@ -50,38 +51,7 @@ export default function ContactPage() {
           </a>
         </p>
 
-        <form className="space-y-6">
-          <div>
-            <label className="mb-1 block text-sm">Nom</label>
-            <input
-              type="text"
-              className="w-full rounded bg-gray-800 px-4 py-2 text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
-              required
-            />
-          </div>
-          <div>
-            <label className="mb-1 block text-sm">Adresse email</label>
-            <input
-              type="email"
-              className="w-full rounded bg-gray-800 px-4 py-2 text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
-              required
-            />
-          </div>
-          <div>
-            <label className="mb-1 block text-sm">Message</label>
-            <textarea
-              rows={5}
-              className="w-full rounded bg-gray-800 px-4 py-2 text-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            className="rounded bg-blue-500 px-6 py-2 font-semibold text-black hover:bg-blue-700"
-          >
-            Envoyer
-          </button>
-        </form>
+        <ContactForm />
       </div>
       <Footer />
     </>

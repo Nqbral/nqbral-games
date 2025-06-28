@@ -6,6 +6,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
+import { MailModule } from './mail/mail.module';
 import { MessageErrorModule } from './message_error/message.error.module';
 
 @Module({
@@ -20,6 +21,7 @@ import { MessageErrorModule } from './message_error/message.error.module';
     }),
     AuthModule,
     MessageErrorModule,
+    MailModule,
     UserModule,
   ],
   controllers: [AppController],
