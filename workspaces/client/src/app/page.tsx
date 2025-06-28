@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 
 import ErrorMessage from './components/error_message/ErrorMessage';
-import Footer from './components/home/Footer';
 import HeroSection from './components/home/HeroSection';
 import NavAndSideBarHome from './components/home/NavAndSideBarHome';
 import OurGames from './components/home/OurGames';
 import WhyNqbralGames from './components/home/WhyNqbralGames';
+import Footer from './footer/Footer';
 
 export const metadata: Metadata = {
   title: 'Nqbral Games – Plateforme de jeux de société en ligne',
