@@ -1,12 +1,9 @@
 # *
 User-agent: *
-Disallow: /signin
-Disallow: /signup
-Disallow: /forgot-password
-Disallow: /reset-password
-Disallow: /admin
-Disallow: /profile/stats
-Disallow: /profile/informations
+Allow: /
+
+# Host
+Host: https://nqbral-games.fr
 
 # Sitemaps
 Sitemap: https://nqbral-games.fr/sitemap.xml
