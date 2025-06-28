@@ -37,8 +37,8 @@ export default function ContactPage() {
   return (
     <>
       <NavbarHomePage />
-      <div className="mx-auto max-w-2xl">
-        <h1 className="mb-6 pt-20 text-4xl font-bold text-blue-400">Contact</h1>
+      <div className="mx-auto mt-20 mb-12 max-w-2xl">
+        <h1 className="mb-6 text-4xl font-bold text-blue-400">Contact</h1>
         <p className="mb-8 text-lg leading-relaxed">
           Une question, une suggestion ou un bug à signaler ? Contactez-nous via
           ce formulaire ou écrivez-nous directement à :{' '}
@@ -77,7 +77,7 @@ export default function ContactPage() {
           </div>
           <button
             type="submit"
-            className="mb-12 rounded bg-blue-500 px-6 py-2 font-semibold text-black hover:bg-blue-700"
+            className="rounded bg-blue-500 px-6 py-2 font-semibold text-black hover:bg-blue-700"
           >
             Envoyer
           </button>

@@ -37,8 +37,8 @@ export default function AboutPage() {
   return (
     <>
       <NavbarHomePage />
-      <div className="mx-auto max-w-4xl">
-        <h1 className="mb-6 pt-20 text-4xl font-bold text-blue-400">
+      <div className="mx-auto mt-20 mb-12 max-w-4xl">
+        <h1 className="mb-6 text-4xl font-bold text-blue-400">
           À propos de Nqbral Games
         </h1>
 
@@ -68,7 +68,7 @@ export default function AboutPage() {
             L&apos;Équipe
           </h2>
 
-          <div className="mb-12">
+          <div>
             <h3 className="text-2xl font-bold text-white">
               Simon Chevalier (NqbraL)
             </h3>
