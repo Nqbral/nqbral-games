@@ -44,7 +44,23 @@ export default function Footer() {
                 href="/terms"
                 className="transition-colors hover:text-blue-400"
               >
-                CGU & Confidentialité
+                CGU
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/privacy"
+                className="transition-colors hover:text-blue-400"
+              >
+                Politique de confidentialité
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/mentions-legales"
+                className="transition-colors hover:text-blue-400"
+              >
+                Mentions légales
               </Link>
             </li>
           </ul>

@@ -1,0 +1,23 @@
+{
+  "name": "Nqbral Games",
+  "short_name": "Nqbral",
+  "description": "Plateforme de jeux de société en ligne : stratégie, bluff, rôles cachés et plus.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#18181b",
+  "theme_color": "#18181b",
+  "orientation": "portrait",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48 72x72 96x96 128x128 256x256 512x512",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/nqbral-games-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

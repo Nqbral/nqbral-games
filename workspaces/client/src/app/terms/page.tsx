@@ -36,50 +36,122 @@ export default function TermsPage() {
     <>
       <NavbarHomePage />
       <div className="mx-auto mt-20 mb-12 max-w-5xl">
-        <h1 className="mb-6 text-4xl font-bold text-blue-400">
+        <h1 className="mb-8 text-3xl font-bold text-blue-400 md:text-4xl">
           Conditions Générales d’Utilisation
         </h1>
+        <p className="mb-12 text-sm text-gray-400">
+          Dernière mise à jour : 28 juin 2025
+        </p>
 
-        <section className="mb-8">
-          <h2 className="mb-2 text-2xl font-semibold text-white">1. Objet</h2>
-          <p>
-            Les présentes conditions régissent l’utilisation du site Nqbral
-            Games et des jeux qui y sont proposés.
-          </p>
-        </section>
+        <section className="space-y-10">
+          <div>
+            <h2 className="text-2xl font-semibold text-blue-400">1. Objet</h2>
+            <p>
+              Les présentes CGU définissent les conditions dans lesquelles vous
+              pouvez accéder à Nqbral Games, créer un compte, jouer à nos jeux
+              en ligne, et interagir avec les autres utilisateurs.
+            </p>
+          </div>
 
-        <section className="mb-8">
-          <h2 className="mb-2 text-2xl font-semibold text-white">
-            2. Données personnelles
-          </h2>
-          <p>
-            Aucune donnée personnelle n’est vendue ou utilisée à des fins
-            commerciales. Vos identifiants ne sont utilisés que pour permettre
-            l’accès aux jeux et fonctionnalités de la plateforme.
-          </p>
-        </section>
+          <div>
+            <h2 className="text-2xl font-semibold text-blue-400">
+              2. Accès au service
+            </h2>
+            <ul className="ml-5 list-disc space-y-1">
+              <li>L’accès au site est gratuit.</li>
+              <li>
+                Certains jeux ou fonctionnalités peuvent nécessiter un compte.
+              </li>
+              <li>Connexion internet et navigateur requis.</li>
+            </ul>
+          </div>
 
-        <section className="mb-8">
-          <h2 className="mb-2 text-2xl font-semibold text-white">
-            3. Propriété intellectuelle
-          </h2>
-          <p>
-            Tous les éléments graphiques, mécaniques de jeu et textes sont la
-            propriété de Nqbral Games ou de leurs auteurs.
-          </p>
-        </section>
+          <div>
+            <h2 className="text-2xl font-semibold text-blue-400">
+              3. Compte utilisateur
+            </h2>
+            <ul className="ml-5 list-disc space-y-1">
+              <li>
+                Fournissez des informations exactes lors de l’inscription.
+              </li>
+              <li>Vous êtes responsable de la sécurité de votre compte.</li>
+              <li>Nous pouvons suspendre votre compte en cas d’abus.</li>
+            </ul>
+          </div>
 
-        <section>
-          <h2 className="mb-2 text-2xl font-semibold text-white">4. Contact</h2>
-          <p>
-            Pour toute demande liée à ces conditions, vous pouvez écrire à :{' '}
-            <a
-              href="mailto:contact@nqbral-games.fr"
-              className="text-blue-400 underline"
-            >
-              contact@nqbral-games.fr
-            </a>
-          </p>
+          <div>
+            <h2 className="text-2xl font-semibold text-blue-400">
+              4. Règles de comportement
+            </h2>
+            <ul className="ml-5 list-disc space-y-1">
+              <li>Respectez les autres joueurs.</li>
+              <li>Ne trichez pas, ne spammez pas.</li>
+              <li>Pas de propos haineux ou discriminatoires.</li>
+              <li>Utilisez le site dans un but ludique et respectueux.</li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-semibold text-blue-400">
+              5. Propriété intellectuelle
+            </h2>
+            <p>
+              Tout le contenu du site (jeux, graphismes, code, etc.) appartient
+              à Nqbral Games. Toute reproduction ou redistribution sans
+              autorisation est interdite.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-semibold text-blue-400">
+              6. Données personnelles
+            </h2>
+            <p>
+              Vos données sont traitées conformément à notre{' '}
+              <a href="/privacy" className="text-blue-400 underline">
+                politique de confidentialité
+              </a>
+              . Vous pouvez les consulter, modifier ou supprimer à tout moment.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-semibold text-blue-400">
+              7. Responsabilités
+            </h2>
+            <p>
+              Nous faisons notre possible pour assurer la continuité du service,
+              sans garantie d&apos;absence totale de bugs ou interruptions.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-semibold text-blue-400">
+              8. Modifications
+            </h2>
+            <p>
+              Nqbral Games se réserve le droit de modifier ces CGU. Vous serez
+              informé de tout changement significatif.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-semibold text-blue-400">9. Contact</h2>
+            <p>
+              Pour toute question, contactez-nous via la page{' '}
+              <a href="/contact" className="text-blue-400">
+                Contact
+              </a>{' '}
+              ou par e-mail à{' '}
+              <a
+                href="mailto:contact@nqbral-games.fr"
+                className="text-blue-400 underline"
+              >
+                contact@nqbral-games.fr
+              </a>
+              .
+            </p>
+          </div>
         </section>
       </div>
       <Footer />
