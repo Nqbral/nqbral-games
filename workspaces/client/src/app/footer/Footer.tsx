@@ -19,22 +19,31 @@ export default function Footer() {
           <h4 className="mb-3 text-lg font-semibold text-white">Navigation</h4>
           <ul className="space-y-2 text-sm">
             <li>
-              <Link href="/" className="hover:text-cyan-400">
+              <Link href="/" className="transition-colors hover:text-blue-400">
                 Accueil
               </Link>
             </li>
             <li>
-              <Link href="/about" className="hover:text-cyan-400">
+              <Link
+                href="/about"
+                className="transition-colors hover:text-blue-400"
+              >
                 À propos
               </Link>
             </li>
             <li>
-              <Link href="/contact" className="hover:text-cyan-400">
+              <Link
+                href="/contact"
+                className="transition-colors hover:text-blue-400"
+              >
                 Contact
               </Link>
             </li>
             <li>
-              <Link href="/terms" className="hover:text-cyan-400">
+              <Link
+                href="/terms"
+                className="transition-colors hover:text-blue-400"
+              >
                 CGU & Confidentialité
               </Link>
             </li>
@@ -49,7 +58,7 @@ export default function Footer() {
                 href="https://discord.gg/..."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-cyan-400"
+                className="transition-colors hover:text-blue-400"
               >
                 Discord
               </a>
