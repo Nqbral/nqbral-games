@@ -1,4 +1,4 @@
-import NavbarHomePage from '../components/navbar/NavbarHomePage';
+import NavAndSideBar from '../components/navbar/NavAndSideBar';
 import Footer from '../footer/Footer';
 
 export const metadata = {
@@ -34,7 +34,7 @@ export const metadata = {
 export default function TermsPage() {
   return (
     <>
-      <NavbarHomePage />
+      <NavAndSideBar />
       <div className="mx-auto mt-20 mb-12 max-w-5xl">
         <h1 className="mb-8 text-3xl font-bold text-blue-400 md:text-4xl">
           Conditions Générales d’Utilisation

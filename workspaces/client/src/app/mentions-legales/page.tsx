@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import NavbarHomePage from '../components/navbar/NavbarHomePage';
+import NavAndSideBar from '../components/navbar/NavAndSideBar';
 import Footer from '../footer/Footer';
 
 export const metadata: Metadata = {
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 export default function LegalNoticePage() {
   return (
     <>
-      <NavbarHomePage />
+      <NavAndSideBar />
       <div className="mx-auto mt-20 mb-12 max-w-5xl">
         <h1 className="mb-8 text-3xl font-bold text-blue-400 md:text-4xl">
           Mentions légales

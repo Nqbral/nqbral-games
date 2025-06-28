@@ -1,4 +1,4 @@
-import NavbarHomePage from '../components/navbar/NavbarHomePage';
+import NavAndSideBar from '../components/navbar/NavAndSideBar';
 import Footer from '../footer/Footer';
 
 export const metadata = {
@@ -36,7 +36,7 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <>
-      <NavbarHomePage />
+      <NavAndSideBar />
       <div className="mx-auto mt-20 mb-12 max-w-2xl">
         <h1 className="mb-6 text-4xl font-bold text-blue-400">Contact</h1>
         <p className="mb-8 text-lg leading-relaxed">

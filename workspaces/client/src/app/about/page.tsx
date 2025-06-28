@@ -1,4 +1,4 @@
-import NavbarHomePage from '../components/navbar/NavbarHomePage';
+import NavAndSideBar from '../components/navbar/NavAndSideBar';
 import Footer from '../footer/Footer';
 
 export const metadata = {
@@ -36,7 +36,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <>
-      <NavbarHomePage />
+      <NavAndSideBar />
       <div className="mx-auto mt-20 mb-12 max-w-4xl">
         <h1 className="mb-6 text-4xl font-bold text-blue-400">
           À propos de Nqbral Games
@@ -76,10 +76,11 @@ export default function AboutPage() {
               Créateur & Développeur indépendant
             </p>
             <p className="text-md mt-3 leading-relaxed">
-              Je conçois, développe et publie les jeux de la plateforme. Mon
-              objectif est simple : offrir des expériences de jeu innovantes,
-              fluides et accessibles à tous. Passionné de jeux de société, de
-              code et de design, je m’occupe de tout, du concept aux animations.
+              Je suis le créateur de la plateforme Nqbral Games. Je conçois,
+              développe et publie les jeux de la plateforme. Mon objectif est
+              simple : offrir des expériences de jeu innovantes, fluides et
+              accessibles à tous. Passionné de jeux de société, de code et de
+              design, je m’occupe de tout, du concept aux animations.
             </p>
           </div>
         </section>

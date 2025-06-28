@@ -2,18 +2,9 @@
 
 import LastHopeLogo from '@public/last-hope-logo-without-text.png';
 import ShadowNetworkLogo from '@public/shadow_network_logo_without_text.png';
-import { Montserrat, Orbitron } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-
-const orbitron = Orbitron({
-  subsets: ['latin'],
-});
-
-const montserrat = Montserrat({
-  subsets: ['latin'],
-});
 
 const games = [
   {
@@ -23,7 +14,6 @@ const games = [
     description:
       "Dans un laboratoire isolé, alors que l'infection se propage, quelques docteurs tentent désespérément de trouver un remède. Mais parmi eux, des infectés, encore humains en apparence, cherchent à saboter leurs efforts. Jeu de bluff et de trahison, chaque joueur devra gagner la confiance des autres... ou les manipuler pour mieux les tromper. Dans cette lutte silencieuse, qui sauvera lhumanité... et qui précipitera sa chute ?",
     image: LastHopeLogo,
-    font: orbitron,
     tags: ['Rôles cachés', 'Trahison', 'Post-apocalyptique'],
   },
   {
@@ -33,7 +23,6 @@ const games = [
     description:
       "Shadow Network est un jeu de cartes rapide et stratégique où les joueurs s'affrontent pour livrer un message crucial entre les mains du Président. En faisant preuve de déduction, de risque et d'un peu de chance, les joueurs éliminent leurs adversaires et tentent d'être le dernier survivant ou d'avoir la carte la plus haute à la fin de la manche.",
     image: ShadowNetworkLogo,
-    font: montserrat,
     tags: ['Espionnage', 'Stratégie', 'Cartes'],
   },
 ];
@@ -68,7 +57,7 @@ export default function OurGames() {
           placeholder="Rechercher un jeu..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="mb-8 w-full max-w-xs rounded-lg border border-gray-700 bg-gray-800 px-4 py-2 text-center text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none"
+          className="mb-8 w-full max-w-xs rounded-lg border border-gray-700 bg-gray-800 px-4 py-2 text-center text-white placeholder-gray-400 focus:border-blue-400 focus:outline-none"
         />
 
         <div className="grid justify-center gap-10 sm:grid-cols-1 md:grid-cols-2">
@@ -89,9 +78,7 @@ export default function OurGames() {
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-5 text-left">
-                  <h3
-                    className={`mb-2 text-center text-2xl font-semibold text-white ${game.font.className}`}
-                  >
+                  <h3 className="mb-2 text-center text-2xl font-semibold text-white">
                     {game.name}
                   </h3>
                   <p className="mb-3 text-center text-sm text-gray-400">

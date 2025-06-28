@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 import BurgerBar from '../burger_bar/BurgerBar';
 
-export default function NavAndSideBarHome() {
+export default function NavAndSideBar() {
   const { isLogged } = useAuth();
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
