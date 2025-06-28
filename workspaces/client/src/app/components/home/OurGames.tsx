@@ -12,7 +12,7 @@ const games = [
     slug: 'last-hope',
     link: process.env.NEXT_PUBLIC_WS_URL_LAST_HOPE ?? '',
     description:
-      "Dans un laboratoire isolé, alors que l'infection se propage, quelques docteurs tentent désespérément de trouver un remède. Mais parmi eux, des infectés, encore humains en apparence, cherchent à saboter leurs efforts. Jeu de bluff et de trahison, chaque joueur devra gagner la confiance des autres... ou les manipuler pour mieux les tromper. Dans cette lutte silencieuse, qui sauvera lhumanité... et qui précipitera sa chute ?",
+      "Dans un laboratoire isolé, alors que l'infection se propage, quelques docteurs tentent désespérément de trouver un remède. Mais parmi eux, des infectés, encore humains en apparence, cherchent à saboter leurs efforts. Jeu de bluff et de trahison, chaque joueur devra gagner la confiance des autres... ou les manipuler pour mieux les tromper. Dans cette lutte silencieuse, qui sauvera l'humanité... et qui précipitera sa chute ?",
     image: LastHopeLogo,
     tags: ['Rôles cachés', 'Trahison', 'Post-apocalyptique'],
   },
