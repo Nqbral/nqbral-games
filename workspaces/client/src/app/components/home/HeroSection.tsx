@@ -4,7 +4,6 @@ import NqbralGamesLogo from '@public/nqbral-games-logo.png';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 
 import ParticlesBackground from './ParticlesBackground';
 
@@ -46,18 +45,19 @@ export default function HeroSection() {
       </motion.p>
 
       <motion.div
-        className="mt-10"
+        className="z-10 mt-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.9 }}
       >
-        <Link
+        <motion.a
           href="#games"
+          whileTap={{ scale: 0.97 }}
           className="inline-flex items-center gap-2 rounded-2xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:bg-blue-700"
         >
           Découvrir nos jeux
           <ArrowRight size={20} />
-        </Link>
+        </motion.a>
       </motion.div>
     </section>
   );

@@ -1,0 +1,120 @@
+'use client';
+
+import LastHopeLogo from '@public/last-hope-logo-without-text.png';
+import ShadowNetworkLogo from '@public/shadow_network_logo_without_text.png';
+import { Montserrat, Orbitron } from 'next/font/google';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
+
+const orbitron = Orbitron({
+  subsets: ['latin'],
+});
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+});
+
+const games = [
+  {
+    name: 'Last Hope',
+    slug: 'last-hope',
+    link: process.env.NEXT_PUBLIC_WS_URL_LAST_HOPE ?? '',
+    description:
+      "Dans un laboratoire isolé, alors que l'infection se propage, quelques docteurs tentent désespérément de trouver un remède. Mais parmi eux, des infectés, encore humains en apparence, cherchent à saboter leurs efforts. Jeu de bluff et de trahison, chaque joueur devra gagner la confiance des autres... ou les manipuler pour mieux les tromper. Dans cette lutte silencieuse, qui sauvera lhumanité... et qui précipitera sa chute ?",
+    image: LastHopeLogo,
+    font: orbitron,
+    tags: ['Rôles cachés', 'Trahison', 'Post-apocalyptique'],
+  },
+  {
+    name: 'Shadow Network',
+    slug: 'shadow-network',
+    link: process.env.NEXT_PUBLIC_WS_URL_SHADOW_NETWORK ?? '',
+    description:
+      "Shadow Network est un jeu de cartes rapide et stratégique où les joueurs s'affrontent pour livrer un message crucial entre les mains du Président. En faisant preuve de déduction, de risque et d'un peu de chance, les joueurs éliminent leurs adversaires et tentent d'être le dernier survivant ou d'avoir la carte la plus haute à la fin de la manche.",
+    image: ShadowNetworkLogo,
+    font: montserrat,
+    tags: ['Espionnage', 'Stratégie', 'Cartes'],
+  },
+];
+
+export default function OurGames() {
+  const [search, setSearch] = useState('');
+
+  // Filtrage des jeux selon la recherche (nom ou tags)
+  const filteredGames = games.filter(
+    (game) =>
+      game.name.toLowerCase().includes(search.toLowerCase()) ||
+      game.tags.some((tag) => tag.toLowerCase().includes(search.toLowerCase())),
+  );
+
+  return (
+    <section
+      className="relative z-10 bg-black px-6 py-10 text-white sm:px-12 lg:px-24"
+      id="games"
+    >
+      <div className="mx-auto max-w-7xl text-center">
+        <h2 className="mb-4 text-4xl font-bold">
+          Nos <span className="text-cyan-400">Jeux</span>
+        </h2>
+        <p className="mb-12 text-lg text-gray-300">
+          Découvrez des jeux de société modernes conçus pour le web : bluff,
+          coopération, stratégie... le tout 100% en ligne.
+        </p>
+
+        {/* Input de recherche */}
+        <input
+          type="text"
+          placeholder="Rechercher un jeu..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="mb-8 w-full max-w-xs rounded-lg border border-gray-700 bg-gray-800 px-4 py-2 text-center text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none"
+        />
+
+        <div className="grid justify-center gap-10 sm:grid-cols-1 md:grid-cols-2">
+          {filteredGames.length > 0 ? (
+            filteredGames.map((game) => (
+              <Link
+                key={game.slug}
+                href={game.link}
+                className="group flex flex-col overflow-hidden rounded-2xl bg-gray-900 shadow-lg transition-all duration-300 hover:bg-gray-950"
+              >
+                <div className="relative h-56 w-full">
+                  <Image
+                    src={game.image}
+                    alt={game.name}
+                    layout="fill"
+                    objectFit="contain"
+                    className="pt-4"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-5 text-left">
+                  <h3
+                    className={`mb-2 text-center text-2xl font-semibold text-white ${game.font.className}`}
+                  >
+                    {game.name}
+                  </h3>
+                  <p className="mb-3 text-center text-sm text-gray-400">
+                    {game.description}
+                  </p>
+                  <div className="mt-auto mb-4 flex w-full flex-wrap justify-center gap-2">
+                    {game.tags.map((tag, i) => (
+                      <span
+                        key={i}
+                        className="rounded-full bg-cyan-900/30 px-3 py-1 text-xs text-cyan-300"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <div className="col-span-full text-gray-400">Aucun jeu trouvé.</div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}

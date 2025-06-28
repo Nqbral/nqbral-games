@@ -6,17 +6,16 @@ import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
 import BurgerBar from '../burger_bar/BurgerBar';
-import ErrorMessage from '../error_message/ErrorMessage';
 
-export default function HomeClient() {
+export default function NavAndSideBarHome() {
   const { isLogged } = useAuth();
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="mt-18 flex w-full flex-col items-center gap-16">
+    <div className="mt-14 flex w-full flex-col items-center gap-16">
       {isLogged && (
         <button
-          className="fixed top-12 left-4 z-50 sm:top-16 md:top-20"
+          className="fixed top-20 left-4 z-50"
           onClick={() => setSidebarOpen(true)}
         >
           <Menu
@@ -43,7 +42,6 @@ export default function HomeClient() {
       </div>
 
       <NavbarHomePage />
-      <ErrorMessage />
     </div>
   );
 }

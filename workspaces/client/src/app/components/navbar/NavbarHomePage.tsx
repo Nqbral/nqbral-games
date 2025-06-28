@@ -17,7 +17,7 @@ export default function NavbarHomePage() {
   };
 
   return (
-    <div className="fixed top-0 flex w-full flex-row items-center justify-between bg-neutral-900 px-6 py-4 shadow-sm shadow-neutral-950">
+    <div className="fixed top-0 z-20 flex w-full flex-row items-center justify-between bg-neutral-900 px-6 py-4 shadow-sm shadow-neutral-950">
       <Link href="/">
         <Image
           src={NqbralGamesLogo}

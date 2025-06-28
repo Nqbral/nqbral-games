@@ -1,3 +1,5 @@
+'use client';
+
 import plainAxios from '@/app/lib/plainAxios';
 import { useEffect, useState } from 'react';
 
