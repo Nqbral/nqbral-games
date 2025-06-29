@@ -85,7 +85,7 @@ export class AuthController {
       httpOnly: true,
       secure: isProd,
       domain: isProd ? '.nqbral-games.fr' : '.nqbral-games.local',
-      sameSite: 'lax',
+      sameSite: isProd ? 'none' : 'lax',
       path: '/',
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
