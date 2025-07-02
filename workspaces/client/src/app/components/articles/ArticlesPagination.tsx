@@ -14,6 +14,7 @@ export default function ArticlesPagination() {
   const [metaDataPagination, setMetadataPagination] =
     useState<MetaDataPagination | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const limit = 2;
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -37,7 +38,7 @@ export default function ArticlesPagination() {
       setLoading(true);
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_CMS_URL}/api/articles?pagination[start]=${page - 1}&pagination[limit]=10&populate=tags`,
+          `${process.env.NEXT_PUBLIC_CMS_URL}/api/articles?pagination[start]=${(page - 1) * limit}&pagination[limit]=${limit}&populate=tags`,
         );
         const data = await res.json();
         setArticles(data.data);
@@ -103,7 +104,8 @@ export default function ArticlesPagination() {
               </button>
             )}
             {metaDataPagination &&
-              page != metaDataPagination.pagination.total && (
+              page &&
+              page * limit < metaDataPagination.pagination.total && (
                 <button
                   onClick={nextPage}
                   aria-label="Page suivante"
