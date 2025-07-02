@@ -8,11 +8,11 @@ import { ThreeDots } from 'react-loader-spinner';
 
 import ArticlePreview from './ArticlePreview';
 
-type Props = {
+type ArticlesPaginationProps = {
   page: number;
 };
 
-export default function ArticlesPagination({ page }: Props) {
+export default function ArticlesPagination({ page }: ArticlesPaginationProps) {
   const [articles, setArticles] = useState<Article[]>([]);
   const [metaDataPagination, setMetadataPagination] =
     useState<MetaDataPagination | null>(null);

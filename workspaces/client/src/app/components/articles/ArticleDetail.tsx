@@ -7,11 +7,11 @@ import { marked } from 'marked';
 import { useEffect, useState } from 'react';
 import { ThreeDots } from 'react-loader-spinner';
 
-type Props = {
+type ArticleDetailProps = {
   slug: string;
 };
 
-export default function ArticleDetail({ slug }: Props) {
+export default function ArticleDetail({ slug }: ArticleDetailProps) {
   const [article, setArticle] = useState<Article | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 

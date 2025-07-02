@@ -3,11 +3,11 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
-type Props = {
+type ArticlePreviewProps = {
   article: Article;
 };
 
-export default function ArticlePreview({ article }: Props) {
+export default function ArticlePreview({ article }: ArticlePreviewProps) {
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}

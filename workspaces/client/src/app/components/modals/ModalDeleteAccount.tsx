@@ -2,11 +2,13 @@ import { useAuth } from '@/app/context/AuthProvider';
 
 import ModalTemplate from './ModalTemplate';
 
-type Props = {
+type ModalDeleteAccountProps = {
   handleClose: () => void;
 };
 
-export default function ModalDeleteAccount({ handleClose }: Props) {
+export default function ModalDeleteAccount({
+  handleClose,
+}: ModalDeleteAccountProps) {
   const { accessToken, logout } = useAuth();
 
   const onDeleteAccount = async () => {

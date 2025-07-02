@@ -2,12 +2,12 @@ import ArticleDetail from '@/app/components/articles/ArticleDetail';
 import Footer from '@/app/components/footer/Footer';
 import NavAndSideBar from '@/app/components/navbar/NavAndSideBar';
 
-interface Props {
-  params: { slug: string };
-}
-
-export default async function ArticleDetailPage({ params }: Props) {
-  const { slug } = params;
+export default async function ArticleDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
 
   return (
     <>

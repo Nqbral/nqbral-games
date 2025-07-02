@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-type Props = {
+type LinkButtonProps = {
   href: string;
   buttonText: string | undefined;
   className?: string | undefined;
@@ -10,7 +10,7 @@ export default function LinkButton({
   href,
   buttonText,
   className = undefined,
-}: Props) {
+}: LinkButtonProps) {
   let classNames = 'transition-colors hover:text-neutral-300';
 
   if (className != undefined) {

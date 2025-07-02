@@ -1,7 +1,6 @@
 import ArticlesPagination from '@/app/components/articles/ArticlesPagination';
 import Footer from '@/app/components/footer/Footer';
 import NavAndSideBar from '@/app/components/navbar/NavAndSideBar';
-import { Suspense } from 'react';
 
 export const metadata = {
   title: 'Actualités - Nqbral Games',
@@ -29,12 +28,13 @@ export const metadata = {
   },
 };
 
-interface Props {
-  params: { page: number };
-}
-
-export default async function ArticlesPage({ params }: Props) {
-  const { page } = params;
+export default async function ArticlesPage({
+  params,
+}: {
+  params: Promise<{ page: string }>;
+}) {
+  const { page } = await params;
+  const pageNumber = parseInt(page);
 
   return (
     <>
@@ -43,9 +43,7 @@ export default async function ArticlesPage({ params }: Props) {
         <h1 className="mb-8 w-full text-center text-4xl font-bold text-blue-400">
           Actualités
         </h1>
-        <Suspense>
-          <ArticlesPagination page={page} />
-        </Suspense>
+        <ArticlesPagination page={pageNumber} />
       </main>
       <Footer />
     </>
