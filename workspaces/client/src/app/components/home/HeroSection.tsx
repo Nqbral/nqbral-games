@@ -53,7 +53,9 @@ export default function HeroSection() {
         <motion.a
           href="#games"
           whileTap={{ scale: 0.97 }}
-          className="inline-flex items-center gap-2 rounded-2xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:bg-blue-700"
+          className="inline-flex items-center gap-2 rounded-2xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:bg-blue-700 hover:shadow-blue-500/40"
+          aria-label="Aller à la section des jeux"
+          title="Voir nos jeux disponibles"
         >
           Découvrir nos jeux
           <ArrowRight size={20} />

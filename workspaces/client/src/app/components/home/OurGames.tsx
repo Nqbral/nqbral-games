@@ -2,9 +2,12 @@
 
 import LastHopeLogo from '@public/last-hope-logo-without-text.png';
 import ShadowNetworkLogo from '@public/shadow_network_logo_without_text.png';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+
+import TagBadgeGame from '../tags/TagBadgeGame';
 
 const games = [
   {
@@ -30,11 +33,17 @@ const games = [
 export default function OurGames() {
   const [search, setSearch] = useState('');
 
+  const normalize = (str: string) =>
+    str
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
+
   // Filtrage des jeux selon la recherche (nom ou tags)
   const filteredGames = games.filter(
     (game) =>
-      game.name.toLowerCase().includes(search.toLowerCase()) ||
-      game.tags.some((tag) => tag.toLowerCase().includes(search.toLowerCase())),
+      normalize(game.name).includes(normalize(search)) ||
+      game.tags.some((tag) => normalize(tag).includes(normalize(search))),
   );
 
   return (
@@ -60,42 +69,43 @@ export default function OurGames() {
           className="mb-8 w-full max-w-xs rounded-lg border border-gray-700 bg-gray-800 px-4 py-2 text-center text-white placeholder-gray-400 focus:border-blue-400 focus:outline-none"
         />
 
-        <div className="grid justify-center gap-10 sm:grid-cols-1 md:grid-cols-2">
+        <div className="grid items-stretch justify-center gap-10 sm:grid-cols-1 md:grid-cols-2">
           {filteredGames.length > 0 ? (
             filteredGames.map((game) => (
-              <Link
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 200 }}
                 key={game.slug}
-                href={game.link}
-                className="group flex flex-col overflow-hidden rounded-2xl bg-gray-900 shadow-lg transition-all duration-300 hover:bg-gray-950"
+                className="group h-full"
               >
-                <div className="relative h-56 w-full">
-                  <Image
-                    src={game.image}
-                    alt={game.name}
-                    layout="fill"
-                    objectFit="contain"
-                    className="pt-4"
-                  />
-                </div>
-                <div className="flex flex-1 flex-col p-5 text-left">
-                  <h3 className="mb-2 text-center text-2xl font-semibold text-white">
-                    {game.name}
-                  </h3>
-                  <p className="mb-3 text-center text-sm text-gray-400">
-                    {game.description}
-                  </p>
-                  <div className="mt-auto mb-4 flex w-full flex-wrap justify-center gap-2">
-                    {game.tags.map((tag, i) => (
-                      <span
-                        key={i}
-                        className="rounded-full bg-cyan-900/30 px-3 py-1 text-xs text-cyan-300"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                <Link
+                  href={game.link}
+                  className="group flex h-full min-h-[450px] flex-col overflow-hidden rounded-2xl bg-gray-900 shadow-lg transition-all duration-300 hover:bg-gray-950"
+                >
+                  <div className="relative h-56 w-full">
+                    <Image
+                      src={game.image}
+                      alt={game.name}
+                      fill
+                      className="object-contain pt-4"
+                    />
                   </div>
-                </div>
-              </Link>
+                  <div className="flex flex-1 flex-col p-5 text-left">
+                    <h3 className="mb-2 text-center text-2xl font-semibold text-white">
+                      {game.name}
+                    </h3>
+                    <p className="mb-3 text-center text-sm text-gray-400">
+                      {game.description}
+                    </p>
+                    <div className="mt-auto mb-4 flex w-full flex-wrap justify-center gap-2">
+                      {game.tags.map((tag, i) => (
+                        <TagBadgeGame label={tag} key={`badge-tag-${i}`} />
+                      ))}
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
             ))
           ) : (
             <div className="col-span-full text-gray-400">Aucun jeu trouvé.</div>

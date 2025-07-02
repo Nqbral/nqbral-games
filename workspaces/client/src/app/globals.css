@@ -16,6 +16,7 @@ html {
   background-size: cover;
   background-attachment: fixed;
   color: var(--color-sky-50);
+  scroll-behavior: smooth;
 }
 
 .shadow-network-bg {
