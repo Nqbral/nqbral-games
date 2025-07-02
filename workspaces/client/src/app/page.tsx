@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import ErrorMessage from './components/error_message/ErrorMessage';
 import HeroSection from './components/home/HeroSection';
+import LastArticleNews from './components/home/LastArticlesNews';
 import OurGames from './components/home/OurGames';
 import WhyNqbralGames from './components/home/WhyNqbralGames';
 import NavAndSideBar from './components/navbar/NavAndSideBar';
@@ -58,6 +59,7 @@ export default function Home() {
       <HeroSection />
       <WhyNqbralGames />
       <OurGames />
+      <LastArticleNews />
       <ErrorMessage />
       <Footer />
     </>

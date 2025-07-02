@@ -20,7 +20,7 @@ export default function NavAndSideBar() {
         >
           <Menu
             size={36}
-            className="rounded-sm border-1 border-neutral-600 bg-black p-2"
+            className="rounded-sm border-1 border-neutral-600 p-2"
           />
         </button>
       )}

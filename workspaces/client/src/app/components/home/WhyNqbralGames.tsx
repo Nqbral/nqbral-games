@@ -2,7 +2,7 @@ import { Globe, ShieldCheck, Sparkles, Users } from 'lucide-react';
 
 export default function WhyNqbralGames() {
   return (
-    <section className="relative z-10 bg-black px-6 py-20 text-white sm:px-12 lg:px-24">
+    <section className="relative z-10 px-6 py-20 text-white sm:px-12 lg:px-24">
       <div className="mx-auto max-w-6xl text-center">
         <h2 className="mb-4 text-4xl font-bold text-white">
           Pourquoi choisir <span className="text-indigo-400">Nqbral Games</span>{' '}
