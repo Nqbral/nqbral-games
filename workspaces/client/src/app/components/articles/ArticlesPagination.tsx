@@ -2,32 +2,24 @@
 
 import { Article, MetaDataPagination } from '@/app/types/article';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { ThreeDots } from 'react-loader-spinner';
 
 import ArticlePreview from './ArticlePreview';
 
-export default function ArticlesPagination() {
-  const [page, setPage] = useState<number | null>(null);
+type Props = {
+  page: number;
+};
+
+export default function ArticlesPagination({ page }: Props) {
   const [articles, setArticles] = useState<Article[]>([]);
   const [metaDataPagination, setMetadataPagination] =
     useState<MetaDataPagination | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const limit = 2;
+  const limit = 10;
 
-  const searchParams = useSearchParams();
   const router = useRouter();
-
-  useEffect(() => {
-    const myPage = searchParams.get('page');
-
-    if (!myPage) {
-      return;
-    }
-
-    setPage(parseInt(myPage));
-  }, [searchParams]);
 
   useEffect(() => {
     if (page == null) {
@@ -56,14 +48,14 @@ export default function ArticlesPagination() {
   const previousPage = () => {
     if (page) {
       const previousPage = page - 1;
-      router.push('/articles?page=' + previousPage);
+      router.push('/articles/' + previousPage);
     }
   };
 
   const nextPage = () => {
     if (page) {
       const nextPage = page + 1;
-      router.push('/articles?page=' + nextPage);
+      router.push('/articles/' + nextPage);
     }
   };
 

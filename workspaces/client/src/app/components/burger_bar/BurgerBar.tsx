@@ -24,6 +24,17 @@ export default function BurgerBar() {
           </li>
           <li>
             <Link
+              href="/articles/1"
+              className={cn(
+                'transition-colors hover:text-neutral-300',
+                pathname?.startsWith('/articles') && 'text-blue-400',
+              )}
+            >
+              Actualités
+            </Link>
+          </li>
+          <li>
+            <Link
               href="/about"
               className={cn(
                 'transition-colors hover:text-neutral-300',

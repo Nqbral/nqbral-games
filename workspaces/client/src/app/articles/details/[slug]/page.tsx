@@ -1,6 +1,6 @@
 import ArticleDetail from '@/app/components/articles/ArticleDetail';
+import Footer from '@/app/components/footer/Footer';
 import NavAndSideBar from '@/app/components/navbar/NavAndSideBar';
-import Footer from '@/app/footer/Footer';
 
 interface Props {
   params: { slug: string };

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
+import Footer from '../components/footer/Footer';
 import NavAndSideBar from '../components/navbar/NavAndSideBar';
-import Footer from '../footer/Footer';
 
 export const metadata: Metadata = {
   title: 'Politique de confidentialité - Nqbral Games',

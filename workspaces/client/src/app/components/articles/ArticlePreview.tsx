@@ -27,7 +27,7 @@ export default function ArticlePreview({ article }: Props) {
         </span>
       ))}
       <Link
-        href={`/articles/${article.slug}`}
+        href={`/articles/details/${article.slug}`}
         className="flex flex-grow flex-col items-center gap-3"
       >
         <h3 className="mt-4 text-xl font-semibold text-white">

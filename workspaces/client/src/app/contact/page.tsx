@@ -1,6 +1,6 @@
+import Footer from '../components/footer/Footer';
 import ContactForm from '../components/form/ContactForm';
 import NavAndSideBar from '../components/navbar/NavAndSideBar';
-import Footer from '../footer/Footer';
 
 export const metadata = {
   title: 'Contact - Nqbral Games',

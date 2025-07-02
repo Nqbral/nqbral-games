@@ -71,7 +71,7 @@ export default function ArticleDetail({ slug }: Props) {
             className="max-w-96 rounded-lg bg-neutral-900 p-4 sm:w-xl sm:max-w-xl md:w-2xl md:max-w-2xl lg:w-4xl lg:max-w-4xl"
           />
           <motion.a
-            href="/articles?page=1"
+            href="/articles/1"
             whileTap={{ scale: 0.97 }}
             className="mb-8 inline-flex items-center gap-2 rounded-2xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:bg-blue-700"
             aria-label="Voir les actualités"
@@ -85,7 +85,7 @@ export default function ArticleDetail({ slug }: Props) {
         <>
           <p className="text-4xl text-gray-400">Article non trouvé</p>
           <motion.a
-            href="/articles?page=1"
+            href="/articles/1"
             whileTap={{ scale: 0.97 }}
             className="mb-8 inline-flex items-center gap-2 rounded-2xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:bg-blue-700"
             aria-label="Voir les actualités"

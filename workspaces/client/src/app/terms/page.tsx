@@ -1,5 +1,5 @@
+import Footer from '../components/footer/Footer';
 import NavAndSideBar from '../components/navbar/NavAndSideBar';
-import Footer from '../footer/Footer';
 
 export const metadata = {
   title: 'Conditions Générales d’Utilisation - Nqbral Games',
