@@ -19,13 +19,10 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Test SSH
-        run: ssh -i ~/.ssh/id_ed25519 root@${{ secrets.VPS_HOST }} "echo ✅ SSH CI fonctionne sans passphrase"
-
       - name: Deploy via SSH
         run: |
           ssh -i ~/.ssh/id_ed25519 root@${{ secrets.VPS_HOST }} << 'EOF'
-          cd /var/repo/nqbral-cms
+          cd /var/repo/nqbral-games
           docker-compose down
           git pull origin main
           docker-compose up -d --build
