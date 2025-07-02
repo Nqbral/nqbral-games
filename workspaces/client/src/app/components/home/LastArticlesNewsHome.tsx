@@ -3,8 +3,9 @@
 import { Article } from '@/app/types/article';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
+
+import ArticlePreview from '../articles/ArticlePreview';
 
 export default function LastArticleNewsHome() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -57,51 +58,28 @@ export default function LastArticleNewsHome() {
         </p>
 
         {articles.length == 0 && (
-          <p className="text-sm text-gray-400 italic sm:text-base">
-            Aucun article
-          </p>
+          <>
+            <p className="text-sm text-gray-400 italic sm:text-base">
+              Aucun article
+            </p>
+          </>
         )}
 
         <div className="grid gap-8 md:grid-cols-2">
           {articles.map((article) => {
-            return (
-              <motion.div
-                key={article.id}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="rounded-2xl bg-zinc-900 p-4 shadow-lg transition-all duration-300 hover:bg-zinc-800"
-              >
-                {article.tags?.map((tag) => (
-                  <span
-                    key={tag.id}
-                    className="rounded-full px-3 py-1 text-xs font-semibold"
-                    style={{
-                      backgroundColor: tag.colorBg, // fallback
-                      color: tag.colorText,
-                    }}
-                  >
-                    {tag.name}
-                  </span>
-                ))}
-                <Link
-                  href={`/articles/${article.slug}`}
-                  className="flex flex-grow flex-col items-center gap-3"
-                >
-                  <h3 className="mt-4 text-xl font-semibold text-white">
-                    {article.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-gray-400">
-                    {article.excerpt}
-                  </p>
-                  <p className="mt-auto inline-flex items-center text-sm text-cyan-400 hover:underline">
-                    Lire l&apos;article{' '}
-                    <ArrowRight size={16} className="ml-1" />
-                  </p>
-                </Link>
-              </motion.div>
-            );
+            return <ArticlePreview article={article} key={article.id} />;
           })}
         </div>
+        <motion.a
+          href="/articles?page=1"
+          whileTap={{ scale: 0.97 }}
+          className="mt-8 inline-flex items-center gap-2 rounded-2xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:bg-blue-700"
+          aria-label="Voir les actualités"
+          title="Voir les actualités"
+        >
+          Plus d&apos;actualités
+          <ArrowRight size={20} />
+        </motion.a>
       </div>
     </section>
   );

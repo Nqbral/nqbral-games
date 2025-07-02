@@ -14,3 +14,11 @@ export type TagArticle = {
   colorText: string;
   colorBg: string;
 };
+
+export type MetaDataPagination = {
+  pagination: {
+    limit: number;
+    start: number;
+    total: number;
+  };
+};
