@@ -3,7 +3,6 @@
 import { Article } from '@/app/types/article';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { marked } from 'marked';
 import { useEffect, useState } from 'react';
 import { ThreeDots } from 'react-loader-spinner';
 
@@ -66,10 +65,10 @@ export default function ArticleDetail({ slug }: ArticleDetailProps) {
               </span>
             ))}
           </div>
-          <div
-            dangerouslySetInnerHTML={{ __html: marked.parse(article.content) }}
-            className="max-w-96 rounded-lg bg-neutral-900 p-4 sm:w-xl sm:max-w-xl md:w-2xl md:max-w-2xl lg:w-4xl lg:max-w-4xl"
-          />
+          <div className="prose max-w-96 rounded-lg bg-neutral-900 p-4 sm:w-xl sm:max-w-xl md:w-2xl md:max-w-2xl lg:w-4xl lg:max-w-4xl">
+            <div dangerouslySetInnerHTML={{ __html: article.content }} />
+          </div>
+
           <motion.a
             href="/articles/1"
             whileTap={{ scale: 0.97 }}
