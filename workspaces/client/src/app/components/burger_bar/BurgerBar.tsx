@@ -104,6 +104,15 @@ export default function BurgerBar() {
                   Tableau de bord admin
                 </Link>
               </li>
+              <li>
+                <Link
+                  href={process.env.NEXT_PUBLIC_CMS_URL ?? ''}
+                  target="_blank"
+                  className="transition-colors hover:text-neutral-300"
+                >
+                  CMS
+                </Link>
+              </li>
             </ul>
           </div>
         )}
