@@ -23,8 +23,16 @@ jobs:
         run: |
           ssh -i ~/.ssh/id_ed25519 root@${{ secrets.VPS_HOST }} << 'EOF'
             echo "Cleanup Docker unused resources..."
-            docker system prune -af --volumes
-          EOF
+            echo "Stop containers"
+            docker stop $(docker ps --filter "name=^nqbral-games" -q)
+            echo "Remove containers"
+            docker rm $(docker ps -a --filter "name=^nqbral-games" -q)
+            echo "Remove images"
+            docker rmi $(docker images --format "{{.Repository}}:{{.Tag}}" | grep "^nqbral-games")
+            echo "Remove volumes"
+            docker volume rm $(docker volume ls --format "{{.Name}}" | grep "^nqbral-games")
+            echo "Remove networks"
+            docker network rm $(docker network ls --format "{{.Name}}" | grep "^nqbral-games")
 
       - name: Deploy via SSH
         run: |
