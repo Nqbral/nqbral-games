@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 import { Suspense } from 'react';
@@ -46,6 +47,7 @@ export default function RootLayout({
             />
           </head>
           <body className={roboto.className}>{children}</body>
+          <GoogleAnalytics gaId="GTM-WRPZ9KMK" />
         </html>
       </Suspense>
     </AuthProvider>
