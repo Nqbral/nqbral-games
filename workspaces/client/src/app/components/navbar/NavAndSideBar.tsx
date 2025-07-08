@@ -20,7 +20,7 @@ export default function NavAndSideBar() {
         >
           <Menu
             size={36}
-            className="rounded-sm border-1 border-neutral-600 p-2"
+            className="rounded-sm border-1 border-neutral-600 bg-neutral-900 p-2"
           />
         </button>
       )}
@@ -35,10 +35,15 @@ export default function NavAndSideBar() {
       <div
         className={`fixed top-0 left-0 z-50 h-full w-80 transform bg-neutral-950 p-4 shadow-lg transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
-        <button className="mb-4 ml-auto" onClick={() => setSidebarOpen(false)}>
-          <X size={24} />
+        <div className="mb-4 flex justify-end">
+          <button onClick={() => setSidebarOpen(false)}>
+            <X size={24} />
+          </button>
+        </div>
+
+        <div className="h-[calc(100%-2.5rem)] overflow-y-auto pr-2">
           <BurgerBar />
-        </button>
+        </div>
       </div>
 
       <NavbarHomePage />
