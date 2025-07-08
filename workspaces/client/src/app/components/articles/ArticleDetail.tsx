@@ -66,7 +66,10 @@ export default function ArticleDetail({ slug }: ArticleDetailProps) {
             ))}
           </div>
           <div className="prose max-w-96 rounded-lg bg-neutral-900 p-4 sm:w-xl sm:max-w-xl md:w-2xl md:max-w-2xl lg:w-4xl lg:max-w-4xl">
-            <div dangerouslySetInnerHTML={{ __html: article.content }} />
+            <div
+              className="richtext-content"
+              dangerouslySetInnerHTML={{ __html: article.content }}
+            />
           </div>
 
           <motion.a

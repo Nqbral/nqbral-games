@@ -30,3 +30,23 @@ html {
   background-size: cover;
   color: var(--color-sky-50);
 }
+
+.richtext-content a {
+  color: #3cd3f2;
+}
+
+.richtext-content a:hover {
+  text-decoration: underline;
+}
+
+.richtext-content h2 {
+  font-size: var(--text-xl);
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.richtext-content h3 {
+  font-size: var(--text-lg);
+  font-weight: bold;
+  margin-bottom: 4px;
+}
