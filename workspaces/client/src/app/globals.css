@@ -50,3 +50,37 @@ html {
   font-weight: bold;
   margin-bottom: 4px;
 }
+
+.richtext-content p {
+  font-size: var(--text-sm);
+}
+
+.richtext-content img.small-image {
+  width: 8rem;
+}
+
+.richtext-content img.medium-image {
+  width: 16rem;
+}
+
+@media (width >= 640px) {
+  .richtext-content h2 {
+    font-size: var(--text-2xl);
+  }
+
+  .richtext-content h3 {
+    font-size: var(--text-xl);
+  }
+
+  .richtext-content p {
+    font-size: var(--text-base);
+  }
+
+  .richtext-content img.small-image {
+    width: 10rem;
+  }
+
+  .richtext-content img.medium-image {
+    width: 20rem;
+  }
+}
