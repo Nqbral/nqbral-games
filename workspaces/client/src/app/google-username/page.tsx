@@ -61,7 +61,7 @@ export default function GoogleUsernamePage() {
 
   if (!email) {
     return (
-      <div className="flex min-h-screen w-full flex-col items-center justify-center gap-8 bg-neutral-200 text-neutral-950">
+      <div className="flex min-h-screen w-full flex-col items-center justify-center bg-neutral-200 text-neutral-950">
         <ThreeDots
           visible={true}
           height="40"
@@ -81,7 +81,7 @@ export default function GoogleUsernamePage() {
   return (
     <>
       <NavbarWhite />
-      <div className="flex min-h-screen w-full flex-col items-center justify-center gap-8 bg-neutral-200 text-neutral-950">
+      <div className="flex min-h-screen w-full flex-col items-center justify-center gap-4 bg-neutral-200 text-neutral-950 sm:gap-8">
         <div className="flex w-72 flex-col items-center gap-2 rounded-sm border-1 border-neutral-600 px-8 py-2 sm:w-96 sm:py-4">
           <Image
             src={NqbralGamesLogo}
@@ -141,7 +141,7 @@ export default function GoogleUsernamePage() {
             )}
 
             {error && (
-              <p className="mt-4 mb-2 text-center text-sm text-red-500">
+              <p className="mt-2 mb-2 text-center text-sm text-red-500">
                 {error}
               </p>
             )}

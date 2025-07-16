@@ -81,7 +81,7 @@ export default function SignInClient() {
   return (
     <>
       <NavbarBlack />
-      <div className="flex min-h-screen w-full flex-col items-center justify-center gap-8">
+      <div className="flex min-h-screen w-full flex-col items-center justify-center gap-4 sm:gap-8">
         <div className="flex w-72 flex-col items-center gap-2 rounded-sm border-1 border-neutral-600 px-8 py-2 sm:w-96 sm:py-4">
           <Image
             src={NqbralGamesLogo}
@@ -153,7 +153,7 @@ export default function SignInClient() {
             )}
 
             {error && (
-              <p className="mt-4 mb-2 text-center text-sm text-red-500">
+              <p className="mt-2 mb-2 text-center text-sm text-red-500">
                 {error}
               </p>
             )}

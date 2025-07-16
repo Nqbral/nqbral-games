@@ -64,7 +64,7 @@ export default function SignupClient() {
   return (
     <>
       <NavbarWhite />
-      <div className="flex min-h-screen w-full flex-col items-center justify-center gap-8 bg-neutral-200 text-neutral-950">
+      <div className="flex min-h-screen w-full flex-col items-center justify-center gap-4 bg-neutral-200 text-neutral-950 sm:gap-8">
         <div className="flex w-72 flex-col items-center gap-2 rounded-sm border-1 border-neutral-600 px-8 py-2 sm:w-96 sm:py-4">
           <Image
             src={NqbralGamesLogo}
@@ -157,7 +157,7 @@ export default function SignupClient() {
                     value === formValues.password ||
                     'Les mots de passe ne correspondent pas',
                 })}
-                placeholder="Confirmer le mot de passe"
+                placeholder="Confirmer mot de passe"
                 className="w-full rounded-lg border border-neutral-500 px-4 py-2 text-center outline-none focus:border-blue-400"
               />
               <div
@@ -193,7 +193,7 @@ export default function SignupClient() {
             )}
 
             {error && (
-              <p className="mt-4 mb-2 text-center text-sm text-red-500">
+              <p className="mt-2 mb-2 text-center text-sm text-red-500">
                 {error}
               </p>
             )}

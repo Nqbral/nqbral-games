@@ -7,7 +7,7 @@ export default function GoogleSignInButton() {
   return (
     <a
       href={googleAuthUrl}
-      className="flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-800"
+      className="flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm text-white transition-colors hover:bg-blue-800 sm:text-base"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
