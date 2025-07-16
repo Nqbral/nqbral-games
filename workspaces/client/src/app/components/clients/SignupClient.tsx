@@ -3,9 +3,10 @@
 import NavbarWhite from '@/app/components/navbar/NavbarWhite';
 import { useAuth } from '@context/AuthProvider';
 import NqbralGamesLogo from '@public/nqbral-games-logo-black.png';
+import { Eye, EyeOff } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ThreeDots } from 'react-loader-spinner';
 
@@ -31,6 +32,9 @@ export default function SignupClient() {
   const onRegister = async (data: RegisterFormValues) => {
     await register(data.username, data.email, data.password);
   };
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const toLogin = () => {
     resetError();
@@ -115,9 +119,9 @@ export default function SignupClient() {
               )}
             </div>
 
-            <div className="flex w-full flex-col items-center gap-2">
+            <div className="relative flex w-full flex-col items-center gap-2">
               <input
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 {...registerForm('password', {
                   required: 'Mot de passe requis',
                   pattern: {
@@ -129,6 +133,12 @@ export default function SignupClient() {
                 placeholder="Mot de passe"
                 className="w-full rounded-lg border border-neutral-500 px-4 py-2 text-center outline-none focus:border-blue-400"
               />
+              <div
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute top-[10px] right-3 cursor-pointer text-neutral-500 hover:text-neutral-800"
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </div>
               {errors.password && (
                 <p className="mt-1 text-sm text-red-500">
                   {errors.password.message}
@@ -136,9 +146,9 @@ export default function SignupClient() {
               )}
             </div>
 
-            <div className="flex w-full flex-col items-center gap-2">
+            <div className="relative flex w-full flex-col items-center gap-2">
               <input
-                type="password"
+                type={showConfirmPassword ? 'text' : 'password'}
                 {...registerForm('confirmPassword', {
                   required: 'Confirmation requise',
                   validate: (value, formValues) =>
@@ -148,6 +158,12 @@ export default function SignupClient() {
                 placeholder="Confirmer le mot de passe"
                 className="w-full rounded-lg border border-neutral-500 px-4 py-2 text-center outline-none focus:border-blue-400"
               />
+              <div
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute top-[10px] right-3 cursor-pointer text-neutral-500 hover:text-neutral-800"
+              >
+                {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </div>
               {errors.confirmPassword && (
                 <p className="mt-1 text-sm text-red-500">
                   {errors.confirmPassword.message}
