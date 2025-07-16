@@ -76,7 +76,7 @@ export default function SignInClient() {
     if (errorMsg) {
       setError(decodeURIComponent(errorMsg));
     }
-  }, [searchParams]);
+  }, [searchParams, setError]);
 
   return (
     <>
