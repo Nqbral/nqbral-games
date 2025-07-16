@@ -23,10 +23,9 @@ type GoogleSignUpValues = {
 export default function GoogleUsernamePage() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { registerGoogle, loading, isLogged } = useAuth();
+  const { registerGoogle, loading, isLogged, setError, error } = useAuth();
 
   const [email, setEmail] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
 
   const {
     register: googleSignUpForm,
@@ -52,7 +51,7 @@ export default function GoogleUsernamePage() {
     } catch {
       setError('Token invalide.');
     }
-  }, [token]);
+  }, [token, setError]);
 
   useEffect(() => {
     if (isLogged) {

@@ -100,32 +100,24 @@ export class AuthController {
   @Get('google/callback')
   @UseGuards(GoogleAuthGuard)
   async googleCallback(@Req() req, @Res({ passthrough: true }) res: Response) {
-    const user = await this.authService.handleGoogleCallback(req.user);
+    try {
+      const user = await this.authService.handleGoogleCallback(req.user);
 
-    const tempJwt = this.authService.generateTempToken(req.user);
+      const tempJwt = this.authService.generateTempToken(req.user);
 
-    if (user === null) {
+      if (user === null) {
+        return res.redirect(
+          `${process.env.FRONT_URL}/google-username?token=${tempJwt}`,
+        );
+      }
+
       return res.redirect(
-        `${process.env.FRONT_URL}/google-username?token=${tempJwt}`,
+        `${process.env.FRONT_URL}/auth/google/success?token=${tempJwt}`,
       );
+    } catch (error) {
+      const message = encodeURIComponent(error.message || 'Erreur inconnue');
+      return res.redirect(`${process.env.FRONT_URL}/signin?error=${message}`);
     }
-
-    const refreshToken = this.authService.generateJwt(user, '7d');
-
-    const isProd = process.env.IS_PROD === 'true';
-
-    res.cookie('refreshToken', refreshToken, {
-      httpOnly: true,
-      secure: isProd,
-      domain: isProd ? '.nqbral-games.fr' : '.nqbral-games.local',
-      sameSite: isProd ? 'none' : 'lax',
-      path: '/',
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
-
-    return res.redirect(
-      `${process.env.FRONT_URL}/auth/google/success?token=${tempJwt}`,
-    );
   }
 
   @Post('google/connect')

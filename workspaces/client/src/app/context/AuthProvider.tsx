@@ -26,6 +26,7 @@ type AuthContextType = {
   resetPassword: (token: string, password: string) => Promise<void>;
   resetError: () => void;
   resetMessage: () => void;
+  setError: (error: string | null) => void;
   loading: boolean;
   message: string | null;
   error: string | null;
@@ -376,6 +377,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         registerGoogle,
         resetError,
         resetMessage,
+        setError,
         forgotPassword,
         resetPassword,
         loading,

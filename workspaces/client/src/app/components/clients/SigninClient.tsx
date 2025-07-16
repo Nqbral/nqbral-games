@@ -26,8 +26,15 @@ export default function SignInClient() {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const { login, resetError, resetMessage, error, loading, isLogged } =
-    useAuth();
+  const {
+    login,
+    resetError,
+    resetMessage,
+    error,
+    loading,
+    isLogged,
+    setError,
+  } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -63,6 +70,13 @@ export default function SignInClient() {
       router.push('/');
     }
   }, [isLogged, router, searchParams]);
+
+  useEffect(() => {
+    const errorMsg = searchParams.get('error');
+    if (errorMsg) {
+      setError(decodeURIComponent(errorMsg));
+    }
+  }, [searchParams]);
 
   return (
     <>
