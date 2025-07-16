@@ -236,6 +236,10 @@ export class AuthService {
     const accessToken = this.generateJwt(user, '15m');
     const refreshToken = this.generateJwt(user, '7d');
 
+    this.mailService
+      .sendWelcome(user.email, user.username)
+      .catch((e) => console.error('Erreur envoi mail de bienvenue', e));
+
     return {
       accessToken: accessToken,
       refreshToken: refreshToken,
