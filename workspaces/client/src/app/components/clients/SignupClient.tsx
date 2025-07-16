@@ -13,6 +13,7 @@ type RegisterFormValues = {
   username: string;
   email: string;
   password: string;
+  confirmPassword: string;
 };
 
 export default function SignupClient() {
@@ -72,7 +73,6 @@ export default function SignupClient() {
             className="flex w-full flex-col items-center gap-2 text-sm sm:gap-4 sm:text-base"
           >
             <div className="flex w-full flex-col items-center gap-2">
-              <label>Nom d&apos;utilisateur</label>
               <input
                 type="text"
                 {...registerForm('username', {
@@ -85,6 +85,7 @@ export default function SignupClient() {
                   minLength: { value: 3, message: 'Minimum 3 caractères' },
                   maxLength: { value: 16, message: 'Maximum 16 caractères' },
                 })}
+                placeholder="Nom d'utilisateur"
                 className="w-full rounded-lg border border-neutral-500 px-4 py-2 text-center outline-none focus:border-blue-400"
               />
               {errors.username && (
@@ -95,7 +96,6 @@ export default function SignupClient() {
             </div>
 
             <div className="flex w-full flex-col items-center gap-2">
-              <label>Adresse email</label>
               <input
                 type="email"
                 {...registerForm('email', {
@@ -105,6 +105,7 @@ export default function SignupClient() {
                     message: 'Adresse email invalide',
                   },
                 })}
+                placeholder="Email"
                 className="w-full rounded-lg border border-neutral-500 px-4 py-2 text-center outline-none focus:border-blue-400"
               />
               {errors.email && (
@@ -115,7 +116,6 @@ export default function SignupClient() {
             </div>
 
             <div className="flex w-full flex-col items-center gap-2">
-              <label>Mot de passe</label>
               <input
                 type="password"
                 {...registerForm('password', {
@@ -126,11 +126,31 @@ export default function SignupClient() {
                       'Mot de passe invalide : 1 majuscule, 1 chiffre, 1 spécial, 6 caractères minimum',
                   },
                 })}
+                placeholder="Mot de passe"
                 className="w-full rounded-lg border border-neutral-500 px-4 py-2 text-center outline-none focus:border-blue-400"
               />
               {errors.password && (
                 <p className="mt-1 text-sm text-red-500">
                   {errors.password.message}
+                </p>
+              )}
+            </div>
+
+            <div className="flex w-full flex-col items-center gap-2">
+              <input
+                type="password"
+                {...registerForm('confirmPassword', {
+                  required: 'Confirmation requise',
+                  validate: (value, formValues) =>
+                    value === formValues.password ||
+                    'Les mots de passe ne correspondent pas',
+                })}
+                placeholder="Confirmer le mot de passe"
+                className="w-full rounded-lg border border-neutral-500 px-4 py-2 text-center outline-none focus:border-blue-400"
+              />
+              {errors.confirmPassword && (
+                <p className="mt-1 text-sm text-red-500">
+                  {errors.confirmPassword.message}
                 </p>
               )}
             </div>

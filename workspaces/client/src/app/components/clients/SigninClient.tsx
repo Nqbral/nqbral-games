@@ -77,7 +77,6 @@ export default function SignInClient() {
             className="flex w-full flex-col items-center gap-2 text-sm sm:gap-4 sm:text-base"
           >
             <div className="flex w-full flex-col items-center gap-2">
-              <label>Nom d&apos;utilisateur</label>
               <input
                 type="text"
                 {...loginForm('username', {
@@ -94,7 +93,6 @@ export default function SignInClient() {
             </div>
 
             <div className="flex w-full flex-col items-center gap-2">
-              <label>Mot de passe</label>
               <input
                 type="password"
                 {...loginForm('password', {
