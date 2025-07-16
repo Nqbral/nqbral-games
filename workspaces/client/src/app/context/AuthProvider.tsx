@@ -13,6 +13,7 @@ import {
 type AuthContextType = {
   username: string | undefined;
   accessToken: string | null;
+  connectGoogle: (token: string | null) => Promise<void>;
   login: (username: string, password: string) => Promise<void>;
   logout: () => void;
   register: (
@@ -20,6 +21,7 @@ type AuthContextType = {
     email: string,
     password: string,
   ) => Promise<void>;
+  registerGoogle: (username: string, token: string | null) => Promise<void>;
   forgotPassword: (email: string) => Promise<void>;
   resetPassword: (token: string, password: string) => Promise<void>;
   resetError: () => void;
@@ -196,6 +198,81 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
+  const connectGoogle = async (token: string | null) => {
+    if (token === null) {
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_WS_API_URL + '/auth/google/connect',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token }),
+          credentials: 'include',
+        },
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setIsLogged(true);
+        setAccessToken(data.accessToken);
+        setUsername(data.username);
+        setIsAdmin(data.isAdmin);
+        localStorage.setItem('accessToken', data.accessToken);
+        localStorage.setItem('username', data.username);
+      } else {
+        setError(data.message || 'Erreur de connexion');
+      }
+    } catch (err) {
+      console.log(err);
+      setError('Erreur serveur');
+    }
+  };
+
+  const registerGoogle = async (username: string, token: string | null) => {
+    setLoading(true);
+    setError(null);
+
+    if (token === null) {
+      setError('Token manquant.');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_WS_API_URL + '/auth/google/finalize',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, token }),
+          credentials: 'include',
+        },
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setIsLogged(true);
+        setAccessToken(data.accessToken);
+        setUsername(data.username);
+        setIsAdmin(data.isAdmin);
+        localStorage.setItem('accessToken', data.accessToken);
+        localStorage.setItem('username', data.username);
+      } else {
+        setError(data.message || "Erreur d'inscription");
+      }
+    } catch (err) {
+      console.log(err);
+      setError('Erreur serveur');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Forgot password
   const forgotPassword = async (email: string) => {
     setLoading(true);
@@ -292,9 +369,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       value={{
         username,
         accessToken,
+        connectGoogle,
         login,
         logout,
         register,
+        registerGoogle,
         resetError,
         resetMessage,
         forgotPassword,

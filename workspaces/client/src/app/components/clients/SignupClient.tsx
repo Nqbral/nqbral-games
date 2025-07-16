@@ -10,6 +10,8 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ThreeDots } from 'react-loader-spinner';
 
+import GoogleSignInButton from '../buttons/GoogleSignInButton';
+
 type RegisterFormValues = {
   username: string;
   email: string;
@@ -62,7 +64,7 @@ export default function SignupClient() {
   return (
     <>
       <NavbarWhite />
-      <div className="flex min-h-screen w-full flex-col items-center justify-center gap-8 bg-neutral-200 text-neutral-950 sm:gap-16">
+      <div className="flex min-h-screen w-full flex-col items-center justify-center gap-8 bg-neutral-200 text-neutral-950">
         <div className="flex w-72 flex-col items-center gap-2 rounded-sm border-1 border-neutral-600 px-8 py-2 sm:w-96 sm:py-4">
           <Image
             src={NqbralGamesLogo}
@@ -197,6 +199,8 @@ export default function SignupClient() {
             )}
           </form>
         </div>
+
+        <GoogleSignInButton />
 
         <div className="flex w-72 flex-row items-center justify-center gap-2 rounded-sm border-1 border-neutral-600 px-8 py-4 text-sm sm:w-96 sm:text-base">
           <div className="text-center">Déjà un compte ?</div>

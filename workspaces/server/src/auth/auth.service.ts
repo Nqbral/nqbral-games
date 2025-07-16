@@ -5,8 +5,8 @@ import { MailService } from '@app/mail/mail.service';
 import { UserService } from '@app/user/user.service';
 import {
   BadRequestException,
+  ForbiddenException,
   Injectable,
-  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -73,7 +73,13 @@ export class AuthService {
       throw new BadRequestException('Identifiants invalides');
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const userPassword = user.password;
+
+    if (!userPassword) {
+      throw new BadRequestException('Identifiants invalides');
+    }
+
+    const isMatch = await bcrypt.compare(password, userPassword);
 
     if (!isMatch) {
       throw new BadRequestException('Identifiants invalides');
@@ -151,5 +157,89 @@ export class AuthService {
     } catch {
       throw new UnauthorizedException('Token invalide ou expiré');
     }
+  }
+
+  async handleGoogleCallback(googleUser) {
+    const { email } = googleUser;
+    const existingUser = await this.userModel.findOne({ email });
+
+    if (existingUser) {
+      if (existingUser.authProvider !== 'google') {
+        throw new ForbiddenException('Email déjà utilisé par un compte local.');
+      }
+      return existingUser;
+    }
+
+    return null;
+  }
+
+  generateTempToken(data: {
+    email: string;
+    displayName: string;
+    googleId: string;
+  }) {
+    return this.jwtService.sign(data, { expiresIn: '10m' });
+  }
+
+  generateJwt(user: UserDocument, expiresIn: string) {
+    return this.jwtService.sign(
+      { sub: user._id, email: user.email },
+      { expiresIn: expiresIn },
+    );
+  }
+
+  async connectGoogle(token: string) {
+    const payload = this.jwtService.verify(token);
+
+    const { email, googleId, displayName } = payload;
+    let existingUser = await this.userModel.findOne({ email });
+
+    if (!existingUser) {
+      throw new BadRequestException('Utilisateur non trouvé avec cet email.');
+    }
+
+    const accessToken = this.generateJwt(existingUser, '15m');
+    const refreshToken = this.generateJwt(existingUser, '7d');
+
+    return {
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+      username: existingUser.username,
+      isAdmin: existingUser.isAdmin,
+    };
+  }
+
+  async finalizeGoogleSignup(tempToken: string, username: string) {
+    const payload = this.jwtService.verify(tempToken);
+
+    const { email, googleId, displayName } = payload;
+    let existingUser = await this.userModel.findOne({ email });
+
+    if (existingUser) {
+      throw new BadRequestException('Un compte existe déjà avec cet email.');
+    }
+
+    existingUser = await this.userModel.findOne({ username });
+
+    if (existingUser) {
+      throw new BadRequestException("Nom d'utilisateur déjà pris.");
+    }
+
+    const user = await this.userModel.create({
+      email,
+      username,
+      password: 'google_oauth',
+      authProvider: 'google',
+      createdAt: new Date(),
+    });
+
+    const accessToken = this.generateJwt(user, '15m');
+    const refreshToken = this.generateJwt(user, '7d');
+
+    return {
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+      isAdmin: user.isAdmin,
+    };
   }
 }
