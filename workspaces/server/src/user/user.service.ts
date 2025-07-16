@@ -28,6 +28,10 @@ export class UserService {
     return this.userModel.findOne({ email }).exec();
   }
 
+  async findByGoogleId(googleId: string) {
+    return this.userModel.findOne({ googleId }).exec();
+  }
+
   async updatePassword(userId: string, updateData: EditPasswordDto) {
     const hashedPassword = await bcrypt.hash(updateData.password, 10);
 

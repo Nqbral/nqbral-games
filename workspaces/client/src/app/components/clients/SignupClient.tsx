@@ -3,16 +3,20 @@
 import NavbarWhite from '@/app/components/navbar/NavbarWhite';
 import { useAuth } from '@context/AuthProvider';
 import NqbralGamesLogo from '@public/nqbral-games-logo-black.png';
+import { Eye, EyeOff } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ThreeDots } from 'react-loader-spinner';
+
+import GoogleSignInButton from '../buttons/GoogleSignInButton';
 
 type RegisterFormValues = {
   username: string;
   email: string;
   password: string;
+  confirmPassword: string;
 };
 
 export default function SignupClient() {
@@ -30,6 +34,9 @@ export default function SignupClient() {
   const onRegister = async (data: RegisterFormValues) => {
     await register(data.username, data.email, data.password);
   };
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const toLogin = () => {
     resetError();
@@ -57,7 +64,7 @@ export default function SignupClient() {
   return (
     <>
       <NavbarWhite />
-      <div className="flex min-h-screen w-full flex-col items-center justify-center gap-8 bg-neutral-200 text-neutral-950 sm:gap-16">
+      <div className="flex min-h-screen w-full flex-col items-center justify-center gap-4 bg-neutral-200 text-neutral-950 sm:gap-8">
         <div className="flex w-72 flex-col items-center gap-2 rounded-sm border-1 border-neutral-600 px-8 py-2 sm:w-96 sm:py-4">
           <Image
             src={NqbralGamesLogo}
@@ -72,7 +79,6 @@ export default function SignupClient() {
             className="flex w-full flex-col items-center gap-2 text-sm sm:gap-4 sm:text-base"
           >
             <div className="flex w-full flex-col items-center gap-2">
-              <label>Nom d&apos;utilisateur</label>
               <input
                 type="text"
                 {...registerForm('username', {
@@ -85,6 +91,7 @@ export default function SignupClient() {
                   minLength: { value: 3, message: 'Minimum 3 caractères' },
                   maxLength: { value: 16, message: 'Maximum 16 caractères' },
                 })}
+                placeholder="Nom d'utilisateur"
                 className="w-full rounded-lg border border-neutral-500 px-4 py-2 text-center outline-none focus:border-blue-400"
               />
               {errors.username && (
@@ -95,7 +102,6 @@ export default function SignupClient() {
             </div>
 
             <div className="flex w-full flex-col items-center gap-2">
-              <label>Adresse email</label>
               <input
                 type="email"
                 {...registerForm('email', {
@@ -105,6 +111,7 @@ export default function SignupClient() {
                     message: 'Adresse email invalide',
                   },
                 })}
+                placeholder="Email"
                 className="w-full rounded-lg border border-neutral-500 px-4 py-2 text-center outline-none focus:border-blue-400"
               />
               {errors.email && (
@@ -114,10 +121,9 @@ export default function SignupClient() {
               )}
             </div>
 
-            <div className="flex w-full flex-col items-center gap-2">
-              <label>Mot de passe</label>
+            <div className="relative flex w-full flex-col items-center gap-2">
               <input
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 {...registerForm('password', {
                   required: 'Mot de passe requis',
                   pattern: {
@@ -126,11 +132,43 @@ export default function SignupClient() {
                       'Mot de passe invalide : 1 majuscule, 1 chiffre, 1 spécial, 6 caractères minimum',
                   },
                 })}
+                placeholder="Mot de passe"
                 className="w-full rounded-lg border border-neutral-500 px-4 py-2 text-center outline-none focus:border-blue-400"
               />
+              <div
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute top-[10px] right-3 cursor-pointer text-neutral-500 hover:text-neutral-800"
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </div>
               {errors.password && (
                 <p className="mt-1 text-sm text-red-500">
                   {errors.password.message}
+                </p>
+              )}
+            </div>
+
+            <div className="relative flex w-full flex-col items-center gap-2">
+              <input
+                type={showConfirmPassword ? 'text' : 'password'}
+                {...registerForm('confirmPassword', {
+                  required: 'Confirmation requise',
+                  validate: (value, formValues) =>
+                    value === formValues.password ||
+                    'Les mots de passe ne correspondent pas',
+                })}
+                placeholder="Confirmer mot de passe"
+                className="w-full rounded-lg border border-neutral-500 px-4 py-2 text-center outline-none focus:border-blue-400"
+              />
+              <div
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute top-[10px] right-3 cursor-pointer text-neutral-500 hover:text-neutral-800"
+              >
+                {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </div>
+              {errors.confirmPassword && (
+                <p className="mt-1 text-sm text-red-500">
+                  {errors.confirmPassword.message}
                 </p>
               )}
             </div>
@@ -155,12 +193,14 @@ export default function SignupClient() {
             )}
 
             {error && (
-              <p className="mt-4 mb-2 text-center text-sm text-red-500">
+              <p className="mt-2 mb-2 text-center text-sm text-red-500">
                 {error}
               </p>
             )}
           </form>
         </div>
+
+        <GoogleSignInButton />
 
         <div className="flex w-72 flex-row items-center justify-center gap-2 rounded-sm border-1 border-neutral-600 px-8 py-4 text-sm sm:w-96 sm:text-base">
           <div className="text-center">Déjà un compte ?</div>

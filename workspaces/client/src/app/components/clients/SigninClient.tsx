@@ -3,11 +3,14 @@
 import NavbarBlack from '@/app/components/navbar/NavbarBlack';
 import { useAuth } from '@context/AuthProvider';
 import NqbralGamesLogo from '@public/nqbral-games-logo.png';
+import { Eye, EyeOff } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ThreeDots } from 'react-loader-spinner';
+
+import GoogleSignInButton from '../buttons/GoogleSignInButton';
 
 type SignInFormValues = {
   username: string;
@@ -21,8 +24,17 @@ export default function SignInClient() {
     formState: { errors },
   } = useForm<SignInFormValues>();
 
-  const { login, resetError, resetMessage, error, loading, isLogged } =
-    useAuth();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const {
+    login,
+    resetError,
+    resetMessage,
+    error,
+    loading,
+    isLogged,
+    setError,
+  } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -59,10 +71,17 @@ export default function SignInClient() {
     }
   }, [isLogged, router, searchParams]);
 
+  useEffect(() => {
+    const errorMsg = searchParams.get('error');
+    if (errorMsg) {
+      setError(decodeURIComponent(errorMsg));
+    }
+  }, [searchParams, setError]);
+
   return (
     <>
       <NavbarBlack />
-      <div className="flex min-h-screen w-full flex-col items-center justify-center gap-8 sm:gap-16">
+      <div className="flex min-h-screen w-full flex-col items-center justify-center gap-4 sm:gap-8">
         <div className="flex w-72 flex-col items-center gap-2 rounded-sm border-1 border-neutral-600 px-8 py-2 sm:w-96 sm:py-4">
           <Image
             src={NqbralGamesLogo}
@@ -77,7 +96,6 @@ export default function SignInClient() {
             className="flex w-full flex-col items-center gap-2 text-sm sm:gap-4 sm:text-base"
           >
             <div className="flex w-full flex-col items-center gap-2">
-              <label>Nom d&apos;utilisateur</label>
               <input
                 type="text"
                 {...loginForm('username', {
@@ -93,16 +111,21 @@ export default function SignInClient() {
               )}
             </div>
 
-            <div className="flex w-full flex-col items-center gap-2">
-              <label>Mot de passe</label>
+            <div className="relative flex w-full flex-col items-center gap-2">
               <input
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 {...loginForm('password', {
                   required: 'Mot de passe requis',
                 })}
                 placeholder="Mot de passe"
                 className="w-full rounded-lg border px-4 py-2 text-center outline-none focus:border-blue-300"
               />
+              <div
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute top-[10px] right-3 cursor-pointer text-neutral-200 hover:text-neutral-500"
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </div>
               {errors.password && (
                 <p className="mt-1 text-sm text-red-500">
                   {errors.password.message}
@@ -130,7 +153,7 @@ export default function SignInClient() {
             )}
 
             {error && (
-              <p className="mt-4 mb-2 text-center text-sm text-red-500">
+              <p className="mt-2 mb-2 text-center text-sm text-red-500">
                 {error}
               </p>
             )}
@@ -142,6 +165,8 @@ export default function SignInClient() {
             Mot de passe oublié ?
           </button>
         </div>
+
+        <GoogleSignInButton />
 
         <div className="flex w-72 flex-row items-center justify-center gap-2 rounded-sm border-1 border-neutral-600 px-8 py-4 text-sm sm:w-96 sm:text-base">
           <div>Pas de compte ?</div>
